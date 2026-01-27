@@ -23,7 +23,7 @@ export function formatDate(date: Date | string): string {
 }
 
 // Generate available pickup dates (excluding Sundays and Mondays)
-export function getAvailablePickupDates(daysAhead: number = 14): string[] {
+export function getAvailablePickupDates(daysAhead: number = 60): string[] {
   const dates: string[] = [];
   const today = new Date();
   

@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { Wheat, Cookie, Cake, Coffee, MenuSquare,  } from "lucide-react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { Wheat, Cookie, Cake, Coffee, Sparkles, MenuSquare } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { products, getProductsByCategory } from "@/lib/data";
 import { cn } from "@/lib/utils";
-import type { ProductCategory } from "@/types";
+import type { Product, ProductCategory } from "@/types";
+import { getProducts } from "@/lib/product";
+import Shimmer from "@/components/Shimmer";
 
 const categories: { id: ProductCategory | "all"; label: string; icon: React.ReactNode }[] = [
   { id: "all", label: "Alla", icon: <MenuSquare className="w-4 h-4" /> },
@@ -15,21 +18,61 @@ const categories: { id: ProductCategory | "all"; label: string; icon: React.Reac
   // { id: "cake", label: "Tårtor", icon: <Cake className="w-4 h-4" /> },
 ];
 
-export default function ProductsPage() {
+function ProductsContent() {
+  const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState<ProductCategory | "all">("all");
+  const [highlightSemla, setHighlightSemla] = useState(false);
+  const [productsList, setProducts] = useState<Product[]>([]);
+   const [loading, setLoading] = useState(true);
+  // Check if coming from Fettisdagen banner
+    
+   
+  useEffect(() => {
+
+     async function fetchProducts() {
+        try {
+         const data  = await getProducts();
+        console.log(data)
+         setProducts( data);
+        } catch (error) {
+           console.error("Error fetching featured products:", error);
+        }finally{
+          setLoading(false)
+        }
+      };
+      fetchProducts()
+    const kategori = searchParams.get("kategori");
+    if (kategori === "semla") {
+      setHighlightSemla(true);
+      setActiveCategory("pastry");
+      // Scroll to products after a short delay
+      setTimeout(() => {
+        document.getElementById("semla")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 300);
+    }
+  }, [searchParams, setProducts]);
 
   const filteredProducts =
     activeCategory === "all"
-      ? products.filter((p) => p.available)
-      : getProductsByCategory(activeCategory);
+      ? productsList.filter((p) => p.available)
+      : getProductsByCategory(activeCategory,productsList );
+  
+  // If highlighting semla, sort to put semla first
+  const sortedProducts = highlightSemla 
+    ? [...filteredProducts].sort((a, b) => {
+        if (a.name.toUpperCase() === "SEMLA") return -1;
+        if (b.name.toUpperCase() ==="SEMLA") return 1;
+        return 0;
+      })
+    : filteredProducts;
 
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-dough-100 to-flour-50 grain-overlay">
+      <section className="pt-32 pb-16  bg-gradient-to-b from-dough-100 to-flour-50 grain-overlay">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="text-sm font-body tracking-[0.3em] uppercase text-wheat-600 mb-4 block">
+            <span className="text-sm font-body tracking-[0.3em] uppercase text-wheat-600 mb-4 block mt-10">
               Vårt Sortiment
             </span>
             <h1 className="font-display text-5xl md:text-6xl font-semibold text-crust-900 mb-6">
@@ -68,13 +111,28 @@ export default function ProductsPage() {
 
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {loading  ?
+            (<>
+              <Shimmer/>
+              <Shimmer/>
+              <Shimmer/>
+              </>)
+             
+             :sortedProducts.map((product) => (
+              <div 
+                key={product.id} 
+                id={product.id}
+                className={cn(
+                  highlightSemla && product.name.toUpperCase() === "SEMLA" && "ring-4 ring-amber-400 ring-offset-4 rounded-sm"
+                )}
+              >
+                <ProductCard product={product} />
+              </div>
             ))}
           </div>
 
           {/* Empty State */}
-          {filteredProducts.length === 0 && (
+          {!loading && (sortedProducts.length === 0) && (
             <div className="text-center py-16">
               <p className="text-crust-500 text-lg">
                 Inga produkter hittades i denna kategori.
@@ -108,5 +166,13 @@ export default function ProductsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen pt-32 flex items-center justify-center">Laddar...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }

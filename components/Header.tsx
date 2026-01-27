@@ -6,6 +6,10 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "./CartContext";
 import CartDrawer from "./CartDrawer";
 import { cn } from "@/lib/utils";
+import { addProductstoDb } from "@/lib/orders";
+import { products } from "@/lib/data";
+import { getProducts } from "@/lib/product";
+import FettisdagenBanner from "./FettisdagenBanner";
 
 const navLinks = [
   { href: "/", label: "Hem" },
@@ -32,9 +36,9 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ",
           isScrolled
-            ? "bg-flour-50/95 backdrop-blur-md shadow-sm py-4"
+            ? "bg-flour-50/95 backdrop-blur-md shadow-sm py-0"
             : "bg-transparent py-6"
         )}
       >
@@ -120,6 +124,7 @@ export default function Header() {
             </div>
           </div>
         </div>
+        <FettisdagenBanner></FettisdagenBanner>
       </header>
 
       {/* Cart Drawer */}

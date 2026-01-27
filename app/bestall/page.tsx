@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -18,6 +18,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { useCart } from "@/components/CartContext";
+import DatePicker from "@/components/DatePicker";
 import {
   formatPrice,
   cn,
@@ -54,7 +55,7 @@ export default function OrderPage() {
   const [orderId, setOrderId] = useState("");
   const [error, setError] = useState("");
 
-  const availableDates = getAvailablePickupDates(14);
+  const availableDates = getAvailablePickupDates(60);
   const availableTimes = pickupDate ? getAvailablePickupTimes(pickupDate) : [];
 
   const steps: { id: Step; label: string; number: number }[] = [
@@ -335,29 +336,14 @@ export default function OrderPage() {
                       <Calendar className="w-4 h-4" />
                       Välj datum
                     </label>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {availableDates.slice(0, 9).map((date) => (
-                        <button
-                          key={date}
-                          onClick={() => {
-                            setPickupDate(date);
-                            setPickupTime("");
-                          }}
-                          className={cn(
-                            "px-4 py-3 rounded-sm text-sm font-body transition-colors",
-                            pickupDate === date
-                              ? "bg-crust-900 text-flour-50"
-                              : "bg-flour-200 text-crust-700 hover:bg-flour-300"
-                          )}
-                        >
-                          {new Date(date).toLocaleDateString("sv-SE", {
-                            weekday: "short",
-                            day: "numeric",
-                            month: "short",
-                          })}
-                        </button>
-                      ))}
-                    </div>
+                    <DatePicker
+                      selectedDate={pickupDate}
+                      onSelectDate={(date: SetStateAction<string>) => {
+                        setPickupDate(date);
+                        setPickupTime("");
+                      }}
+                      availableDates={availableDates}
+                    />
                   </div>
 
                   {/* Time Selection */}

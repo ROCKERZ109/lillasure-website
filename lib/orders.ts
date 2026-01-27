@@ -11,23 +11,48 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
-import type { Order, OrderStatus } from "@/types";
+import type { Order, OrderStatus, Product } from "@/types";
+
+
 
 const ORDERS_COLLECTION = "orders";
+
+export function addProductstoDb(products: Product[]) {
+  console.log(products)
+  
+  products.map(async (product) => {
+   
+     const productRef = doc(db, "products", product.id);
+     console.log(productRef.path)
+     await setDoc(productRef, product);
+  });
+}
 
 // Create a new order
 export async function createOrder(
   order: Omit<Order, "id" | "createdAt">,
 ): Promise<string> {
   try {
+    
     const orderData = {
       ...order,
       createdAt: Timestamp.now(),
     };
+    const newDocRef = doc(collection(db, ORDERS_COLLECTION));
 
-    const docRef = await addDoc(collection(db, ORDERS_COLLECTION), orderData);
+  // 2. Get the auto-generated ID from that reference
+    const generatedId = newDocRef.id;
+    console.log(generatedId)
 
-    return docRef.id;
+  // 3. Add the ID to your data object and save it using setDoc
+      await setDoc(newDocRef, {
+        ...orderData,
+        productId: generatedId // Now the ID is a field inside the document!
+      });
+
+  
+
+    return newDocRef.id;
   } catch (error) {
     console.error("Error creating order:", error);
     throw new Error("Failed to create order");

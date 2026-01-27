@@ -83,108 +83,8 @@ export const products: Product[] = [
     image: "/images/semla.jpg",
     available: true,
     allergens: ["gluten", "dairy", "eggs", "almonds"],
-  },
-  // {
-  //   id: "appelpaaj-bulle",
-  //   name: "Apple Pie Bun",
-  //   nameSv: "Äppelpajbulle",
-  //   description: "Soft bun filled with spiced apple compote and topped with crumble.",
-  //   descriptionSv: "Mjuk bulle fylld med kryddad äppelkompott och toppad med smuldeg.",
-  //   price: 38,
-  //   category: "pastry",
-  //   image: "/images/apple.jpg",
-  //   available: true,
-  //   allergens: ["gluten", "dairy", "eggs"],
-  // },
-  // {
-  //   id: "croissant",
-  //   name: "Butter Croissant",
-  //   nameSv: "Smörcroissant",
-  //   description: "Flaky, buttery croissant with golden layers. The perfect breakfast treat.",
-  //   descriptionSv: "Frasig, smörig croissant med gyllene lager. Den perfekta frukostnjutningen.",
-  //   price: 38,
-  //   category: "pastry",
-  //   image: "/images/croissant.jpg",
-  //   available: true,
-  //   allergens: ["gluten", "dairy", "eggs"],
-  // },
-  
-  // Cookies
-  // {
-  //   id: "havreflarn",
-  //   name: "Oat Lace Cookies",
-  //   nameSv: "Havreflarn",
-  //   description: "Thin, crispy oat cookies with caramelized edges. Sold by dozen.",
-  //   descriptionSv: "Tunna, knapriga havrekakor med karamelliserade kanter. Säljs per dussin.",
-  //   price: 55,
-  //   category: "cookie",
-  //   image: "/images/oatcookies.jpg",
-  //   available: true,
-  //   allergens: ["gluten", "oats", "dairy"],
-  // },
-  // {
-  //   id: "skorpor",
-  //   name: "Swedish Rusks",
-  //   nameSv: "Skorpor",
-  //   description: "Twice-baked sweet bread, crispy and perfect for dipping. Bag of 8.",
-  //   descriptionSv: "Dubbelbakade söta bröd, knapriga och perfekta att doppa. Påse med 8 st.",
-  //   price: 42,
-  //   category: "cookie",
-  //   image: "/images/rusks.jpg",
-  //   available: true,
-  //   allergens: ["gluten", "dairy", "eggs"],
-  // },
-  // {
-  //   id: "saffranskorpor",
-  //   name: "Saffron Rusks",
-  //   nameSv: "Saffransskorpor",
-  //   description: "Golden rusks infused with precious saffron. A Christmas tradition year-round.",
-  //   descriptionSv: "Gyllene skorpor med dyrbar saffran. En jultradition året runt.",
-  //   price: 58,
-  //   category: "cookie",
-  //   image: "/images/saffronrusks.jpg",
-  //   available: true,
-  //   featured: true,
-  //   allergens: ["gluten", "dairy", "eggs"],
-  // },
-  
-  // // Cakes
-  // {
-  //   id: "chokladbollars",
-  //   name: "Chocolate Balls",
-  //   nameSv: "Chokladbollar",
-  //   description: "No-bake chocolate oat balls rolled in coconut. Pack of 6.",
-  //   descriptionSv: "Chokladbollar rullade i kokos. Förpackning med 6 st.",
-  //   price: 45,
-  //   category: "cake",
-  //   image: "/images/chocballs.jpg",
-  //   available: true,
-  //   allergens: ["oats", "dairy", "coconut"],
-  // },
-  // {
-  //   id: "mandelkubb",
-  //   name: "Almond Cubes",
-  //   nameSv: "Mandelkubb",
-  //   description: "Dense almond cake cubes dipped in dark chocolate. Pack of 4.",
-  //   descriptionSv: "Kompakta mandelkakskuber doppade i mörk choklad. Förpackning med 4 st.",
-  //   price: 52,
-  //   category: "cake",
-  //   image: "/images/almond.jpg",
-  //   available: true,
-  //   allergens: ["almonds", "eggs", "dairy"],
-  // },
-  // {
-  //   id: "citrompaj",
-  //   name: "Lemon Tart",
-  //   nameSv: "Citronpaj",
-  //   description: "Tangy lemon curd in a buttery shortcrust, topped with Italian meringue.",
-  //   descriptionSv: "Syrlig citronkräm i mördegsbotten, toppad med italiensk maräng.",
-  //   price: 55,
-  //   category: "cake",
-  //   image: "/images/lemon.jpg",
-  //   available: true,
-  //   allergens: ["gluten", "dairy", "eggs"],
-  // },
+  }
+ 
 ];
 
 export const storeHours: StoreHours[] = [
@@ -208,7 +108,7 @@ export const bakeryInfo = {
     country: "Sverige",
   },
   contact: {
-    email: "butiken@lillasur.se",
+    email: "info@lillasur.se",
     instagram: "@lillasurgbg",
   },
   coordinates: {
@@ -217,14 +117,15 @@ export const bakeryInfo = {
   },
 };
 
-export function getProductsByCategory(category: string): Product[] {
-  return products.filter((p) => p.category === category && p.available);
+
+export function getProductsByCategory(category: string, productsList : Product[]): Product[] {
+  return productsList.filter((p) => p.category === category && p.available);
 }
 
-export function getFeaturedProducts(): Product[] {
-  return products.filter((p) => p.featured && p.available);
+export function getFeaturedProducts(productsList : Product[]): Product[] {
+  return productsList.filter((p) => p.featured && p.available);
 }
 
-export function getProductById(id: string): Product | undefined {
-  return products.find((p) => p.id === id);
+export function getProductById(id: string,productsList : Product[]): Product | undefined {
+  return productsList.find((p) => p.id === id);
 }

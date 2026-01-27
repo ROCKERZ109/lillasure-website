@@ -1,10 +1,34 @@
+"use client"
+
 import Link from "next/link";
 import { ArrowRight, Wheat, Clock, MapPin, Leaf } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { getFeaturedProducts, storeHours, bakeryInfo } from "@/lib/data";
+import { getProducts } from "@/lib/product";
+import { useEffect, useState } from "react";
+import { Product } from "@/types";
+import Shimmer from "@/components/Shimmer";
 
 export default function HomePage() {
-  const featuredProducts = getFeaturedProducts().slice(0, 6);
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  
+  const [loading, setLoading] = useState(true);
+  useEffect(()=>{
+    async function fetchProducts() {
+      try {
+       const data  = await getProducts();
+      
+       setFeaturedProducts( getFeaturedProducts(data).slice(0, 6));
+      } catch (error) {
+         console.error("Error fetching featured products:", error);
+      }finally{
+        setLoading(false)
+      }
+    };
+    fetchProducts()
+  },[setFeaturedProducts, setLoading])
+ 
+  
 
   return (
     <>
@@ -18,7 +42,7 @@ export default function HomePage() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-dough-200 rounded-full blur-3xl opacity-30 animate-float delay-300" />
         
         <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-4xl mx-auto text-center ">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-flour-100/80 backdrop-blur-sm border border-flour-300 rounded-full mb-8 animate-fade-in">
               <Leaf className="w-4 h-4 text-green-600" />
@@ -96,8 +120,22 @@ export default function HomePage() {
           </div>
 
           {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {featuredProducts.map((product, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 ">
+            {loading ?  
+            (<>
+
+<Shimmer/>
+      <div className="w-full">
+<Shimmer/>
+<Shimmer/>
+</div> 
+<Shimmer/>
+            </>
+     
+
+)
+
+             : featuredProducts.map((product, index) => (
               <ProductCard
                 key={product.id}
                 product={product}

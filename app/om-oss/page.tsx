@@ -8,7 +8,7 @@ export default function AboutPage() {
       <section className="pt-32 pb-20 bg-gradient-to-b from-dough-100 to-flour-50 grain-overlay">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <span className="text-sm font-body tracking-[0.3em] uppercase text-wheat-600 mb-4 block text-center">
+            <span className="text-sm font-body tracking-[0.3em] uppercase text-wheat-600 mb-4 block text-center mt-10">
               Vår Historia
             </span>
             <h1 className="font-display text-5xl md:text-6xl font-semibold text-crust-900 mb-8 text-center leading-tight">
