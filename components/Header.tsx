@@ -38,8 +38,8 @@ export default function Header() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ",
           isScrolled
-            ? "bg-flour-50/95 backdrop-blur-md shadow-sm py-0"
-            : "bg-transparent py-6"
+            ? "bg-black backdrop-blur-md shadow-sm py-0"
+            : "bg-black py-0"
         )}
       >
         <div className="container mx-auto px-6">
@@ -49,12 +49,19 @@ export default function Header() {
               href="/"
               className="relative z-10 group"
             >
-              <span className="font-display text-3xl md:text-4xl font-semibold text-crust-900 tracking-tight">
+              
+              <div className="grid grid-cols-2 grid-rows-1 ">
+              <img src="/images/logo-white.png" alt="logo.png" className="h-24 w-36 -ml-5 max-sm:h-16 max-sm:w-20 max-sm:-ml-2 object-cover" />
+              {/* <div className="mt-4 -ml-11 max-sm:mt-2 max-sm:-ml-16"><span className="font-display text-3xl md:text-4xl font-semibold text-white/80 tracking-tight ">
                 Lilla Sur
               </span>
-              <span className="block text-xs font-body tracking-[0.3em] uppercase text-crust-500 mt-0.5 group-hover:text-crust-700 transition-colors">
+              <span className="block text-xs font-body tracking-[0.3em] uppercase text-crust-200 mt-0.5 group-hover:text-amber-100transition-colors">
                 Hantverksbageri
-              </span>
+              </span></div> */}
+              
+              </div>
+              
+              
             </Link>
 
             {/* Desktop Navigation */}
@@ -63,7 +70,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-body text-sm tracking-wide text-crust-700 link-underline hover:text-crust-900 transition-colors"
+                  className="font-body text-lg tracking-wide text-amber-100 link-underline hover:text-white/80 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -75,7 +82,7 @@ export default function Header() {
               {/* Cart Button */}
               <button
                 onClick={openCart}
-                className="relative p-2 text-crust-700 hover:text-crust-900 transition-colors"
+                className="relative p-2 text-amber-100 hover:text-white/80 transition-colors"
                 aria-label="Öppna varukorg"
               >
                 <ShoppingBag className="w-6 h-6" strokeWidth={1.5} />
@@ -89,13 +96,13 @@ export default function Header() {
               {/* Mobile Menu Toggle */}
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-crust-700 hover:text-crust-900 transition-colors"
+                className="lg:hidden p-2 text-amber-100 hover:text-white/80 transition-colors"
                 aria-label={isMobileMenuOpen ? "Stäng meny" : "Öppna meny"}
               >
                 {isMobileMenuOpen ? (
                   <X className="w-6 h-6" />
                 ) : (
-                  <Menu className="w-6 h-6" />
+                  <Menu className="w-6 h-6 " />
                 )}
               </button>
             </div>
@@ -103,9 +110,10 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
+        {/* bg-black */}
         <div
           className={cn(
-            "lg:hidden absolute top-full left-0 right-0 bg-flour-50/98 backdrop-blur-lg border-t border-flour-200 transition-all duration-300 overflow-hidden",
+            "lg:hidden absolute top-full left-0 right-0 bg-black-50/98 backdrop-blur-lg border-t border-flour-200 transition-all duration-300 overflow-hidden",
             isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
           )}
         >
@@ -116,7 +124,7 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="font-body text-lg text-crust-700 hover:text-crust-900 transition-colors py-2"
+                  className="font-body text-lg text-amber-100 hover:text-white/80 transition-colors py-2"
                 >
                   {link.label}
                 </Link>

@@ -6,19 +6,21 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-crust-950 text-flour-100">
+    
+    <footer className="bg-gray-950 text-flour-100">
+      <hr />
       {/* Main Footer */}
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-6">
-              <span className="font-display text-3xl font-semibold text-flour-50">
-                Lilla Sur
-              </span>
-              <span className="block text-xs tracking-[0.3em] uppercase text-flour-400 mt-1">
+            <Link href="/" className="inline-block mb-0">
+              {/* <span className="font-display text-3xl font-semibold text-flour-50"> */}
+               <img src="/images/logo-white.png" className="sm:size-48 max-sm:size-32" alt="" />
+              {/* </span> */}
+              {/* <span className="block text-xs tracking-[0.3em] uppercase text-flour-400 mt-1">
                 Hantverksbageri
-              </span>
+              </span> */}
             </Link>
             <p className="text-sm text-flour-300 leading-relaxed mb-6">
               Ekologiskt bageri i Kålltorp sedan 2014. Vi bakar med

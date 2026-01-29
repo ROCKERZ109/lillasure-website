@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -16,6 +16,7 @@ import {
   Minus,
   Plus,
   Trash2,
+  Info,
 } from "lucide-react";
 import { useCart } from "@/components/CartContext";
 import DatePicker from "@/components/DatePicker";
@@ -25,9 +26,11 @@ import {
   getAvailablePickupDates,
   getAvailablePickupTimes,
   formatDate,
+  getDayOfWeek,
 } from "@/lib/utils";
 import { createOrder } from "@/lib/orders";
 import type { CustomerInfo, OrderItem } from "@/types";
+import { dayLabels, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA } from "@/types";
 
 type Step = "cart" | "pickup" | "details" | "confirm";
 
@@ -55,8 +58,15 @@ export default function OrderPage() {
   const [orderId, setOrderId] = useState("");
   const [error, setError] = useState("");
 
+  // Check if selected date is Fettisdagen
+  const isFettisdagenSelected = pickupDate === FETTISDAGEN_DATE;
+
   const availableDates = getAvailablePickupDates(60);
   const availableTimes = pickupDate ? getAvailablePickupTimes(pickupDate) : [];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep, orderComplete]);
 
   const steps: { id: Step; label: string; number: number }[] = [
     { id: "cart", label: "Varukorg", number: 1 },
@@ -65,14 +75,29 @@ export default function OrderPage() {
     { id: "confirm", label: "Bekräfta", number: 4 },
   ];
 
-  const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
+  const unavailableItems = state.items.filter((item) => {
+    if (!pickupDate) return false;
+    const selectedDay = getDayOfWeek(pickupDate);
 
+    // If availableDays is empty/undefined, it's available every day
+    if (!item.product.availableDays || item.product.availableDays.length === 0) {
+      return false;
+    }
+    return !item.product.availableDays.includes(selectedDay);
+  });
+
+  const hasAvailabilityConflict = unavailableItems.length > 0;
+
+  const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
+  // 2. Update canProceed logic
   const canProceed = () => {
     switch (currentStep) {
       case "cart":
         return state.items.length > 0;
       case "pickup":
-        return pickupDate && pickupTime;
+        if (isFettisdagenSelected) return false;
+        // Block if date/time is missing OR if there are unavailable items
+        return pickupDate && pickupTime && !hasAvailabilityConflict;
       case "details":
         return (
           customerInfo.name.trim() &&
@@ -103,7 +128,6 @@ export default function OrderPage() {
 
   const handleSubmitOrder = async () => {
     if (!canProceed()) return;
-
     setIsSubmitting(true);
     setError("");
 
@@ -141,48 +165,46 @@ export default function OrderPage() {
   // Order Complete View
   if (orderComplete) {
     return (
-      <section className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-dough-100 to-flour-50">
+      <section className="min-h-screen pt-40 pb-20 bg-black">
         <div className="container mx-auto px-6">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-8 bg-green-100 rounded-full flex items-center justify-center">
               <Check className="w-10 h-10 text-green-600" />
             </div>
-            <h1 className="font-display text-4xl font-semibold text-crust-900 mb-4">
+            <h1 className="font-display text-4xl font-semibold text-white/80 mb-4">
               Tack för din beställning!
             </h1>
-            <p className="text-crust-600 mb-8">
+            <p className="text-crust-200 mb-8 font-body">
               Din beställning har mottagits och vi börjar förbereda den.
-              Du får en bekräftelse via email.
             </p>
 
-            <div className="bg-flour-100 rounded-sm p-6 mb-8 text-left">
-              <h2 className="font-display text-xl text-crust-900 mb-4">
+            <div className="bg-gray-600 rounded-sm p-6 mb-8 text-left">
+              <h2 className="font-display text-xl text-white/80 mb-4">
                 Beställningsdetaljer
               </h2>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-crust-500">Ordernummer</dt>
-                  <dd className="text-crust-900 font-medium">{orderId.slice(0, 8).toUpperCase()}</dd>
+                  <dt className="text-crust-200">Ordernummer</dt>
+                  <dd className="text-white/80 font-medium">{orderId.slice(0, 8).toUpperCase()}</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-crust-500">Avhämtning</dt>
-                  <dd className="text-crust-900">
+                  <dt className="text-crust-200">Avhämtning</dt>
+                  <dd className="text-white/80">
                     {formatDate(pickupDate)} kl {pickupTime}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-crust-500">Totalt</dt>
-                  <dd className="text-crust-900 font-medium">
+                  <dt className="text-crust-200">Totalt</dt>
+                  <dd className="text-white/80 font-medium">
                     {formatPrice(totalAmount)}
                   </dd>
                 </div>
               </dl>
             </div>
 
-            <div className="bg-wheat-100 rounded-sm p-4 mb-8">
-              <p className="text-sm text-wheat-800">
-                <strong>Obs!</strong> Betalning sker vid avhämtning i butiken.
-                Vi tar emot kort och Swish.
+            <div className="bg-crust-900 border border-crust-200 rounded-lg p-4 mb-10">
+              <p className="text-sm text-crust-200 font-body">
+                <strong>Betalning:</strong> Betalning sker vid avhämtning i butiken. Vi tar emot kort och Swish.
               </p>
             </div>
 
@@ -196,15 +218,15 @@ export default function OrderPage() {
   }
 
   return (
-    <section className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-dough-100 to-flour-50">
+    <section className="min-h-screen py-36 pb-20 bg-black">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="font-display text-4xl md:text-5xl font-semibold text-crust-900 mb-4">
+          <div className="text-center mb-12 mt-8 max-sm:mt-4">
+            <h1 className="font-display text-4xl md:text-5xl font-semibold text-white/80 mb-4">
               Beställning
             </h1>
-            <p className="text-crust-600">
+            <p className="text-crust-200">
               Fyll i din beställning och välj tid för avhämtning
             </p>
           </div>
@@ -217,8 +239,8 @@ export default function OrderPage() {
                   className={cn(
                     "flex items-center justify-center w-10 h-10 rounded-full font-body text-sm transition-colors",
                     currentStepIndex >= index
-                      ? "bg-crust-900 text-flour-50"
-                      : "bg-flour-300 text-crust-500"
+                      ? "bg-crust-900 text-crust-200"
+                      : "bg-gray-600 text-white/70"
                   )}
                 >
                   {currentStepIndex > index ? (
@@ -230,7 +252,7 @@ export default function OrderPage() {
                 <span
                   className={cn(
                     "hidden sm:block ml-3 text-sm font-body",
-                    currentStepIndex >= index ? "text-crust-900" : "text-crust-400"
+                    currentStepIndex >= index ? "text-white/80" : "text-white"
                   )}
                 >
                   {step.label}
@@ -256,64 +278,67 @@ export default function OrderPage() {
           )}
 
           {/* Step Content */}
-          <div className="bg-flour-50 rounded-sm shadow-lg p-6 md:p-8">
+          <div className="w-full bg-gray-800 shadow-lg p-6 md:p-8 rounded-2xl">
             {/* Step 1: Cart */}
             {currentStep === "cart" && (
               <div>
-                <h2 className="font-display text-2xl text-crust-900 mb-6">
+                <h2 className="font-display text-2xl text-white/80 mb-6">
                   Din varukorg
                 </h2>
 
                 {state.items.length === 0 ? (
                   <div className="text-center py-12">
-                    <ShoppingBag className="w-16 h-16 text-flour-400 mx-auto mb-4" />
-                    <p className="text-crust-500 mb-6">Din varukorg är tom</p>
-                    <Link href="/produkter" className="btn-secondary">
+                    <ShoppingBag className="w-16 h-16 text-crust-200 mx-auto mb-4" />
+                    <p className="text-crust-200 mb-6">Din varukorg är tom</p>
+                    <Link href="/produkter" className="btn-secondary border-crust-200 text-crust-200 ">
                       Se produkter
                     </Link>
                   </div>
                 ) : (
-                  <div className="space-y-4">
+                  <div className="space-y-4 ">
                     {state.items.map((item) => (
                       <div
                         key={item.product.id}
-                        className="flex gap-4 p-4 bg-flour-100 rounded-sm"
+                        className="flex gap-4 p-4 bg-gray-700 rounded-lg max-sm:h-28"
                       >
-                        <div className="w-16 h-16 bg-flour-200 rounded-sm flex items-center justify-center flex-shrink-0">
-                          <span className="text-2xl">🥖</span>
+                        <div className="w-16 h-16 bg-gray-600 rounded-lg overflow-hidden flex-shrink-0">
+                          {item.product.image ? (
+                            <img src={item.product.image} className="w-full h-full object-cover" alt={item.product.nameSv} />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-2xl">🥖</div>
+                          )}
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-display text-lg text-crust-900">
+                          <h3 className="font-display text-lg text-white/80">
                             {item.product.nameSv}
                           </h3>
-                          <p className="text-sm text-crust-500">
-                            {formatPrice(item.product.price)} st
+                          <p className="text-sm text-crust-200">
+                            {formatPrice(item.product.price)} / st
                           </p>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() =>
-                              updateQuantity(item.product.id, item.quantity - 1)
-                            }
-                            className="w-8 h-8 flex items-center justify-center border border-crust-200 rounded-sm hover:bg-crust-100"
+                        <div className="grid grid-cols-2  gap-x-5 max-sm:gap-x-0 max-sm:grid-cols-2">
+                          <div className="flex flex-col items-center max-sm:-mt-2  max-sm:h-24  "> <button
+                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                            className="w-8 h-8 max-sm:w-8 flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors "
                           >
-                            <Minus className="w-4 h-4" />
+                            <Plus className="w-4 h-4 text-white/70" />
                           </button>
-                          <span className="w-8 text-center">{item.quantity}</span>
-                          <button
-                            onClick={() =>
-                              updateQuantity(item.product.id, item.quantity + 1)
-                            }
-                            className="w-8 h-8 flex items-center justify-center border border-crust-200 rounded-sm hover:bg-crust-100"
-                          >
-                            <Plus className="w-4 h-4" />
-                          </button>
+                            <span className="w-8 text-center text-white max-sm:mt-2 max-sm:h-6  flex items-center justify-center">{item.quantity}</span>
+
+                            <button
+                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              className="w-8 h-8 max-sm:w-8   flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors max-sm:mt-2"
+                            >
+                              <Minus className="w-4 h-4 text-white/70 " />
+                            </button></div>
+
                           <button
                             onClick={() => removeItem(item.product.id)}
-                            className="p-2 text-crust-400 hover:text-red-600"
+                            className="p-2 text-gray-400 hover:text-red-500 transition-colors max-sm:ml-1 sm:mt-8 max-sm:mt-6"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-4 h-4 max-sm:h-4 -mt-6" />
                           </button>
+
                         </div>
                       </div>
                     ))}
@@ -325,31 +350,87 @@ export default function OrderPage() {
             {/* Step 2: Pickup */}
             {currentStep === "pickup" && (
               <div>
-                <h2 className="font-display text-2xl text-crust-900 mb-6">
+                <h2 className="font-display text-2xl text-white/80 mb-6">
                   Välj avhämtning
                 </h2>
 
                 <div className="space-y-6">
                   {/* Date Selection */}
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-body text-crust-700 mb-3">
+                    <label className="flex items-center gap-2 text-sm font-body text-amber-100 mb-3">
                       <Calendar className="w-4 h-4" />
                       Välj datum
                     </label>
                     <DatePicker
                       selectedDate={pickupDate}
                       onSelectDate={(date: SetStateAction<string>) => {
-                        setPickupDate(date);
+                        setPickupDate(date as string);
                         setPickupTime("");
                       }}
                       availableDates={availableDates}
                     />
                   </div>
+                  {/* AESTHETIC ALERT: Availability Conflict */}
+                  {pickupDate && hasAvailabilityConflict && !isFettisdagenSelected && (
+                    <div className="p-5 bg-red-950/30 border border-red-500/50 rounded-xl animate-in fade-in slide-in-from-top-2 duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="p-2 bg-red-500/20 rounded-lg">
+                          <AlertCircle className="w-6 h-6 text-red-400" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-red-200 font-semibold mb-1 font-body max-sm:text-sm" >
+                            Produkter ej tillgängliga valt datum
+                          </h3>
+                          <p className="text-sm text-red-300/80 mb-3 font-body max-sm:text-xs">
+                            Följande produkter bakas inte på {dayLabels[getDayOfWeek(pickupDate)]}ar:
+                          </p>
+                          <ul className="space-y-1">
+                            {unavailableItems.map((item) => (
+                              <li key={item.product.id} className="text-sm text-white flex items-center gap-2 font-body">
+                                <span className="w-1.5 h-1.5 bg-red-400 rounded-full " />
+                                {item.product.nameSv}
+                              </li>
+                            ))}
+                          </ul>
+                          <p className="text-xs text-red-400/60 mt-4 italic font-body max-sm:text-xs">
+                            Tips: Ändra datum eller gå tillbaka till varukorgen för att ta bort dessa produkter.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
 
-                  {/* Time Selection */}
-                  {pickupDate && (
+                  {/* Fettisdagen Warning */}
+                  {isFettisdagenSelected && (
+                    <div className="p-4 bg-gray-600 border border-crust-200 rounded-lg">
+                      <div className="flex items-start gap-3">
+                        <Info className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <div className="flex flex-row items-center">
+                            <img src="/images/kremla.png" className="size-6 animate-bounce" alt="" />
+                            <p className=" text-xl font-bold text-white  max-sm:text-base mb-2 font-display">
+                              Fettisdagen - Endast Kremla!
+                            </p></div>
+                          <p className="text-sm text-crust-200 max-sm:text-xs mb-3 font-body">
+                            På Fettisdagen ({formatDate(FETTISDAGEN_DATE)}) kan du endast beställa Kremla/kremlor,
+                            med en minsta beställning på {FETTISDAGEN_MIN_KREMLA} stycken.
+                          </p>
+                          <Link
+                            href="/fettisdagen"
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white text-black rounded-sm hover:bg-crust-900 hover:text-white  transition-colors max-sm:text-xs"
+                          >
+                            Beställ Kremla här
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Time Selection - only show if NOT Fettisdagen */}
+                  {pickupDate && !isFettisdagenSelected && !hasAvailabilityConflict && (
                     <div>
-                      <label className="flex items-center gap-2 text-sm font-body text-crust-700 mb-3">
+                      <label className="flex items-center gap-2 text-sm font-body text-amber-100 mb-3">
                         <Clock className="w-4 h-4" />
                         Välj tid
                       </label>
@@ -359,10 +440,10 @@ export default function OrderPage() {
                             key={time}
                             onClick={() => setPickupTime(time)}
                             className={cn(
-                              "px-4 py-3 rounded-sm text-sm font-body transition-colors",
+                              "px-4 py-3 rounded-lg text-sm font-body transition-colors",
                               pickupTime === time
-                                ? "bg-crust-900 text-flour-50"
-                                : "bg-flour-200 text-crust-700 hover:bg-flour-300"
+                                ? "bg-white text-gray-900"
+                                : "bg-gray-700 text-white/80 hover:bg-gray-600"
                             )}
                           >
                             {time}
@@ -378,69 +459,64 @@ export default function OrderPage() {
             {/* Step 3: Details */}
             {currentStep === "details" && (
               <div>
-                <h2 className="font-display text-2xl text-crust-900 mb-6">
+                <h2 className="font-display text-2xl text-white/80 mb-6">
                   Dina uppgifter
                 </h2>
 
                 <div className="space-y-4">
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-body text-crust-700 mb-2">
+                    <label className="flex items-center gap-2 text-sm font-body text-amber-100 mb-2">
                       <User className="w-4 h-4" />
-                      Namn
+                      Namn *
                     </label>
                     <input
                       type="text"
                       value={customerInfo.name}
-                      onChange={(e) =>
-                        setCustomerInfo({ ...customerInfo, name: e.target.value })
-                      }
+                      onChange={(e) => setCustomerInfo({ ...customerInfo, name: e.target.value })}
                       placeholder="Ditt namn"
-                      className="input-field"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-body text-crust-700 mb-2">
+                    <label className="flex items-center gap-2 text-sm font-body text-amber-100 mb-2">
                       <Mail className="w-4 h-4" />
-                      E-post
+                      E-post *
                     </label>
                     <input
                       type="email"
                       value={customerInfo.email}
-                      onChange={(e) =>
-                        setCustomerInfo({ ...customerInfo, email: e.target.value })
-                      }
+                      onChange={(e) => setCustomerInfo({ ...customerInfo, email: e.target.value })}
                       placeholder="din@email.se"
-                      className="input-field"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
                   <div>
-                    <label className="flex items-center gap-2 text-sm font-body text-crust-700 mb-2">
+                    <label className="flex items-center gap-2 text-sm font-body text-amber-100 mb-2">
                       <Phone className="w-4 h-4" />
-                      Telefon
+                      Telefon *
                     </label>
                     <input
                       type="tel"
                       value={customerInfo.phone}
-                      onChange={(e) =>
-                        setCustomerInfo({ ...customerInfo, phone: e.target.value })
-                      }
+                      onChange={(e) => setCustomerInfo({ ...customerInfo, phone: e.target.value })}
                       placeholder="07X XXX XX XX"
-                      className="input-field"
+                      maxLength={10}
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500"
                     />
                   </div>
 
                   <div>
-                    <label className="text-sm font-body text-crust-700 mb-2 block">
-                      Meddelande (valfritt)
+                    <label className="text-sm font-body text-amber-100 mb-2 block">
+                      Ytterligare kommentarer (valfritt)
                     </label>
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       placeholder="Allergier eller andra önskemål..."
                       rows={3}
-                      className="input-field resize-none"
+                      className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 resize-none"
                     />
                   </div>
                 </div>
@@ -450,81 +526,77 @@ export default function OrderPage() {
             {/* Step 4: Confirm */}
             {currentStep === "confirm" && (
               <div>
-                <h2 className="font-display text-2xl text-crust-900 mb-6">
+                <h2 className="font-display text-2xl text-white/80 mb-6">
                   Bekräfta beställning
                 </h2>
 
                 <div className="space-y-6">
                   {/* Order Summary */}
-                  <div className="bg-flour-100 rounded-sm p-4">
-                    <h3 className="font-display text-lg text-crust-900 mb-3">
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <h3 className="font-display text-lg text-white/80 mb-3 ">
                       Produkter
                     </h3>
                     <ul className="space-y-2">
                       {state.items.map((item) => (
-                        <li
-                          key={item.product.id}
-                          className="flex justify-between text-sm"
-                        >
-                          <span className="text-crust-700">
+                        <li key={item.product.id} className="flex justify-between text-sm">
+                          <span className="text-gray-300">
                             {item.quantity}x {item.product.nameSv}
                           </span>
-                          <span className="text-crust-900">
+                          <span className="text-white">
                             {formatPrice(item.product.price * item.quantity)}
                           </span>
                         </li>
                       ))}
                     </ul>
-                    <div className="border-t border-flour-300 mt-3 pt-3 flex justify-between font-medium">
+                    <div className="border-t border-gray-600 mt-3 pt-3 flex justify-between font-medium text-white">
                       <span>Totalt</span>
                       <span>{formatPrice(totalAmount)}</span>
                     </div>
                   </div>
 
                   {/* Pickup Details */}
-                  <div className="bg-flour-100 rounded-sm p-4">
-                    <h3 className="font-display text-lg text-crust-900 mb-3">
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <h3 className="font-display text-lg text-white/80 mb-3">
                       Avhämtning
                     </h3>
-                    <p className="text-sm text-crust-700">
+                    <p className="text-sm text-gray-300">
                       {formatDate(pickupDate)} kl {pickupTime}
                     </p>
-                    <p className="text-sm text-crust-500 mt-1">
+                    <p className="text-sm text-gray-400 mt-1">
                       Solrosgatan 11, Göteborg
                     </p>
                   </div>
 
                   {/* Customer Details */}
-                  <div className="bg-flour-100 rounded-sm p-4">
-                    <h3 className="font-display text-lg text-crust-900 mb-3">
+                  <div className="bg-gray-700 rounded-lg p-4">
+                    <h3 className="font-display text-lg text-white/80 mb-3">
                       Kontaktuppgifter
                     </h3>
                     <dl className="space-y-1 text-sm">
                       <div className="flex gap-2">
-                        <dt className="text-crust-500">Namn:</dt>
-                        <dd className="text-crust-900">{customerInfo.name}</dd>
+                        <dt className="text-gray-400">Namn:</dt>
+                        <dd className="text-white">{customerInfo.name}</dd>
                       </div>
                       <div className="flex gap-2">
-                        <dt className="text-crust-500">E-post:</dt>
-                        <dd className="text-crust-900">{customerInfo.email}</dd>
+                        <dt className="text-gray-400">E-post:</dt>
+                        <dd className="text-white">{customerInfo.email}</dd>
                       </div>
                       <div className="flex gap-2">
-                        <dt className="text-crust-500">Telefon:</dt>
-                        <dd className="text-crust-900">{customerInfo.phone}</dd>
+                        <dt className="text-gray-400">Telefon:</dt>
+                        <dd className="text-white">{customerInfo.phone}</dd>
                       </div>
                       {notes && (
                         <div className="flex gap-2">
-                          <dt className="text-crust-500">Meddelande:</dt>
-                          <dd className="text-crust-900">{notes}</dd>
+                          <dt className="text-gray-400">Meddelande:</dt>
+                          <dd className="text-white">{notes}</dd>
                         </div>
                       )}
                     </dl>
                   </div>
 
-                  <div className="bg-wheat-100 rounded-sm p-4">
-                    <p className="text-sm text-wheat-800">
-                      <strong>Betalning:</strong> Betalning sker vid avhämtning
-                      i butiken. Vi tar emot kort och Swish.
+                  <div className="bg-crust-900 border border-crust-200 rounded-lg p-4">
+                    <p className="text-sm text-crust-200 font-body">
+                      <strong>Betalning:</strong> Betalning sker vid avhämtning i butiken. Vi tar emot kort och Swish.
                     </p>
                   </div>
                 </div>
@@ -532,11 +604,11 @@ export default function OrderPage() {
             )}
 
             {/* Navigation */}
-            <div className="flex items-center justify-between mt-8 pt-6 border-t border-flour-200">
+            <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-700">
               {currentStepIndex > 0 ? (
                 <button
                   onClick={handleBack}
-                  className="inline-flex items-center gap-2 text-crust-600 hover:text-crust-900 transition-colors"
+                  className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Tillbaka
@@ -544,7 +616,7 @@ export default function OrderPage() {
               ) : (
                 <Link
                   href="/produkter"
-                  className="inline-flex items-center gap-2 text-crust-600 hover:text-crust-900 transition-colors"
+                  className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" />
                   Fortsätt handla
@@ -554,8 +626,8 @@ export default function OrderPage() {
               <div className="flex items-center gap-4">
                 {state.items.length > 0 && (
                   <div className="text-right">
-                    <span className="text-sm text-crust-500">Totalt</span>
-                    <p className="font-display text-xl text-crust-900">
+                    <span className="text-sm text-gray-400">Totalt</span>
+                    <p className="font-display text-xl text-white">
                       {formatPrice(totalAmount)}
                     </p>
                   </div>
@@ -566,8 +638,10 @@ export default function OrderPage() {
                     onClick={handleSubmitOrder}
                     disabled={!canProceed() || isSubmitting}
                     className={cn(
-                      "btn-primary",
-                      (!canProceed() || isSubmitting) && "opacity-50 cursor-not-allowed"
+                      "px-6 py-3 btn-primary bg-crust-900 hover:bg-crust-800 font-semibold rounded-lg transition-colors font-body",
+                      canProceed() && !isSubmitting
+                        ? "hover:bg-crust-800"
+                        : "opacity-50 cursor-not-allowed"
                     )}
                   >
                     {isSubmitting ? "Skickar..." : "Bekräfta beställning"}
@@ -577,12 +651,14 @@ export default function OrderPage() {
                     onClick={handleNext}
                     disabled={!canProceed()}
                     className={cn(
-                      "btn-primary group",
-                      !canProceed() && "opacity-50 cursor-not-allowed"
+                      "inline-flex items-center gap-2 px-6 py-3 bg-crust-900 text-white font-semibold rounded-lg transition-colors font-body",
+                      canProceed()
+                        ? "hover:bg-crust-800"
+                        : "opacity-50 cursor-not-allowed"
                     )}
                   >
                     Fortsätt
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 )}
               </div>

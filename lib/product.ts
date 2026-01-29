@@ -1,3 +1,4 @@
+//lib/product.ts
 import { Order, Product } from "@/types";
 import { db } from "./firebase";
 import { query, collection, orderBy, getDocs } from "firebase/firestore";

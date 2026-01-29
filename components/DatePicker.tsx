@@ -107,9 +107,9 @@ export default function DatePicker({
           // Base styles
           "flex items-center justify-center mx-auto",
           // Available & not selected
-          available && !selected && "hover:bg-wheat-100 text-crust-900 cursor-pointer",
+          available && !selected && "hover:bg-gray-700 text-white/80 cursor-pointer",
           // Not available
-          !available && "text-crust-300 cursor-not-allowed",
+          !available && "text-red-400 cursor-not-allowed",
           // Selected
           selected && "bg-crust-900 text-flour-50 font-medium shadow-lg",
           // Today indicator
@@ -122,7 +122,7 @@ export default function DatePicker({
   }
 
   return (
-    <div className="bg-flour-50 border border-flour-300 rounded-lg p-4 shadow-sm">
+    <div className="bg-gray-800 border border-flour-300 rounded-lg p-4 shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <button
@@ -134,7 +134,7 @@ export default function DatePicker({
           <ChevronLeft className="w-5 h-5 text-crust-600" />
         </button>
         
-        <h3 className="font-display text-lg text-crust-900">
+        <h3 className="font-display text-lg text-white/80">
           {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
         </h3>
         
@@ -153,7 +153,7 @@ export default function DatePicker({
         {dayNames.map((day) => (
           <div
             key={day}
-            className="h-8 flex items-center justify-center text-xs font-medium text-crust-500 uppercase tracking-wide"
+            className="h-8 flex items-center justify-center text-xs font-medium text-crust-200 uppercase tracking-wide"
           >
             {day}
           </div>
@@ -167,16 +167,16 @@ export default function DatePicker({
 
       {/* Legend */}
       <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-flour-200">
-        <div className="flex items-center gap-2 text-xs text-crust-500">
+        <div className="flex items-center gap-2 text-xs text-crust-200">
           <div className="w-3 h-3 rounded-full bg-crust-900" />
           <span>Vald dag</span>
         </div>
-        <div className="flex items-center gap-2 text-xs text-crust-500">
+        <div className="flex items-center gap-2 text-xs text-crust-200">
           <div className="w-3 h-3 rounded-full ring-2 ring-wheat-400" />
           <span>Idag</span>
         </div>
-        <div className="flex items-center gap-2 text-xs text-crust-500">
-          <div className="w-3 h-3 rounded-full bg-flour-300" />
+        <div className="flex items-center gap-2 text-xs text-crust-200">
+          <div className="w-3 h-3 rounded-full bg-red-400" />
           <span>Stängt</span>
         </div>
       </div>

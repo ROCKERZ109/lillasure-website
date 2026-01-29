@@ -5,43 +5,43 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-dough-100 to-flour-50 grain-overlay">
+      <section className="pt-32 pb-16 bg-black">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="text-sm font-body tracking-[0.3em] uppercase text-wheat-600 mb-4 block mt-10">
+            <span className="text-sm font-body tracking-[0.3em] uppercase  text-white/80 mb-4 block mt-10">
               Välkommen
             </span>
-            <h1 className="font-display text-5xl md:text-6xl font-semibold text-crust-900 mb-6">
+            <h1 className="font-display text-5xl md:text-6xl font-semibold text-white mb-6">
               Kontakt
             </h1>
-            <p className="text-crust-600 leading-relaxed text-lg">
+            <p className="text-crust-200 leading-relaxed text-lg font-body">
               Har du frågor, funderingar eller vill bara säga hej? 
               Vi finns här för dig.
             </p>
           </div>
         </div>
       </section>
-
+<hr />
       {/* Contact Info */}
-      <section className="py-24 bg-flour-50">
+      <section className="py-24 bg-black">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
             {/* Info Cards */}
             <div className="space-y-6">
               {/* Location */}
-              <div className="bg-flour-100 rounded-sm p-8">
+              <div className="bg-gray-800 rounded-sm p-8">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 bg-wheat-100 rounded-full flex items-center justify-center">
-                    <MapPin className="w-7 h-7 text-wheat-700" />
+                  <div className="w-14 h-14 bg-gray-400 rounded-full flex items-center justify-center">
+                    <MapPin className="w-7 h-7 text-white/90" />
                   </div>
                   <div>
-                    <h2 className="font-display text-2xl text-crust-900">
+                    <h2 className="font-display text-2xl text-white/80">
                       Besöksadress
                     </h2>
-                    <p className="text-sm text-crust-500">I hjärtat av Kålltorp</p>
+                    <p className="text-sm text-crust-200">I hjärtat av Kålltorp</p>
                   </div>
                 </div>
-                <address className="not-italic text-crust-700 leading-relaxed mb-4">
+                <address className="not-italic text-crust-200 leading-relaxed mb-4">
                   {bakeryInfo.address.street}
                   <br />
                   {bakeryInfo.address.postalCode} {bakeryInfo.address.city}
@@ -52,23 +52,23 @@ export default function ContactPage() {
                   href={`https://www.google.com/maps/search/?api=1&query=${bakeryInfo.address.street}+${bakeryInfo.address.city}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-wheat-600 hover:text-wheat-700 transition-colors font-medium"
+                  className="inline-flex items-center gap-2 text-crust-400 hover:text-crust-600 transition-colors font-body"
                 >
                   Öppna i Google Maps →
                 </a>
               </div>
 
               {/* Hours */}
-              <div className="bg-flour-100 rounded-sm p-8">
+              <div className="bg-gray-800 rounded-sm p-8">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 bg-wheat-100 rounded-full flex items-center justify-center">
-                    <Clock className="w-7 h-7 text-wheat-700" />
+                  <div className="w-14 h-14 bg-gray-400 rounded-full flex items-center justify-center">
+                    <Clock className="w-7 h-7 text-white/90" />
                   </div>
                   <div>
-                    <h2 className="font-display text-2xl text-crust-900">
+                    <h2 className="font-display text-2xl text-white/70">
                       Öppettider
                     </h2>
-                    <p className="text-sm text-crust-500">
+                    <p className="text-sm text-crust-200">
                       Stängt söndag & måndag
                     </p>
                   </div>
@@ -79,12 +79,12 @@ export default function ContactPage() {
                       key={hours.day}
                       className="flex justify-between py-2 border-b border-flour-200 last:border-0"
                     >
-                      <span className="text-crust-600">{hours.day}</span>
+                      <span className="text-crust-200">{hours.day}</span>
                       <span
                         className={
                           hours.closed
-                            ? "text-crust-400"
-                            : "text-crust-900 font-medium"
+                            ? "text-white"
+                            : "text-white/80 font-medium"
                         }
                       >
                         {hours.closed ? "Stängt" : `${hours.open} – ${hours.close}`}
@@ -94,54 +94,20 @@ export default function ContactPage() {
                 </ul>
               </div>
 
-              {/* Contact Methods */}
-              <div className="bg-flour-100 rounded-sm p-8">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 bg-wheat-100 rounded-full flex items-center justify-center">
-                    <Mail className="w-7 h-7 text-wheat-700" />
-                  </div>
-                  <div>
-                    <h2 className="font-display text-2xl text-crust-900">
-                      Kontakta oss
-                    </h2>
-                    <p className="text-sm text-crust-500">Vi svarar så snart vi kan</p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <a
-                    href={`mailto:${bakeryInfo.contact.email}`}
-                    className="flex items-center gap-3 text-crust-700 hover:text-crust-900 transition-colors"
-                  >
-                    <Mail className="w-5 h-5 text-crust-400" />
-                    {bakeryInfo.contact.email}
-                  </a>
-                  <a
-                    href={`https://instagram.com/${bakeryInfo.contact.instagram.replace(
-                      "@",
-                      ""
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-crust-700 hover:text-crust-900 transition-colors"
-                  >
-                    <Instagram className="w-5 h-5 text-crust-400" />
-                    {bakeryInfo.contact.instagram}
-                  </a>
-                </div>
-              </div>
+            
             </div>
 
             {/* Map Placeholder */}
-            <div className="relative">
-              <div className="sticky top-32">
-                <div className="aspect-square bg-gradient-to-br from-dough-200 to-dough-300 rounded-sm overflow-hidden">
+            <div className="">
+            
+                <div className=" bg-gray-800 rounded-sm overflow-hidden max-sm:-mt-4">
                   {/* Map placeholder - replace with actual map */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                    <MapPin className="w-16 h-16 text-crust-400 mb-4" />
-                    <h3 className="font-display text-2xl text-crust-900 mb-2">
+                  <div className="  flex flex-col items-center justify-center text-center p-8">
+                    <MapPin className="max-sm:w-10 max-sm:h-10 w-16 h-16 text-white mb-4" />
+                    <h3 className="font-display max-sm:text-xl text-2xl text-white/80 mb-2">
                       Hitta till oss
                     </h3>
-                    <p className="text-crust-600 mb-6">
+                    <p className="text-crust-200 mb-6 max-sm:text-sm font-body">
                       Vi ligger på Solrosgatan 11 i Kålltorp, 
                       enkelt att nå med spårvagn eller buss.
                     </p>
@@ -157,28 +123,64 @@ export default function ContactPage() {
                 </div>
 
                 {/* Additional Info */}
-                <div className="mt-6 p-6 bg-wheat-100 rounded-sm">
-                  <h3 className="font-display text-lg text-crust-900 mb-2">
+                <div className="mt-6 p-6 bg-gray-800 rounded-sm ">
+                  <h3 className="font-display text-lg text-white/80 mb-2">
                     Tips för besöket
                   </h3>
-                  <ul className="text-sm text-crust-600 space-y-2">
+                  <ul className="text-sm text-crust-200 space-y-2 font-body">
                     <li>• Parkering finns längs gatan</li>
-                    <li>• Närmaste hållplats: Kålltorp (spårvagn 5, 7)</li>
+                    <li>• Närmaste hållplats: Solrosgatan (spårvagn 5, 3)</li>
                     <li>• Populära bröd kan ta slut tidigt – kom i tid!</li>
                     <li>• Vi tar emot kort, Swish och kontant</li>
                   </ul>
                 </div>
+           
+                {/* Contact Methods */}
+              <div className="mt-6 p-6 bg-gray-800 rounded-sm">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 bg-gray-400  rounded-full flex items-center justify-center">
+                    <Mail className="w-7 h-7 text-white/90" />
+                  </div>
+                  <div>
+                    <h2 className="font-display text-2xl text-white/80">
+                      Kontakta oss
+                    </h2>
+                    <p className="text-sm text-crust-200">Vi svarar så snart vi kan</p>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <a
+                    href={`mailto:${bakeryInfo.contact.email}`}
+                    className="flex items-center gap-3 text-crust-200 hover:text-white/80 transition-colors"
+                  >
+                    <Mail className="w-5 h-5 text-white" />
+                    {bakeryInfo.contact.email}
+                  </a>
+                  <a
+                    href={`https://instagram.com/${bakeryInfo.contact.instagram.replace(
+                      "@",
+                      ""
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-crust-200 hover:text-white/80 transition-colors"
+                  >
+                    <Instagram className="w-5 h-5 text-white" />
+                    {bakeryInfo.contact.instagram}
+                  </a>
+                </div>
               </div>
             </div>
+            
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 bg-dough-100 grain-overlay">
+      <section className="py-24 bg-gray-800 grain-overlay">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto">
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-crust-900 mb-12 text-center">
+            <h2 className="font-display text-3xl md:text-4xl font-semibold text-white/80 mb-12 text-center">
               Vanliga frågor
             </h2>
 
@@ -202,7 +204,7 @@ export default function ContactPage() {
                 {
                   question: "Kan jag reservera bröd?",
                   answer:
-                    "Ja! Använd vår online-beställning eller ring till butiken. Vi rekommenderar att beställa minst en dag i förväg, särskilt för helger.",
+                    "Ja! Använd vår online-beställning. Vi rekommenderar att beställa minst en dag i förväg, särskilt för helger.",
                 },
                 {
                   question: "Varför är butiken stängd söndag och måndag?",
@@ -212,12 +214,12 @@ export default function ContactPage() {
               ].map((faq, index) => (
                 <div
                   key={index}
-                  className="bg-flour-50 rounded-sm p-6 transition-all duration-300 hover:shadow-md"
+                  className="bg-gray-600 rounded-sm p-6 transition-all duration-300 hover:shadow-md"
                 >
-                  <h3 className="font-display text-xl text-crust-900 mb-2">
+                  <h3 className="font-display text-xl font-bold text-white/80 mb-2">
                     {faq.question}
                   </h3>
-                  <p className="text-crust-600 leading-relaxed">{faq.answer}</p>
+                  <p className="text-crust-200  max-sm:text-sm font-body leading-relaxed">{faq.answer}</p>
                 </div>
               ))}
             </div>

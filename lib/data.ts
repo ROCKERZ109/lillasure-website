@@ -1,3 +1,4 @@
+//lib/data.ts
 import type { Product, StoreHours } from "@/types";
 
 export const products: Product[] = [
@@ -89,12 +90,12 @@ export const products: Product[] = [
 
 export const storeHours: StoreHours[] = [
   { day: "Måndag", open: "", close: "", closed: true },
-  { day: "Tisdag", open: "08:00", close: "17:00" },
-  { day: "Onsdag", open: "07:00", close: "18:00" },
-  { day: "Torsdag", open: "07:00", close: "18:00" },
-  { day: "Fredag", open: "07:00", close: "18:00" },
-  { day: "Lördag", open: "08:00", close: "13:00" },
-  { day: "Söndag", open: "", close: "", closed: true },
+  { day: "Tisdag", open: "08:00", close: "18:00" },
+  { day: "Onsdag", open: "08:00", close: "18:00" },
+  { day: "Torsdag", open: "08:00", close: "18:00" },
+  { day: "Fredag", open: "08:00", close: "18:00" },
+  { day: "Lördag", open: "08:00", close: "16:00" },
+  { day: "Söndag", open: "08:00", close: "16:00" },
 ];
 
 export const bakeryInfo = {
@@ -108,7 +109,7 @@ export const bakeryInfo = {
     country: "Sverige",
   },
   contact: {
-    email: "info@lillasur.se",
+    email: "butiken@lillasur.se",
     instagram: "@lillasurgbg",
   },
   coordinates: {

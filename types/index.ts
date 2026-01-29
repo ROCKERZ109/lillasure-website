@@ -12,6 +12,13 @@ export interface Product {
   featured?: boolean;
   allergens?: string[];
   weight?: string;
+  // NEW: Days when product is available
+  availableDays?: DayOfWeek[];
+  // NEW: Special product type (week special or day special)
+  specialType?: "week" | "day" | null;
+  // NEW: For Fettisdagen special products
+  isFettisdagen?: boolean;
+  minOrder?: number; // Minimum order quantity
 }
 
 export type ProductCategory = 
@@ -20,6 +27,15 @@ export type ProductCategory =
   | "cookie" 
   | "cake" 
   | "seasonal";
+
+export type DayOfWeek = 
+  | "monday"
+  | "tuesday" 
+  | "wednesday" 
+  | "thursday" 
+  | "friday" 
+  | "saturday" 
+  | "sunday";
 
 export interface CartItem {
   product: Product;
@@ -36,7 +52,9 @@ export interface Order {
   status: OrderStatus;
   totalAmount: number;
   createdAt: Date;
-  notes?: string ;
+  notes?: string;
+  // NEW: Flag for Fettisdagen orders
+  isFettisdagenOrder?: boolean;
 }
 
 export interface OrderItem {
@@ -66,3 +84,28 @@ export interface StoreHours {
   close: string;
   closed?: boolean;
 }
+
+// Day labels for UI
+export const dayLabels: Record<DayOfWeek, string> = {
+  monday: "Måndag",
+  tuesday: "Tisdag",
+  wednesday: "Onsdag",
+  thursday: "Torsdag",
+  friday: "Fredag",
+  saturday: "Lördag",
+  sunday: "Söndag",
+};
+
+export const dayLabelsEn: Record<DayOfWeek, string> = {
+  monday: "Monday",
+  tuesday: "Tuesday",
+  wednesday: "Wednesday",
+  thursday: "Thursday",
+  friday: "Friday",
+  saturday: "Saturday",
+  sunday: "Sunday",
+};
+
+// Fettisdagen date (update yearly)
+export const FETTISDAGEN_DATE = "2026-02-17"; // March 4th, 2025
+export const FETTISDAGEN_MIN_KREMLA = 10;
