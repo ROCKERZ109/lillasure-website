@@ -2,15 +2,15 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Wheat, Cookie, Coffee, Sparkles, MenuSquare, Calendar } from "lucide-react";
+import { Wheat, Cookie, Coffee, Sparkles, MenuSquare, Calendar, Pizza } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { getProductsByCategory } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import type { Product, ProductCategory, DayOfWeek } from "@/types";
-import { dayLabels } from "@/types";
+import { dayLabels, dayLabelsEn } from "@/types";
 import { getProducts } from "@/lib/product";
 import Shimmer from "@/components/Shimmer";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // Static config for icons and IDs
 const categoryConfig: { id: ProductCategory | "all"; icon: React.ReactNode }[] = [
@@ -18,6 +18,7 @@ const categoryConfig: { id: ProductCategory | "all"; icon: React.ReactNode }[] =
   { id: "bread", icon: <Wheat className="w-4 h-4" /> },
   { id: "pastry", icon: <Coffee className="w-4 h-4" /> },
   { id: "cookie", icon: <Cookie className="w-4 h-4" /> },
+  { id: "dough", icon: <Pizza className="w-4 h-4" /> },
 ];
 
 // Get current day of week
@@ -36,13 +37,14 @@ function isProductAvailableOnDay(product: Product, day: DayOfWeek): boolean {
 
 function ProductsContent() {
   const t = useTranslations('products');
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const [activeCategory, setActiveCategory] = useState<ProductCategory | "all">("all");
   const [highlightSemla, setHighlightSemla] = useState(false);
   const [productsList, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [showOnlyToday, setShowOnlyToday] = useState(false);
-  
+
   const currentDay = getCurrentDay();
 
   // Map translations to categories
@@ -55,7 +57,7 @@ function ProductsContent() {
     async function fetchProducts() {
       try {
         const data = await getProducts();
-        console.log(data);
+
         setProducts(data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -90,18 +92,18 @@ function ProductsContent() {
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     if (a.specialType === "week" && b.specialType !== "week") return -1;
     if (b.specialType === "week" && a.specialType !== "week") return 1;
-    
+
     if (a.specialType === "day" && b.specialType !== "day") return -1;
     if (b.specialType === "day" && a.specialType !== "day") return 1;
-    
+
     if (a.featured && !b.featured) return -1;
     if (b.featured && !a.featured) return 1;
-    
+
     if (highlightSemla) {
       if (a.name.toUpperCase() === "SEMLA") return -1;
       if (b.name.toUpperCase() === "SEMLA") return 1;
     }
-    
+
     return 0;
   });
 
@@ -203,8 +205,8 @@ function ProductsContent() {
               )}
             >
               <Calendar className="w-4 h-4" />
-              {showOnlyToday 
-                ? `${t('filters.available_today')} (${dayLabels[currentDay]})` 
+              {showOnlyToday
+                ? `${t('filters.available_today')} (${locale == "sv" ? dayLabels[currentDay] : dayLabelsEn[currentDay]})`
                 : t('filters.show_today')}
             </button>
           </div>
@@ -236,14 +238,14 @@ function ProductsContent() {
           {!loading && sortedProducts.length === 0 && (
             <div className="text-center py-16">
               <p className="text-crust-200 text-lg">
-                {showOnlyToday 
-                  ? t('empty.no_today', { day: dayLabels[currentDay] })
+                {showOnlyToday
+                  ? t('empty.no_today', { day: locale == "sv" ? dayLabels[currentDay] : dayLabelsEn[currentDay] })
                   : t('empty.no_category')
                 }
               </p>
               {showOnlyToday && (
                 <button
-                  onClick={() => setShowOnlyToday(false)}
+                  onClick={() => { setShowOnlyToday(false); setActiveCategory("all") }}
                   className="mt-4 px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
                 >
                   {t('empty.reset_btn')}
@@ -261,7 +263,7 @@ function ProductsContent() {
         <div className="container mx-auto px-6">
           <div className="flex flex-wrap items-center justify-center gap-8 text-center">
             <div className="flex items-center gap-2 secondary text-white/70">
-              
+
             </div>
             <div className="flex items-center gap-2 secondary text-white/70">
               <span className="text-2xl">🔥</span>

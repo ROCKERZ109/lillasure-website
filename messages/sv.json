@@ -184,7 +184,8 @@
         "all": "Alla",
         "bread": "Bröd",
         "pastry": "Sötbröd",
-        "cookie": "Kakor"
+        "cookie": "Kakor",
+        "dough": "Deg"
       },
       "show_today": "Visa endast dagens produkter",
       "available_today": "Tillgängligt idag"

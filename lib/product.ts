@@ -22,7 +22,7 @@ export async function getProducts(): Promise<Product[]> {
           id: doc.id
         } as Product);
       });
-      console.log(products);
+      
       return products;
     } catch (error) {
       console.error("Error fetching orders:", error);

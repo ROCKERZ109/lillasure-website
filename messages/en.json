@@ -182,7 +182,8 @@
         "all": "All",
         "bread": "Bread",
         "pastry": "Pastries",
-        "cookie": "Cookies"
+        "cookie": "Cookies",
+        "dough": "Dough"
       },
       "show_today": "Show only today's products",
       "available_today": "Available today"

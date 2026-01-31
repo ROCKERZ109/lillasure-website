@@ -25,7 +25,7 @@ export type ProductCategory =
   | "bread" 
   | "pastry" 
   | "cookie" 
-  | "cake" 
+  | "dough" 
   | "seasonal";
 
 export type DayOfWeek = 

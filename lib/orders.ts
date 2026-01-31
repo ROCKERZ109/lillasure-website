@@ -18,12 +18,12 @@ import type { Order, OrderStatus, Product } from "@/types";
 const ORDERS_COLLECTION = "orders";
 
 export function addProductstoDb(products: Product[]) {
-  console.log(products)
+  
   
   products.map(async (product) => {
    
      const productRef = doc(db, "products", product.id);
-     console.log(productRef.path)
+     
      await setDoc(productRef, product);
   });
 }
@@ -42,7 +42,7 @@ export async function createOrder(
 
   // 2. Get the auto-generated ID from that reference
     const generatedId = newDocRef.id;
-    console.log(generatedId)
+    
 
   // 3. Add the ID to your data object and save it using setDoc
       await setDoc(newDocRef, {

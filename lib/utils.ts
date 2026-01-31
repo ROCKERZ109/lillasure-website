@@ -89,7 +89,6 @@ export function getAvailablePickupTimes(dateString: string): string[] {
   // console.log(date);
   const dayOfWeek = date.getDay();
   // const now = new Date();
-  console.log(date.getMonth(), date.getDate())
   if ((date.getMonth()== 1) && (date.getDate()== 17)) return ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
   const satSun =  ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00"];
   const weekDays = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
