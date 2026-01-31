@@ -1,43 +1,30 @@
-"use client";
+"use client"; // 👈 Ye zaroori hai
 
 import { Plus, Wheat, Calendar } from "lucide-react";
 import { useCart } from "./CartContext";
 import { formatPrice, cn } from "@/lib/utils";
 import type { Product, DayOfWeek } from "@/types";
 import { dayLabels } from "@/types";
+import { useLocale, useTranslations } from "next-intl"; // 👈 Import kiya
+
 
 interface ProductCardProps {
   product: Product;
   featured?: boolean;
   showAvailableDays?: boolean;
+  
 }
 
-// Short day labels for display
-const shortDayLabels: Record<DayOfWeek, string> = {
-  monday: "Mån",
-  tuesday: "Tis",
-  wednesday: "Ons",
-  thursday: "Tor",
-  friday: "Fre",
-  saturday: "Lör",
-  sunday: "Sön",
-};
-
 export default function ProductCard({ product, featured, showAvailableDays }: ProductCardProps) {
-  const { addItem, openCart } = useCart();
 
+  
+  const t = useTranslations('product_card'); // 👈 Hook use kiya
+  const { addItem, openCart } = useCart();
+   const locale = useLocale();
   const handleAddToCart = () => {
     addItem(product);
     openCart();
   };
-
-  // Format available days for display
-  const formatAvailableDays = (days?: DayOfWeek[]): string | null => {
-    if (!days || days.length === 0 || days.length === 7) return null; // All days
-    return days.map(d => shortDayLabels[d]).join(", ");
-  };
-
-  const availableDaysText = formatAvailableDays(product.availableDays);
 
   return (
     <article
@@ -65,22 +52,22 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
           {product.featured && (
             <span className="badge badge-featured">
               <Wheat className="w-3 h-3 mr-1" />
-              Populär
+              {t('badges.popular')}
             </span>
           )}
           {product.specialType === "week" && (
             <span className="px-2 py-1 bg-purple-500 text-white text-xs rounded-full font-medium">
-              Veckans special
+              {t('badges.week_special')}
             </span>
           )}
           {product.specialType === "day" && (
             <span className="px-2 py-1 bg-blue-500 text-white text-xs rounded-full font-medium">
-              Dagens special
+              {t('badges.day_special')}
             </span>
           )}
           {product.isFettisdagen && (
             <span className="px-2 py-1 bg-amber-500 text-white text-xs rounded-full font-medium">
-              🥯 Fettisdagen
+              {t('badges.fettisdagen')}
             </span>
           )}
         </div>
@@ -99,7 +86,7 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
           )}
           aria-label={`Lägg till ${product.nameSv} i varukorg`}
         >
-          Lägg till
+          {t('add_to_cart')}
         </button>
       </div>
 
@@ -131,7 +118,7 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
             !featured && "line-clamp-2"
           )}
         >
-          {product.descriptionSv}
+          {locale=="sv"?product.descriptionSv:product.description}
         </p>
 
         {/* Available Days as Tags */}
@@ -139,10 +126,10 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
           <div className="mb-3">
             <div className="flex items-center gap-1.5 mb-2">
               <Calendar className="w-3 h-3 text-amber-200" />
-              <span className="text-xs text-amber-200">Tillgänglig:</span>
+              <span className="text-xs text-amber-200">{t('availability.label')}</span>
             </div>
             <div className="flex flex-wrap gap-1">
-              {(["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"] as DayOfWeek[]).map((day) => {
+              {(["tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"] as DayOfWeek[]).map((day) => {
                 const isAvailable = product.availableDays?.includes(day);
                 return (
                   <span
@@ -154,18 +141,32 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
                         : "bg-gray-700 text-gray-500 line-through"
                     )}
                   >
-                    {shortDayLabels[day]}
+                    {/* Note: Dynamic keys require strict typing or checking, but this works for basic setup */}
+                    {t(`availability.days.${day}`)}
                   </span>
                 );
               })}
             </div>
           </div>
         )}
+        
+        {/* Available Days: All Days */}
+        {showAvailableDays && product.availableDays && product.availableDays.length == 0 && (
+          <div className="mb-3">
+            <div className="flex flex-rpmw items-center gap-1.5 mb-2">
+              <Calendar className="w-3 h-3 text-amber-200" />
+              <span className="text-xs text-amber-200">{t('availability.label')}</span>
+               <span className="text-xs px-2 py-0.5 rounded-full bg-green-600 text-white">
+                {t('availability.all_days')}
+              </span>
+            </div>
+          </div>
+        )}
 
-        {/* Min Order - for Fettisdagen products */}
+        {/* Min Order */}
         {product.minOrder && product.minOrder > 1 && (
           <div className="mb-3 text-xs text-amber-300">
-            Min. beställning: {product.minOrder} st
+            {t('min_order', { count: product.minOrder })}
           </div>
         )}
 
@@ -177,12 +178,7 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
                 key={allergen}
                 className="text-xs text-white bg-gray-500 px-2 py-0.5 rounded-full"
               >
-                {allergen === "gluten" && "Gluten"}
-                {allergen === "dairy" && "Mjölk"}
-                {allergen === "eggs" && "Ägg"}
-                {allergen === "almonds" && "Mandel"}
-                {allergen === "oats" && "Havre"}
-                {allergen === "coconut" && "Kokos"}
+                {t(`allergens.${allergen}`)}
               </span>
             ))}
           </div>

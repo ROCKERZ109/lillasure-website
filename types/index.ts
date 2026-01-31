@@ -107,5 +107,5 @@ export const dayLabelsEn: Record<DayOfWeek, string> = {
 };
 
 // Fettisdagen date (update yearly)
-export const FETTISDAGEN_DATE = "2026-02-17"; // March 4th, 2025
-export const FETTISDAGEN_MIN_KREMLA = 10;
+export const FETTISDAGEN_DATE = "2026-02-17"; 
+export const FETTISDAGEN_MIN_KREMLA = 20;

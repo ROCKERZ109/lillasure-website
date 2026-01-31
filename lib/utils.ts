@@ -61,30 +61,16 @@ function canOrderForTomorrow(): boolean {
 export function getAvailablePickupDates(daysAhead: number = 60): string[] {
   const dates: string[] = [];
   const today = new Date();
-  console.log(today)
   const canOrderTomorrow = canOrderForTomorrow();
-  console.log(canOrderForTomorrow())
+
   
   for (let i = 1; i <= daysAhead; i++) {
-   let date = new Date("2026-01-28T22:50:39.476Z");
+   let date = new Date(today);
 date.setDate(today.getDate() + i);
 
 // 1. Get the Day of Week (0-6) reliably
 const dayOfWeek = date.getDay(); 
-
-// 2. Get a clean ISO string (YYYY-MM-DD) without local formatting issues
-const year = date.getFullYear();
-const month = String(date.getMonth() + 1).padStart(2, '0');
-const day = String(date.getDate()).padStart(2, '0');
-const dateString = `${year}-${month}-${day}`;
-
-console.log("Clean Date:", dateString);
-console.log("Day of Week Index:", dayOfWeek);
-    
-  
-   
-  
-    // Skip Sunday (0) and Monday (1) - bakery is closed
+    // Skip  Monday (1) - bakery is closed
     if (dayOfWeek !== 1) {
       // Skip tomorrow if past cutoff time
       if (i === 1 && !canOrderTomorrow) {
@@ -103,9 +89,10 @@ export function getAvailablePickupTimes(dateString: string): string[] {
   // console.log(date);
   const dayOfWeek = date.getDay();
   // const now = new Date();
-
-  const satSun =  ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"];
-  const weekDays = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+  console.log(date.getMonth(), date.getDate())
+  if ((date.getMonth()== 1) && (date.getDate()== 17)) return ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+  const satSun =  ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00"];
+  const weekDays = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
   // Different hours for weekdays vs weekends
   if (dayOfWeek === 6 || dayOfWeek === 0) {
     //  if(now.toLocaleDateString() == date.toLocaleDateString()){

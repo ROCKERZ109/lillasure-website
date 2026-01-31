@@ -98,6 +98,17 @@ export const storeHours: StoreHours[] = [
   { day: "Söndag", open: "08:00", close: "16:00" },
 ];
 
+export const storeHoursEn: StoreHours[] = [
+  { day: "Monday", open: "", close: "", closed: true },
+  { day: "Tuesday", open: "08:00", close: "18:00" },
+  { day: "Wednesday", open: "08:00", close: "18:00" },
+  { day: "Thursday", open: "08:00", close: "18:00" },
+  { day: "Friday", open: "08:00", close: "18:00" },
+  { day: "Saturday", open: "08:00", close: "16:00" },
+  { day: "Sunday", open: "08:00", close: "16:00" },
+];
+
+
 export const bakeryInfo = {
   name: "Lilla Sur",
   tagline: "Göteborgs Hantverksbageri",
@@ -110,7 +121,7 @@ export const bakeryInfo = {
   },
   contact: {
     email: "butiken@lillasur.se",
-    instagram: "@lillasurgbg",
+    instagram: "@lillasurgbg"
   },
   coordinates: {
     lat: 57.7202,

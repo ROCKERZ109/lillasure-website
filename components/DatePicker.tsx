@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 interface DatePickerProps {
   selectedDate: string;
@@ -15,6 +16,8 @@ export default function DatePicker({
   onSelectDate,
   availableDates,
 }: DatePickerProps) {
+  const t = useTranslations('date_picker');
+  
   const [currentMonth, setCurrentMonth] = useState(() => {
     const today = new Date();
     return new Date(today.getFullYear(), today.getMonth(), 1);
@@ -32,15 +35,21 @@ export default function DatePicker({
     1
   ).getDay();
 
-  // Adjust for Monday start (Swedish calendar)
+  // Adjust for Monday start (Swedish calendar logic)
   const startDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1;
 
+  // Construct translated arrays
   const monthNames = [
-    "Januari", "Februari", "Mars", "April", "Maj", "Juni",
-    "Juli", "Augusti", "September", "Oktober", "November", "December"
+    t('months.jan'), t('months.feb'), t('months.mar'), t('months.apr'),
+    t('months.may'), t('months.jun'), t('months.jul'), t('months.aug'),
+    t('months.sep'), t('months.oct'), t('months.nov'), t('months.dec')
   ];
 
-  const dayNames = ["Mån", "Tis", "Ons", "Tor", "Fre", "Lör", "Sön"];
+  const dayNames = [
+    t('weekdays.mon'), t('weekdays.tue'), t('weekdays.wed'), 
+    t('weekdays.thu'), t('weekdays.fri'), t('weekdays.sat'), 
+    t('weekdays.sun')
+  ];
 
   const goToPrevMonth = () => {
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
@@ -95,6 +104,7 @@ export default function DatePicker({
     const available = isDateAvailable(day);
     const selected = isDateSelected(day);
     const today = isToday(day);
+    const currentDay = new Date().toISOString().split("T")[0];
 
     calendarDays.push(
       <button
@@ -107,9 +117,13 @@ export default function DatePicker({
           // Base styles
           "flex items-center justify-center mx-auto",
           // Available & not selected
-          available && !selected && "hover:bg-gray-700 text-white/80 cursor-pointer",
+          available && !selected && "hover:bg-gray-700 text-white cursor-pointer",
           // Not available
           !available && "text-red-400 cursor-not-allowed",
+          // Past dates
+          formatDateString(day) < currentDay && "text-gray-500 cursor-not-allowed",
+          // Today not available
+          today && "text-yellow-200 cursor-not-allowed",
           // Selected
           selected && "bg-crust-900 text-flour-50 font-medium shadow-lg",
           // Today indicator
@@ -129,7 +143,7 @@ export default function DatePicker({
           type="button"
           onClick={goToPrevMonth}
           className="p-2 hover:bg-flour-200 rounded-full transition-colors"
-          aria-label="Föregående månad"
+          aria-label={t('aria.prev_month')}
         >
           <ChevronLeft className="w-5 h-5 text-crust-600" />
         </button>
@@ -142,7 +156,7 @@ export default function DatePicker({
           type="button"
           onClick={goToNextMonth}
           className="p-2 hover:bg-flour-200 rounded-full transition-colors"
-          aria-label="Nästa månad"
+          aria-label={t('aria.next_month')}
         >
           <ChevronRight className="w-5 h-5 text-crust-600" />
         </button>
@@ -169,15 +183,15 @@ export default function DatePicker({
       <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-flour-200">
         <div className="flex items-center gap-2 text-xs text-crust-200">
           <div className="w-3 h-3 rounded-full bg-crust-900" />
-          <span>Vald dag</span>
+          <span>{t('legend.selected')}</span>
         </div>
         <div className="flex items-center gap-2 text-xs text-crust-200">
           <div className="w-3 h-3 rounded-full ring-2 ring-wheat-400" />
-          <span>Idag</span>
+          <span>{t('legend.today')}</span>
         </div>
         <div className="flex items-center gap-2 text-xs text-crust-200">
           <div className="w-3 h-3 rounded-full bg-red-400" />
-          <span>Stängt</span>
+          <span>{t('legend.closed')}</span>
         </div>
       </div>
     </div>

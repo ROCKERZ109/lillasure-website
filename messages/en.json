@@ -1,0 +1,514 @@
+{
+  "home": {
+    "about": {
+      "cta": "Order now",
+      "description": "Place your order online and pick up your freshly baked bread in the store. We bake to order so that your bread is always as fresh as possible.",
+      "title": "Order for pickup"
+    },
+   "new_product": {
+  "cta": "Order now",
+  "title": "God rested. We bake.",
+  "badge": "🥐 New!",
+  "line1": "We believe that freshly baked bread on a Sunday is a basic human right.",
+  "line2": "Now Open on Sunday",
+  "line3": "From the creators of",
+  "product_name": "Vive La Kremla!!",
+  "tagline": "Made only on Sundays!"
+},
+    "featured": {
+      "description": "Every day we bake a selection of classic sourdough breads and Swedish pastries. Everything handmade with the finest organic ingredients.",
+      "label": "From the Oven",
+      "title": "Our Favorites",
+      "view_all": "See all products"
+    },
+    "hero": {
+      "cta": "Order Online",
+      "hours_short": "Open Tue-Sun",
+      "location": "Kålltorp, Gothenburg",
+      "method": "Stone-oven baked",
+      "subtitle": "We have been baking bread in Kålltorp since 2014. Every loaf is filled with love, shaped by hand, and baked in a stone oven with locally selected ingredients.",
+      "title_prefix": "Handmade",
+      "title_suffix": "Sourdough Bread"
+    },
+    "info": {
+      "closed": "Closed",
+      "contact_description": "Do you have questions about orders or our products? Feel free to get in touch!",
+      "contact_title": "Contact",
+      "hours_title": "Opening Hours",
+      "location_description": "In the heart of Kålltorp, right by Solrosgatan. Street parking is available.",
+      "location_title": "Find Us",
+      "map_link": "View on Google Maps"
+    }
+  },
+  "about": {
+    "hero": {
+      "badge": "Our History",
+      "title_line1": "Baked with love",
+      "title_line2": "since 2014",
+      "description": "Lilla Sur is a craft bakery in Kålltorp driven by a passion for real bread – the kind of bread our ancestors ate."
+    },
+    "story": {
+      "subtitle": "Creating a legacy",
+      "title": "Lilla Sur's story",
+      "p1": "A craft bakery in the heart of Kålltorp. Real bread. Real people. Real taste. Lilla Sur was founded in 2014 by bread enthusiasts Andreas and Tommy and has since been a symbol of quality, community, and service. A decade later, Beata and Sid are taking Lilla Sur to new heights. Same quality. Same community. More love. More adventure.",
+      "p2": "Beata has loved sourdough bread for as long as she can remember. The smell of freshly baked sourdough takes her right back to her childhood days in Poland. Beata has lived and worked in Asia, Europe, and the USA, gathering experiences and flavors from all corners of the world. Along the way, she met Sid. Sid has been playing with dough even before he learned to walk. An engineer by craft and an artist at heart, Sid built cars at Volvo before deciding to pursue what he is truly passionate about. Wake and bake.",
+      "p3": "Together with a team of talented bakers, Beata and Sid promise to pamper the people of Gothenburg with bread and buns of the highest taste and quality. Baked at Lilla Sur."
+    },
+    "values": {
+      "title": "Our Values",
+      "description": "Every decision we make is guided by our fundamental values – from the choice of ingredients to how we treat our customers.",
+      "hover": "Hover to read more",
+      "tap":"Tap to read more",
+      "items": {
+        "quality": {
+    "title": "Uncompromising Quality",
+    "description": "Like a well-kneaded dough, nothing is rushed and nothing is tolerated if it’s subpar. From flour selection to final bake, every step is held to a standard where shortcuts would weaken the structure and flavour of the bread."
+  },
+  "customer": {
+    "title": "Customer Obsessed",
+    "description": "A loaf is shaped for the hands and palate that will break it open. Crust, crumb, and aroma are tuned to the experience of the person eating it, the way dough is shaped around the needs of its final form."
+  },
+  "clean": {
+    "title": "Clean Eating, Scandi Minimalism",
+    "description": "Only the clean, necessary ingredients go into the mix. Just as a pure dough relies on flour, water, salt, and time, the focus is on clarity, lightness, and ingredients you can recognise and trust."
+  },
+  "craft": {
+    "title": "Craft over Convenience",
+    "description": "Slow fermentation over instant yeast, handwork over automation. Like letting dough rise naturally, patience and technique are chosen over speed to build deeper flavour and character."
+  },
+  "less": {
+    "title": "Less, but Better",
+    "description": "Fewer varieties, perfected deeply. Each bread is refined again and again, the way repeated folds strengthen dough, until simplicity turns into excellence."
+  },
+  "magic": {
+    "title": "Method meets Magic",
+    "description": "Precise ratios and temperatures create the conditions, but the oven spring and blistered crust still feel like alchemy. Thoughtful scoring guides how each loaf opens, and intentional shaping turns living dough into edible art. Solid technique invites the beautiful unpredictability of fermentation."
+  }
+      }
+    },
+    "process": {
+      "title": "Our Process",
+      "description": "From sourdough to finished bread – a journey that takes up to 72 hours.",
+      "steps": {
+        "sourdough": {
+          "title": "The Sourdough",
+          "description": "Our sourdough is over 10 years old and is fed daily with fresh flour."
+        },
+        "fermentation": {
+          "title": "Fermentation",
+          "description": "The dough ferments slowly in the cold to develop flavor and texture."
+        },
+        "shaping": {
+          "title": "Shaping",
+          "description": "Every loaf is gently shaped by hand for perfect structure."
+        },
+        "baking": {
+          "title": "Baking",
+          "description": "In the stone oven, the bread gets its crispy crust and golden color."
+        }
+      }
+    },
+    "cta": {
+      "title": "Come and Taste the Difference",
+      "description": "The best way to understand what we do is to taste for yourself. Visit us in the store or order online for pickup.",
+      "btn_primary": "Order Online",
+      "btn_secondary": "Find Us"
+    }
+  },
+  "contact": {
+    "hero": {
+      "subtitle": "Welcome",
+      "title": "Contact",
+      "description": "Do you have questions, concerns, or just want to say hello? We are here for you."
+    },
+    "info": {
+      "address_title": "Visiting Address",
+      "address_subtitle": "In the heart of Kålltorp",
+      "open_map": "Open in Google Maps →",
+      "hours_title": "Opening Hours",
+      "hours_subtitle": "Closed Monday",
+      "closed": "Closed",
+      "map_placeholder": {
+        "title": "Find Us",
+        "description": "We are located at Solrosgatan 11 in Kålltorp, easily accessible by tram or bus.",
+        "button": "View on Map"
+      },
+      "tips": {
+        "title": "Tips for your visit",
+        "items": [
+          "• Parking is available along the street",
+          "• Nearest stop: Solrosgatan (tram 5, 3)",
+          "• Popular breads may sell out early – come on time!",
+          "• We accept cards, Swish, and cash"
+        ]
+      },
+      "contact_title": "Contact Us",
+      "contact_subtitle": "We reply as soon as we can"
+    },
+    "faq": {
+      "title": "Common Questions",
+      "items": {
+        "corporate": {
+          "question": "Can I order for corporate events?",
+          "answer": "Absolutely! We accept larger orders for companies, parties, and events. Contact us via email at least one week in advance and we will help you."
+        },
+        "gluten": {
+          "question": "Do you have gluten-free options?",
+          "answer": "Unfortunately, we do not bake gluten-free at the moment as we work with flour throughout the premises. However, our oat loaves naturally contain less gluten thanks to long fermentation."
+        },
+        "shelf_life": {
+          "question": "How long does the bread last?",
+          "answer": "Our sourdough bread stays fresh for 3-5 days at room temperature, wrapped in a kitchen towel. You can also freeze it – slice it first for easy thawing."
+        },
+        "reserve": {
+          "question": "Can I reserve bread?",
+          "answer": "Yes! Use our online ordering. We recommend ordering at least one day in advance, especially for weekends."
+        },
+        "closed_days": {
+          "question": "Why is the shop closed Sunday and Monday?",
+          "answer": "We need time to prepare and bake for the week. Sourdough bread takes time – our doughs ferment for up to 48 hours. And everyone needs to rest!"
+        }
+      }
+    }
+  },
+  "products": {
+    "hero": {
+      "subtitle": "Our Range",
+      "title": "Products",
+      "description": "All our products are baked daily with 100% organic and KRAV-certified Swedish flour. Choose from sourdough bread, buns, cookies, and other treats."
+    },
+    "filters": {
+      "categories": {
+        "all": "All",
+        "bread": "Bread",
+        "pastry": "Pastries",
+        "cookie": "Cookies"
+      },
+      "show_today": "Show only today's products",
+      "available_today": "Available today"
+    },
+    "specials": {
+      "week": "Week's Special",
+      "day": "Today's Special"
+    },
+    "empty": {
+      "no_today": "No products available today ({day}). Try showing all products.",
+      "no_category": "No products found in this category.",
+      "reset_btn": "Show all products",
+      "loading": "Loading..."
+    },
+    "features": {
+      "organic": "100% Organic",
+      "stone_baked": "Stone-oven Baked",
+      "handmade": "Handmade",
+      "swedish_flour": "Swedish Flour"
+    }
+  },
+  "fettisdagen": {
+    "back_link": "Back",
+    "hero": {
+      "title": "Fettisdagen",
+      "subtitle": "Pre-order your Kremlas for <strong>{date}</strong>"
+    },
+    "info": {
+      "title": "Important to know:",
+      "min_order": "Minimum order: <strong>{count} Kremlas</strong>",
+      "pickup_only": "Pickup only on Fettisdagen ({date})",
+      "payment": "Payment is made in store at pickup"
+    },
+    "error": {
+      "submit_failed": "Could not submit the order. Please try again."
+    },
+    "loading": "Loading...",
+    "unavailable": "Kremlas are not available for order right now.",
+    "steps": {
+      "quantity": {
+        "title": "1. Choose quantity",
+        "subtitle": "Minimum {count} pcs total (mix freely)",
+        "price_unit": "/ pc",
+        "min_error": "Minimum order is {count} Kremlas",
+        "variant_mandel": "Kremla (Almond)",
+      "variant_vanilj": "Kremla (Vanilla)",
+      "total_label": "Total:"
+      },
+      "time": {
+        "title": "2. Choose pickup time",
+        "date_label": "Date:"
+      },
+      "customer": {
+        "title": "3. Your details",
+        "labels": {
+          "name": "Name *",
+          "email": "Email *",
+          "phone": "Phone *",
+          "notes": "Additional comments (optional)"
+        },
+        "placeholders": {
+          "name": "Your name",
+          "email": "your@email.com",
+          "phone": "07X XXX XX XX",
+          "notes": "Allergies or other requests..."
+        }
+      }
+    },
+    "summary": {
+      "total_label": "Total to pay",
+      "submit_btn": "Order Kremlas",
+      "submitting": "Sending...",
+      "disclaimer": "By ordering you agree to pay upon pickup"
+    },
+    "success": {
+      "title": "Thank you for your Fettisdagen order!",
+      "message": "We look forward to baking your Kremlas. Don't forget to pick them up on Fettisdagen!",
+      "details_title": "Order Details",
+      "labels": {
+        "order_number": "Order Number",
+        "product": "Product",
+        "pickup": "Pickup",
+        "total": "Total"
+      },
+      "payment_note": "<strong>Note!</strong> Payment is made upon pickup in the store.",
+      "back_home": "Back to home page"
+    },
+    "banner": {
+    "approaching": "Fettisdagen is approaching!",
+    "countdown": "Fettisdagen in {days} days!",
+    "countdown_one": "Fettisdagen in {days} day!",
+    "cta": "Pre-order your Kremla now →",
+    "close": "Close banner"
+  }
+  },
+  "order": {
+    "header": {
+      "title": "Order",
+      "subtitle": "Fill in your order and choose a time for pickup"
+    },
+    "steps": {
+      "cart": "Cart",
+      "pickup": "Pickup",
+      "details": "Details",
+      "confirm": "Confirm"
+    },
+    "cart": {
+      "title": "Your Cart",
+      "empty_title": "Your cart is empty",
+      "empty_btn": "View Products",
+      "price_unit": "/ pc"
+    },
+    "pickup": {
+      "title": "Choose Pickup",
+      "date_label": "Choose Date",
+      "time_label": "Choose Time",
+      "conflict": {
+        "title": "Products not available on selected date",
+        "description": "The following products are not baked on {day}s:",
+        "tip": "Tip: Change date or go back to the cart to remove these products."
+      },
+      "fettisdagen": {
+        "title": "Fettisdagen - Kremla Only!",
+        "description": "On Fettisdagen ({date}) you can only order Kremla/Kremlas, with a minimum order of {count} pieces.",
+        "btn": "Order Kremla here"
+      }
+    },
+    "details": {
+      "title": "Your Details",
+      "labels": {
+        "name": "Name *",
+        "email": "Email *",
+        "phone": "Phone *",
+        "notes": "Additional comments (optional)"
+      },
+      "placeholders": {
+        "name": "Your name",
+        "email": "your@email.com",
+        "phone": "07X XXX XX XX",
+        "notes": "Allergies or other requests..."
+      }
+    },
+    "confirm": {
+      "title": "Confirm Order",
+      "sections": {
+        "products": "Products",
+        "pickup": "Pickup",
+        "contact": "Contact Details"
+      },
+      "labels": {
+        "total": "Total",
+        "name": "Name:",
+        "email": "Email:",
+        "phone": "Phone:",
+        "message": "Message:"
+      },
+      "payment_info": "<strong>Payment:</strong> Payment is made upon pickup in the store. We accept cards and Swish."
+    },
+    "success": {
+      "title": "Thank you for your order!",
+      "message": "Your order has been received and we will start preparing it.",
+      "details_title": "Order Details",
+      "labels": {
+        "order_number": "Order Number",
+        "pickup": "Pickup",
+        "total": "Total"
+      },
+      "back_btn": "Back to home page"
+    },
+    "navigation": {
+      "back": "Back",
+      "continue_shopping": "Continue Shopping",
+      "continue": "Continue",
+      "confirm_btn": "Confirm",
+      "submitting": "Sending...",
+      "total_label": "Total"
+    },
+    "errors": {
+      "submit_failed": "Could not submit the order. Please check your internet connection and try again."
+    }
+  },
+  "product_card": {
+    "add_to_cart": "Add",
+    "badges": {
+      "popular": "Popular",
+      "week_special": "Week's Special",
+      "day_special": "Today's Special",
+      "fettisdagen": "🥯 Fettisdagen"
+    },
+    "availability": {
+      "label": "Available:",
+      "all_days": "All days",
+      "days": {
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "saturday": "Sat",
+        "sunday": "Sun"
+      }
+    },
+    "min_order": "Min. order: {count} pcs",
+    "allergens": {
+      "gluten": "Gluten",
+      "dairy": "Milk",
+      "eggs": "Eggs",
+      "almonds": "Almonds",
+      "oats": "Oats",
+      "coconut": "Coconut"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Home",
+      "products": "Products",
+      "order": "Order",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "actions": {
+      "open_cart": "Open cart",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu"
+    },
+    "logo_alt": "Lilla Sur Logo"
+  }
+,
+  "footer": {
+    "brand_description": "Organic bakery in Kålltorp since 2014. We bake with love, time, and the best ingredients.",
+    "nav": {
+      "title": "Navigation",
+      "home": "Home",
+      "products": "Products",
+      "order": "Order Online",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "hours": {
+      "title": "Opening Hours",
+      "closed": "Closed"
+    },
+    "contact": {
+      "title": "Find Us",
+      "map_link": "View on Map →"
+    },
+    "bottom": {
+      "copyright": "© {year} Lilla Sur Göteborgs Hantverksbageri AB. All rights reserved.",
+      "tags": {
+        "organic": "100% Organic",
+        "krav": "KRAV-certified",
+        "handmade": "Handmade with love"
+      }
+    }
+  }
+,
+  "cart_drawer": {
+    "header": {
+      "title": "Cart",
+      "item_one": "item",
+      "item_other": "items",
+      "close_aria": "Close cart"
+    },
+    "empty": {
+      "title": "Your cart is empty",
+      "subtitle": "Explore our freshly baked products",
+      "btn": "View Products"
+    },
+    "item": {
+      "price_suffix": "pc",
+      "decrease_aria": "Decrease quantity",
+      "increase_aria": "Increase quantity",
+      "remove_aria": "Remove"
+    },
+    "footer": {
+      "total": "Total",
+      "checkout_btn": "Proceed to Checkout",
+      "disclaimer": "Orders are picked up in store"
+    }
+  },
+   "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, sv {Svenska} en {English}}"
+  }
+,
+  "date_picker": {
+    "months": {
+      "jan": "January",
+      "feb": "February",
+      "mar": "March",
+      "apr": "April",
+      "may": "May",
+      "jun": "June",
+      "jul": "July",
+      "aug": "August",
+      "sep": "September",
+      "oct": "October",
+      "nov": "November",
+      "dec": "December"
+    },
+    "weekdays": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    },
+    "aria": {
+      "prev_month": "Previous month",
+      "next_month": "Next month"
+    },
+    "legend": {
+      "selected": "Selected",
+      "today": "Today",
+      "closed": "Closed"
+    }
+  },
+  "fettisdagen_popup": {
+    "title": "Fettisdagen {year}!",
+    "description": "On Tuesday 17 February we only bake Kremlas",
+    "sub_description": "Pre-order your kremlas now – minimum {count} pcs per order",
+    "cta_btn": "Order Kremla →",
+    "close_btn": "Close",
+    "close_aria": "Close",
+    "image_alt": "Kremla image"
+  }
+}

@@ -1,7 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, ReactNode } from "react";
+import React, { createContext, useContext, useReducer, ReactNode, useEffect, useState } from "react";
 import type { Product, CartItem } from "@/types";
+import Cookies from 'universal-cookie';
+
 
 interface CartState {
   items: CartItem[];
@@ -15,7 +17,8 @@ type CartAction =
   | { type: "CLEAR_CART" }
   | { type: "TOGGLE_CART" }
   | { type: "OPEN_CART" }
-  | { type: "CLOSE_CART" };
+  | { type: "CLOSE_CART" }
+  | { type: "LOAD_CART"; payload: CartItem[] };
 
 interface CartContextType {
   state: CartState;
@@ -30,17 +33,22 @@ interface CartContextType {
   totalAmount: number;
 }
 
+
+
 const CartContext = createContext<CartContextType | undefined>(undefined);
+
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD_ITEM": {
+
+
       const existingItem = state.items.find(
         (item) => item.product.id === action.payload.id
       );
 
       if (existingItem) {
-        return {
+        const cartState = {
           ...state,
           items: state.items.map((item) =>
             item.product.id === action.payload.id
@@ -48,6 +56,9 @@ function cartReducer(state: CartState, action: CartAction): CartState {
               : item
           ),
         };
+
+
+        return cartState
       }
 
       return {
@@ -92,6 +103,8 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case "CLOSE_CART":
       return { ...state, isOpen: false };
 
+    case "LOAD_CART":
+      return { ...state, items: action.payload };
     default:
       return state;
   }
@@ -102,8 +115,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
     items: [],
     isOpen: false,
   });
+  const [isInitialized, setIsInitialized] = useState(false);
+  useEffect(() => {
+    const savedCart = window.localStorage.getItem("Cart");
+    if (savedCart) {
+      try {
+        // Parse the JSON string back into an array
+        const parsedCart: CartItem[] = JSON.parse(savedCart);
+        dispatch({ type: "LOAD_CART", payload: parsedCart });
+      } catch (error) {
+        console.error("Failed to parse cart data:", error);
+      }
+    }
+    setIsInitialized(true); // Mark as ready so we can start saving changes
+  }, []);
 
+  useEffect(() => {
+    if (isInitialized) {
+      window.localStorage.setItem("Cart", JSON.stringify(state.items));
+    }
+  }, [state.items, isInitialized]);
   const addItem = (product: Product) => {
+
     dispatch({ type: "ADD_ITEM", payload: product });
   };
 
@@ -158,9 +191,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
 }
 
 export function useCart() {
+
+
   const context = useContext(CartContext);
   if (context === undefined) {
     throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 }
+

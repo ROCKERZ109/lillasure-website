@@ -1,0 +1,523 @@
+{
+  "home": {
+    "about": {
+      "cta": "Beställ nu",
+      "description": "Lägg din beställning online och hämta ditt nybakade bröd i butiken. Vi bakar på beställning så att ditt bröd alltid är så färskt som möjligt.",
+      "title": "Beställ till avhämtning"
+    },
+    "new_product": {
+  "cta": "Beställ nu",
+  "title": "Gud vilade. Vi bakar.",
+  "badge": "🥐 Nyhet!",
+  "line1": "Vi anser att nybakat bröd på en söndag är en mänsklig rättighet.",
+  "line2": "Nu öppet på söndagar",
+  "line3": "Från skaparna av",
+  "product_name": "Vive La Kremla!!",
+  "tagline": "Bakas endast på söndagar!"
+},
+    "featured": {
+      "description": "Varje dag bakar vi ett urval av klassiska surdegsbröd och svenska bakverk. Allt handgjort med de finaste ekologiska råvarorna.",
+      "label": "Från Ugnen",
+      "title": "Våra Favoriter",
+      "view_all": "Se alla produkter"
+    },
+    "hero": {
+      "cta": "Beställ Online",
+      "hours_short": "Tis-Sön öppet",
+      "location": "Kålltorp, Göteborg",
+      "method": "Stenugnsbakat",
+      "subtitle": "Vi har bakat bröd i Kålltorp sedan 2014. Varje limpa är fylld med kärlek, formas för hand och bakas i en stenugn med lokalt utvalda ingredienser",
+      "title_prefix": "Handgjort",
+      "title_suffix": "Surdegsbröd"
+    },
+    "info": {
+      "closed": "Stängt",
+      "contact_description": "Har du frågor om beställningar eller våra produkter? Hör gärna av dig!",
+      "contact_title": "Kontakt",
+      "hours_title": "Öppettider",
+      "location_description": "I hjärtat av Kålltorp, precis vid Solrosgatan. Parkering finns på gatan.",
+      "location_title": "Hitta Hit",
+      "map_link": "Visa på Google Maps"
+    }
+  },
+
+  "about": {
+    "hero": {
+      "badge": "Vår Historia",
+      "title_line1": "Bakat med kärlek",
+      "title_line2": "sedan 2014",
+      "description": "Lilla Sur är ett hantverksbageri i Kålltorp som drivs av passionen för riktigt bröd – det bröd som våra förfäder åt."
+    },
+   "story": {
+  "subtitle": "Att skapa ett arv",
+  "title": "Lilla Surs historia",
+  "p1": "Ett hantverksbageri i hjärtat av Kålltorp. Riktigt bröd. Riktiga människor. Riktig smak. Lilla Sur grundades 2014 av brödentusiasterna Andreas och Tommy och har sedan dess varit en symbol för kvalitet, gemenskap och service. Ett decennium senare tar Beata och Sid Lilla Sur till nya höjder. Samma kvalitet. Samma gemenskap. Mer kärlek. Mer äventyr.",
+  "p2": "Beata har älskat surdegsbröd så länge hon kan minnas. Doften av nybakat tar henne direkt tillbaka till barndomen i Polen. Beata har bott och arbetat i Asien, Europa och USA, och har samlat på sig erfarenheter och smaker från världens alla hörn. Längs vägen mötte hon Sid. Sid har lekt med degar redan innan han lärde sig gå. Ingenjör till yrket och konstnär i själen – Sid byggde bilar på Volvo innan han bestämde sig för att satsa på det han verkligen brinner för. Upp och baka.",
+  "p3": "Tillsammans med ett team av talangfulla bagare lovar Beata och Sid att skämma bort göteborgarna med bröd och bullar av högsta smak och kvalitet. Bakat på Lilla Sur."
+},
+    "values": {
+
+      "title": "Våra värderingar",
+      "description": "Varje beslut vi tar styrs av våra grundläggande värderingar – från val av råvaror till hur vi bemöter våra kunder.",
+      "hover": "För musen över för att läsa mer",
+      "tap":"Tryck för att läsa mer",
+      "items": {
+       "quality": {
+    "title": "Kompromisslös kvalitet",
+    "description": "Liksom en välknådad deg stressas inget fram och inget undermåligt tolereras. Från val av mjöl till sista gräddningen hålls varje steg till en standard där genvägar skulle försvaga brödets struktur och smak."
+  },
+  "customer": {
+    "title": "Kunden i centrum",
+    "description": "Ett bröd formas för händerna och gommen som ska bryta det. Skorpa, inkråm och doft är avstämda för upplevelsen hos den som äter, precis som degen formas efter dess slutgiltiga syfte."
+  },
+  "clean": {
+    "title": "Ren mat, skandinavisk minimalism",
+    "description": "Bara rena, nödvändiga ingredienser åker ner i blandningen. Precis som en ren deg förlitar sig på mjöl, vatten, salt och tid, ligger fokus på tydlighet, lätthet och ingredienser du känner igen och litar på."
+  },
+  "craft": {
+    "title": "Hantverk framför bekvämlighet",
+    "description": "Långsam jäsning istället för snabbjäst, handarbete istället för automation. Som att låta degen jäsa naturligt väljer vi tålamod och teknik framför hastighet för att bygga djupare smak och karaktär."
+  },
+  "less": {
+    "title": "Mindre, men bättre",
+    "description": "Färre sorter, men fulländade på djupet. Varje bröd förfinas om och om igen, likt hur upprepade vikningar stärker degen, tills enkelhet övergår i excellens."
+  },
+  "magic": {
+    "title": "Metod möter magi",
+    "description": "Exakta proportioner skapar förutsättningarna, men ugnsexplosionen och den krispiga skorpan känns ändå som alkemi. Omtänksamma snitt styr hur varje limpa öppnar sig, och medveten formning förvandlar levande deg till ätbar konst. Solid teknik bjuder in jäsningens vackra oförutsägbarhet."
+  }
+      }
+    },
+    "process": {
+      "title": "Vår process",
+      "description": "Från surdeg till färdigt bröd – en resa som tar upp till 48 timmar.",
+      "steps": {
+        "sourdough": {
+          "title": "Surdegen",
+          "description": "Vår surdeg är över 10 år gammal och matas dagligen med färskt mjöl."
+        },
+        "fermentation": {
+          "title": "Jäsningen",
+          "description": "Degen jäser långsamt i kyla för att utveckla smak och textur."
+        },
+        "shaping": {
+          "title": "Formningen",
+          "description": "Varje bröd formas varsamt för hand för perfekt struktur."
+        },
+        "baking": {
+          "title": "Gräddningen",
+          "description": "I stenugnen får brödet sin knapriga skorpa och gyllene färg."
+        }
+      }
+    },
+    "cta": {
+      "title": "Kom och smaka skillnaden",
+      "description": "Det bästa sättet att förstå vad vi gör är att smaka själv. Besök oss i butiken eller beställ online för avhämtning.",
+      "btn_primary": "Beställ online",
+      "btn_secondary": "Hitta till oss"
+    }
+},
+  "contact": {
+    "hero": {
+      "subtitle": "Välkommen",
+      "title": "Kontakt",
+      "description": "Har du frågor, funderingar eller vill bara säga hej? Vi finns här för dig."
+    },
+    "info": {
+      "address_title": "Besöksadress",
+      "address_subtitle": "I hjärtat av Kålltorp",
+      "open_map": "Öppna i Google Maps →",
+      "hours_title": "Öppettider",
+      "hours_subtitle": "Stängt söndag & måndag",
+      "closed": "Stängt",
+      "map_placeholder": {
+        "title": "Hitta till oss",
+        "description": "Vi ligger på Solrosgatan 11 i Kålltorp, enkelt att nå med spårvagn eller buss.",
+        "button": "Visa på karta"
+      },
+      "tips": {
+        "title": "Tips för besöket",
+        "items": [
+          "• Parkering finns längs gatan",
+          "• Närmaste hållplats: Solrosgatan (spårvagn 5, 3)",
+          "• Populära bröd kan ta slut tidigt – kom i tid!",
+          "• Vi tar emot kort, Swish och kontant"
+        ]
+      },
+      "contact_title": "Kontakta oss",
+      "contact_subtitle": "Vi svarar så snart vi kan"
+    },
+    "faq": {
+      "title": "Vanliga frågor",
+      "items": {
+        "corporate": {
+          "question": "Kan jag beställa till företagsevent?",
+          "answer": "Absolut! Vi tar emot större beställningar för företag, fester och evenemang. Kontakta oss via email minst en vecka i förväg så hjälper vi dig."
+        },
+        "gluten": {
+          "question": "Har ni glutenfria alternativ?",
+          "answer": "Tyvärr bakar vi inte glutenfritt just nu eftersom vi arbetar med mjöl i hela lokalen. Men våra havre-limpor innehåller naturligt mindre gluten tack vare lång jäsning."
+        },
+        "shelf_life": {
+          "question": "Hur länge håller brödet?",
+          "answer": "Vårt surdegsbröd håller sig färskt i 3-5 dagar i rumstemperatur, inslaget i kökshandduk. Du kan också frysa det – skiva först för enkel upptining."
+        },
+        "reserve": {
+          "question": "Kan jag reservera bröd?",
+          "answer": "Ja! Använd vår online-beställning. Vi rekommenderar att beställa minst en dag i förväg, särskilt för helger."
+        },
+        "closed_days": {
+          "question": "Varför är butiken stängd söndag och måndag?",
+          "answer": "Vi behöver tid att förbereda och baka inför veckan. Surdegsbröd tar tid – våra degar jäser i upp till 48 timmar. Och alla behöver vila!"
+        }
+      }
+    }
+  }
+,"products": {
+    "hero": {
+      "subtitle": "Vårt Sortiment",
+      "title": "Produkter",
+      "description": "Alla våra produkter bakas dagligen på 100% ekologiskt och KRAV-märkt svenskt mjöl. Välj bland surdegsbröd, bullar, kakor och annat gott."
+    },
+    "filters": {
+      "categories": {
+        "all": "Alla",
+        "bread": "Bröd",
+        "pastry": "Sötbröd",
+        "cookie": "Kakor"
+      },
+      "show_today": "Visa endast dagens produkter",
+      "available_today": "Tillgängligt idag"
+    },
+    "specials": {
+      "week": "Veckans special",
+      "day": "Dagens special"
+    },
+    "empty": {
+      "no_today": "Inga produkter tillgängliga idag ({day}). Prova att visa alla produkter.",
+      "no_category": "Inga produkter hittades i denna kategori.",
+      "reset_btn": "Visa alla produkter",
+      "loading": "Laddar..."
+    },
+    "features": {
+      "organic": "100% Ekologiskt",
+      "stone_baked": "Stenugnsbakat",
+      "handmade": "Handgjort",
+      "swedish_flour": "Svenskt mjöl"
+    }
+  }
+,
+  "fettisdagen": {
+    "back_link": "Tillbaka",
+    "hero": {
+      "title": "Fettisdagen",
+      "subtitle": "Förbeställ dina semlor till <strong>{date}</strong>"
+    },
+    "info": {
+      "title": "Viktigt att veta:",
+      "min_order": "Minsta beställning: <strong>{count} semlor</strong>",
+      "pickup_only": "Endast avhämtning på Fettisdagen ({date})",
+      "payment": "Betalning sker i butiken vid avhämtning"
+    },
+    "error": {
+      "submit_failed": "Det gick inte att skicka beställningen. Försök igen."
+    },
+    "loading": "Laddar...",
+    "unavailable": "Semlor är inte tillgängliga för beställning just nu.",
+    "steps": {
+      "quantity": {
+        "title": "1. Välj antal semlor",
+        "subtitle": "Minst {count} st totalt (blanda fritt)",
+        "price_unit": "/ st",
+        "min_error": "Minsta beställning är {count} semlor",
+        "variant_mandel": "Kremla (Mandel)",
+      "variant_vanilj": "Kremla (Vanilj)",
+      "total_label": "Totalt:"
+      },
+      "time": {
+        "title": "2. Välj tid för avhämtning",
+        "date_label": "Datum:"
+      },
+      "customer": {
+        "title": "3. Dina uppgifter",
+        "labels": {
+          "name": "Namn *",
+          "email": "E-post *",
+          "phone": "Telefon *",
+          "notes": "Ytterligare kommentarer (valfritt)"
+        },
+        "placeholders": {
+          "name": "Ditt namn",
+          "email": "din@email.se",
+          "phone": "07X XXX XX XX",
+          "notes": "Allergier eller andra önskemål..."
+        }
+      }
+    },
+    "summary": {
+      "total_label": "Totalt att betala",
+      "submit_btn": "Beställ semlor",
+      "submitting": "Skickar...",
+      "disclaimer": "Genom att beställa godkänner du att betala vid avhämtning"
+    },
+    "success": {
+      "title": "Tack för din Fettisdagen-beställning!",
+      "message": "Vi ser fram emot att baka dina semlor. Glöm inte att hämta dem på Fettisdagen!",
+      "details_title": "Beställningsdetaljer",
+      "labels": {
+        "order_number": "Ordernummer",
+        "product": "Produkt",
+        "pickup": "Avhämtning",
+        "total": "Totalt"
+      },
+      "payment_note": "<strong>Obs!</strong> Betalning sker vid avhämtning i butiken.",
+      "back_home": "Tillbaka till startsidan"
+    },
+   
+
+  "banner": {
+    "approaching": "Fettisdagen närmar sig!",
+    "countdown": "Fettisdagen om {days} dagar!",
+    "countdown_one": "Fettisdagen om {days} dag!",
+    "cta": "Förbeställ din semla nu →",
+    "close": "Stäng banner"
+  
+}
+  }
+,
+  "order": {
+    "header": {
+      "title": "Beställning",
+      "subtitle": "Fyll i din beställning och välj tid för avhämtning"
+    },
+    "steps": {
+      "cart": "Varukorg",
+      "pickup": "Avhämtning",
+      "details": "Uppgifter",
+      "confirm": "Bekräfta"
+    },
+    "cart": {
+      "title": "Din varukorg",
+      "empty_title": "Din varukorg är tom",
+      "empty_btn": "Se produkter",
+      "price_unit": "/ st"
+    },
+    "pickup": {
+      "title": "Välj avhämtning",
+      "date_label": "Välj datum",
+      "time_label": "Välj tid",
+      "conflict": {
+        "title": "Produkter ej tillgängliga valt datum",
+        "description": "Följande produkter bakas inte på {day}ar:",
+        "tip": "Tips: Ändra datum eller gå tillbaka till varukorgen för att ta bort dessa produkter."
+      },
+      "fettisdagen": {
+        "title": "Fettisdagen - Endast Kremla!",
+        "description": "På Fettisdagen ({date}) kan du endast beställa Kremla/kremlor, med en minsta beställning på {count} stycken.",
+        "btn": "Beställ Kremla här"
+      }
+    },
+    "details": {
+      "title": "Dina uppgifter",
+      "labels": {
+        "name": "Namn *",
+        "email": "E-post *",
+        "phone": "Telefon *",
+        "notes": "Ytterligare kommentarer (valfritt)"
+      },
+      "placeholders": {
+        "name": "Ditt namn",
+        "email": "din@email.se",
+        "phone": "07X XXX XX XX",
+        "notes": "Allergier eller andra önskemål..."
+      }
+    },
+    "confirm": {
+      "title": "Bekräfta beställning",
+      "sections": {
+        "products": "Produkter",
+        "pickup": "Avhämtning",
+        "contact": "Kontaktuppgifter"
+      },
+      "labels": {
+        "total": "Totalt",
+        "name": "Namn:",
+        "email": "E-post:",
+        "phone": "Telefon:",
+        "message": "Meddelande:"
+      },
+      "payment_info": "<strong>Betalning:</strong> Betalning sker vid avhämtning i butiken. Vi tar emot kort och Swish."
+    },
+    "success": {
+      "title": "Tack för din beställning!",
+      "message": "Din beställning har mottagits och vi börjar förbereda den.",
+      "details_title": "Beställningsdetaljer",
+      "labels": {
+        "order_number": "Ordernummer",
+        "pickup": "Avhämtning",
+        "total": "Totalt"
+      },
+      "back_btn": "Tillbaka till startsidan"
+    },
+    "navigation": {
+      "back": "Tillbaka",
+      "continue_shopping": "Fortsätt handla",
+      "continue": "Fortsätt",
+      "confirm_btn": "Bekräfta beställning",
+      "submitting": "Skickar...",
+      "total_label": "Totalt"
+    },
+    "errors": {
+      "submit_failed": "Det gick inte att skicka beställningen. Kontrollera att du har internetanslutning och försök igen."
+    }
+  }
+,
+  "product_card": {
+    "add_to_cart": "Lägg till",
+    "badges": {
+      "popular": "Populär",
+      "week_special": "Veckans special",
+      "day_special": "Dagens special",
+      "fettisdagen": "🥯 Fettisdagen"
+    },
+    "availability": {
+      "label": "Tillgänglig:",
+      "all_days": "Alla dagar",
+      "days": {
+        "monday": "Mån",
+        "tuesday": "Tis",
+        "wednesday": "Ons",
+        "thursday": "Tor",
+        "friday": "Fre",
+        "saturday": "Lör",
+        "sunday": "Sön"
+      }
+    },
+    "min_order": "Min. beställning: {count} st",
+    "allergens": {
+      "gluten": "Gluten",
+      "dairy": "Mjölk",
+      "eggs": "Ägg",
+      "almonds": "Mandel",
+      "oats": "Havre",
+      "coconut": "Kokos"
+    }
+  },
+  "header": {
+    "nav": {
+      "home": "Hem",
+      "products": "Produkter",
+      "order": "Beställ",
+      "about": "Om Oss",
+      "contact": "Kontakt"
+    },
+    "actions": {
+      "open_cart": "Öppna varukorg",
+      "open_menu": "Öppna meny",
+      "close_menu": "Stäng meny"
+    },
+    "logo_alt": "Lilla Sur Logotyp"
+  },
+  "footer": {
+    "brand_description": "Ekologiskt bageri i Kålltorp sedan 2014. Vi bakar med kärlek, tid och de bästa råvarorna.",
+    "nav": {
+      "title": "Navigering",
+      "home": "Hem",
+      "products": "Produkter",
+      "order": "Beställ Online",
+      "about": "Om Oss",
+      "contact": "Kontakt"
+    },
+    "hours": {
+      "title": "Öppettider",
+      "closed": "Stängt"
+    },
+    "contact": {
+      "title": "Hitta oss",
+      "map_link": "Visa på karta →"
+    },
+    "bottom": {
+      "copyright": "© {year} Lilla Sur Göteborgs Hantverksbageri AB. Alla rättigheter förbehållna.",
+      "tags": {
+        "organic": "100% Ekologiskt",
+        "krav": "KRAV-märkt",
+        "handmade": "Handgjort med kärlek"
+      }
+    }
+  }
+,
+  "cart_drawer": {
+    "header": {
+      "title": "Varukorg",
+      "item_one": "vara",
+      "item_other": "varor",
+      "close_aria": "Stäng varukorg"
+    },
+    "empty": {
+      "title": "Din varukorg är tom",
+      "subtitle": "Utforska våra nybakade produkter",
+      "btn": "Se produkter"
+    },
+    "item": {
+      "price_suffix": "st",
+      "decrease_aria": "Minska antal",
+      "increase_aria": "Öka antal",
+      "remove_aria": "Ta bort"
+    },
+    "footer": {
+      "total": "Totalt",
+      "checkout_btn": "Gå till beställning",
+      "disclaimer": "Beställningar hämtas i butiken"
+    }
+  },
+   "LocaleSwitcher": {
+    "label": "Ändra språk",
+    "locale": "{locale, välj, sv {Svenska} en {Engelska}"
+  
+  }
+,
+  "date_picker": {
+    "months": {
+      "jan": "Januari",
+      "feb": "Februari",
+      "mar": "Mars",
+      "apr": "April",
+      "may": "Maj",
+      "jun": "Juni",
+      "jul": "Juli",
+      "aug": "Augusti",
+      "sep": "September",
+      "oct": "Oktober",
+      "nov": "November",
+      "dec": "December"
+    },
+    "weekdays": {
+      "mon": "Mån",
+      "tue": "Tis",
+      "wed": "Ons",
+      "thu": "Tor",
+      "fri": "Fre",
+      "sat": "Lör",
+      "sun": "Sön"
+    },
+    "aria": {
+      "prev_month": "Föregående månad",
+      "next_month": "Nästa månad"
+    },
+    "legend": {
+      "selected": "Vald dag",
+      "today": "Idag",
+      "closed": "Stängt"
+    }
+  }
+,
+  "fettisdagen_popup": {
+    "title": "Fettisdagen {year}!",
+    "description": "Den {date} bakar vi endast Kremlor",
+    "sub_description": "Förbeställ dina kremlor nu – minst {count} st per beställning",
+    "cta_btn": "Beställ Kremlor →",
+    "close_btn": "Stäng",
+    "close_aria": "Stäng",
+    "image_alt": "Kremla bild"
+  }
+}
