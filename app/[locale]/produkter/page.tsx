@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Wheat, Cookie, Coffee, Sparkles, MenuSquare, Calendar, Pizza } from "lucide-react";
+import { Wheat, Cookie, Coffee, Sparkles, MenuSquare, Calendar, Pizza, Box } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import { getProductsByCategory } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,7 @@ const categoryConfig: { id: ProductCategory | "all"; icon: React.ReactNode }[] =
   { id: "bread", icon: <Wheat className="w-4 h-4" /> },
   { id: "pastry", icon: <Coffee className="w-4 h-4" /> },
   { id: "cookie", icon: <Cookie className="w-4 h-4" /> },
-  { id: "dough", icon: <Pizza className="w-4 h-4" /> },
+  { id: "other", icon: <Box className="w-4 h-4" /> },
 ];
 
 // Get current day of week
@@ -171,7 +171,7 @@ function ProductsContent() {
       )}
 
       {/* Products Section */}
-      <section className="py-16 bg-black">
+      <section className="py-12 bg-black">
         <div className="container mx-auto px-6 ">
           {/* Filters Row */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 max-sm:items-center">

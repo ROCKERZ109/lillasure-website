@@ -16,7 +16,7 @@
   "tagline": "Bakas endast på söndagar!"
 },
     "featured": {
-      "description": "Varje dag bakar vi ett urval av klassiska surdegsbröd och svenska bakverk. Allt handgjort med de finaste ekologiska råvarorna.",
+      "description": "Varje dag bakar vi ett urval av klassiska surdegsbröd och svenska bakverk. Allt handgjort med de finaste råvarorna.",
       "label": "Från Ugnen",
       "title": "Våra Favoriter",
       "view_all": "Se alla produkter"
@@ -177,7 +177,7 @@
     "hero": {
       "subtitle": "Vårt Sortiment",
       "title": "Produkter",
-      "description": "Alla våra produkter bakas dagligen på 100% ekologiskt och KRAV-märkt svenskt mjöl. Välj bland surdegsbröd, bullar, kakor och annat gott."
+      "description": "Alla våra produkter bakas dagligen med 100% svenskt mjöl. Välj bland surdegsbröd, bullar, kakor och annat gott."
     },
     "filters": {
       "categories": {
@@ -185,7 +185,7 @@
         "bread": "Bröd",
         "pastry": "Sötbröd",
         "cookie": "Kakor",
-        "dough": "Deg"
+        "other": "Övrigt"
       },
       "show_today": "Visa endast dagens produkter",
       "available_today": "Tillgängligt idag"
@@ -420,7 +420,7 @@
     "logo_alt": "Lilla Sur Logotyp"
   },
   "footer": {
-    "brand_description": "Ekologiskt bageri i Kålltorp sedan 2014. Vi bakar med kärlek, tid och de bästa råvarorna.",
+    "brand_description": "Bageri i Kålltorp sedan 2014. Vi bakar med kärlek, tid och de bästa råvarorna.",
     "nav": {
       "title": "Navigering",
       "home": "Hem",

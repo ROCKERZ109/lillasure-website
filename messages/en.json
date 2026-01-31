@@ -16,7 +16,7 @@
   "tagline": "Made only on Sundays!"
 },
     "featured": {
-      "description": "Every day we bake a selection of classic sourdough breads and Swedish pastries. Everything handmade with the finest organic ingredients.",
+      "description": "Every day we bake a selection of classic sourdough breads and Swedish pastries. Everything handmade with the finest ingredients.",
       "label": "From the Oven",
       "title": "Our Favorites",
       "view_all": "See all products"
@@ -175,7 +175,7 @@
     "hero": {
       "subtitle": "Our Range",
       "title": "Products",
-      "description": "All our products are baked daily with 100% organic and KRAV-certified Swedish flour. Choose from sourdough bread, buns, cookies, and other treats."
+      "description": "All our products are baked daily with 100% Swedish flour. Choose from sourdough bread, buns, cookies, and other treats."
     },
     "filters": {
       "categories": {
@@ -183,7 +183,7 @@
         "bread": "Bread",
         "pastry": "Pastries",
         "cookie": "Cookies",
-        "dough": "Dough"
+        "other": "Other"
       },
       "show_today": "Show only today's products",
       "available_today": "Available today"
@@ -413,7 +413,7 @@
   }
 ,
   "footer": {
-    "brand_description": "Organic bakery in Kålltorp since 2014. We bake with love, time, and the best ingredients.",
+    "brand_description": "Bakery in Kålltorp since 2014. We bake with love, time, and the best ingredients.",
     "nav": {
       "title": "Navigation",
       "home": "Home",
