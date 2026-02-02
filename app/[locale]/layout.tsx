@@ -72,7 +72,7 @@ export default async function LocaleLayout({
   // FETCH MESSAGES - This is what was likely missing!
   const messages = await getMessages();
   return (
-    <html lang={locale} className={`${cormorant.variable} ${lato.variable}`}>
+    <html lang={locale}  translate="no" className={`${cormorant.variable} ${lato.variable}`}>
 
       <body className="min-h-screen flex flex-col ">
         <NextIntlClientProvider locale={locale} messages={messages}>

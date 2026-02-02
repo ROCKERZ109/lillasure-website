@@ -212,11 +212,11 @@
     "back_link": "Tillbaka",
     "hero": {
       "title": "Fettisdagen",
-      "subtitle": "Förbeställ dina semlor till <strong>{date}</strong>"
+      "subtitle": "Förbeställ dina Kremlor till <strong>{date}</strong>"
     },
     "info": {
       "title": "Viktigt att veta:",
-      "min_order": "Minsta beställning: <strong>{count} semlor</strong>",
+      "min_order": "Minsta beställning: <strong>{count} Kremlor</strong>",
       "pickup_only": "Endast avhämtning på Fettisdagen ({date})",
       "payment": "Betalning sker i butiken vid avhämtning"
     },
@@ -224,13 +224,13 @@
       "submit_failed": "Det gick inte att skicka beställningen. Försök igen."
     },
     "loading": "Laddar...",
-    "unavailable": "Semlor är inte tillgängliga för beställning just nu.",
+    "unavailable": "Kremlor är inte tillgängliga för beställning just nu.",
     "steps": {
       "quantity": {
-        "title": "1. Välj antal semlor",
+        "title": "1. Välj antal Kremlor",
         "subtitle": "Minst {count} st totalt (blanda fritt)",
         "price_unit": "/ st",
-        "min_error": "Minsta beställning är {count} semlor",
+        "min_error": "Minsta beställning är {count} Kremlor",
         "variant_mandel": "Kremla (Mandel)",
       "variant_vanilj": "Kremla (Vanilj)",
       "total_label": "Totalt:"
@@ -257,13 +257,13 @@
     },
     "summary": {
       "total_label": "Totalt att betala",
-      "submit_btn": "Beställ semlor",
+      "submit_btn": "Beställ Kremlor",
       "submitting": "Skickar...",
       "disclaimer": "Genom att beställa godkänner du att betala vid avhämtning"
     },
     "success": {
       "title": "Tack för din Fettisdagen-beställning!",
-      "message": "Vi ser fram emot att baka dina semlor. Glöm inte att hämta dem på Fettisdagen!",
+      "message": "Vi ser fram emot att baka dina Kremlor. Glöm inte att hämta dem på Fettisdagen!",
       "details_title": "Beställningsdetaljer",
       "labels": {
         "order_number": "Ordernummer",
@@ -280,7 +280,7 @@
     "approaching": "Fettisdagen närmar sig!",
     "countdown": "Fettisdagen om {days} dagar!",
     "countdown_one": "Fettisdagen om {days} dag!",
-    "cta": "Förbeställ din semla nu →",
+    "cta": "Förbeställ din Kremla nu →",
     "close": "Stäng banner"
   
 }
