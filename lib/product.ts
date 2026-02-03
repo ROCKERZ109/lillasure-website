@@ -10,8 +10,8 @@ export async function getProducts(): Promise<Product[]> {
     try {
       
       const q = query(
-        // @ts-ignore
-        collection(db, process.env.NEXT_PUBLIC_PRODUCT_DATABASE)
+        
+        collection(db, process.env.NEXT_PUBLIC_PRODUCT_DATABASE as string)
       );
   
       const querySnapshot = await getDocs(q);

@@ -15,7 +15,7 @@ import type { Order, OrderStatus, Product } from "@/types";
 
 
 
-const ORDERS_COLLECTION = process.env.NEXT_PUBLIC_ORDER_DATABASE;
+const ORDERS_COLLECTION = process.env.NEXT_PUBLIC_ORDER_DATABASE as string;
 
 export function addProductstoDb(products: Product[]) {
   
@@ -38,7 +38,7 @@ export async function createOrder(
       ...order,
       createdAt: Timestamp.now(),
     };
-      // @ts-ignore
+      
     const newDocRef = doc(collection(db, ORDERS_COLLECTION));
 
   // 2. Get the auto-generated ID from that reference
