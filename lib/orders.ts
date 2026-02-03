@@ -15,7 +15,7 @@ import type { Order, OrderStatus, Product } from "@/types";
 
 
 
-const ORDERS_COLLECTION = "orders";
+const ORDERS_COLLECTION = process.env.NEXT_PUBLIC_ORDER_DATABASE;
 
 export function addProductstoDb(products: Product[]) {
   

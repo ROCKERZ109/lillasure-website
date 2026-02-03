@@ -54,7 +54,7 @@ export default function FettisdagenPage() {
             try {
                 const products = await getProducts();
                 const kremla = products.find(
-                    (p) => p.isFettisdagen || p.nameSv.toLowerCase().includes("semla") || p.nameSv.toLowerCase().includes("kremla")
+                    (p) => p.isFettisdagen || p.nameSv.toLowerCase().includes("semla") || p.nameSv.toLowerCase().startsWith("kremla")
                 );
                 if (kremla) {
                     setKremlaProduct(kremla);

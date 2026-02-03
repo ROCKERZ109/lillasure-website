@@ -9,7 +9,7 @@ import { query, collection, orderBy, getDocs } from "firebase/firestore";
 export async function getProducts(): Promise<Product[]> {
     try {
       const q = query(
-        collection(db, "products")
+        collection(db, process.env.NEXT_PUBLIC_PRODUCT_DATABASE)
       );
   
       const querySnapshot = await getDocs(q);
