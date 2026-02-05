@@ -53,6 +53,8 @@ export interface Order {
   totalAmount: number;
   createdAt: Date;
   notes?: string;
+  locale: string;
+  
   // NEW: Flag for Fettisdagen orders
   isFettisdagenOrder?: boolean;
 }

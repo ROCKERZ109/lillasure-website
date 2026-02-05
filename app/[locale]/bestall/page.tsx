@@ -137,6 +137,7 @@ export default function OrderPage() {
 
     try {
       const orderItems: OrderItem[] = state.items.map((item) => ({
+
         productId: item.product.id,
         productName: item.product.nameSv,
         quantity: item.quantity,
@@ -151,6 +152,7 @@ export default function OrderPage() {
         status: "pending",
         totalAmount,
         notes: notes || "",
+        locale: locale
       });
 
       setOrderId(newOrderId);

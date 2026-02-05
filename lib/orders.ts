@@ -17,16 +17,7 @@ import type { Order, OrderStatus, Product } from "@/types";
 
 const ORDERS_COLLECTION = process.env.NEXT_PUBLIC_ORDER_DATABASE as string;
 
-export function addProductstoDb(products: Product[]) {
-  
-  
-  products.map(async (product) => {
-   
-     const productRef = doc(db, "products", product.id);
-     
-     await setDoc(productRef, product);
-  });
-}
+
 
 // Create a new order
 export async function createOrder(

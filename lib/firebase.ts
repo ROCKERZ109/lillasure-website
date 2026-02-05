@@ -1,6 +1,6 @@
-import { initializeApp, getApps } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore, connectFirestoreEmulator} from "firebase/firestore";
+import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 // Firebase configuration - replace with your own values
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,7 +12,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+ const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
-
+// const functions = getFunctions(app);
+// const db = getFirestore(app)
+// connectFirestoreEmulator(db, "127.0.0.1", 8080);
+// console.log(db)
 export { app, db };

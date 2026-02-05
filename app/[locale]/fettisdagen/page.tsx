@@ -22,10 +22,11 @@ import { createOrder } from "@/lib/orders";
 import { getProducts } from "@/lib/product";
 import type { Product, CustomerInfo, OrderItem } from "@/types";
 import { FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA } from "@/types";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function FettisdagenPage() {
     const t = useTranslations('fettisdagen');
+    const locale = useLocale();
     const [kremlaProduct, setKremlaProduct] = useState<Product | null>(null);
     
     // Split quantity state
@@ -116,7 +117,8 @@ export default function FettisdagenPage() {
                     productId: kremlaProduct.id,
                     productName: `${kremlaProduct.nameSv} (Vanilj)`,
                     quantity: quantities.vanilj,
-                    price: kremlaProduct.price,
+                    price: kremlaProduct.price
+                   
                 });
             }
 
@@ -129,6 +131,8 @@ export default function FettisdagenPage() {
                 totalAmount,
                 notes: notes || "",
                 isFettisdagenOrder: true,
+                locale: locale
+                
             });
 
             setOrderId(newOrderId);
