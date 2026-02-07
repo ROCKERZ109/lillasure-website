@@ -371,8 +371,11 @@
       "popular": "Popular",
       "week_special": "Week's Special",
       "day_special": "Today's Special",
+      "options": "options",
       "fettisdagen": "🥯 Fettisdagen"
     },
+    "select": "Select",
+    "from_price": "from",
     "availability": {
       "label": "Available:",
       "all_days": "All days",
@@ -403,12 +406,14 @@
       "order": "Order",
       "about": "About Us",
       "contact": "Contact"
+
     },
     "actions": {
       "open_cart": "Open cart",
       "open_menu": "Open menu",
       "close_menu": "Close menu"
     },
+    "tagline":"House of Sur",
     "logo_alt": "Lilla Sur Logo"
   }
 ,
@@ -437,7 +442,9 @@
         "krav": "KRAV-certified",
         "handmade": "Handmade with love"
       }
-    }
+
+    },
+     "tagline":"House of Sur"
   }
 ,
   "cart_drawer": {
@@ -511,5 +518,10 @@
     "close_btn": "Close",
     "close_aria": "Close",
     "image_alt": "Kremla image"
+  },
+  "variant_selector": {
+    "from": "From",
+    "add_to_cart": "Add to cart",
+    "select_variant": "Select an option"
   }
 }

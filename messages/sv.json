@@ -379,8 +379,11 @@
       "popular": "Populär",
       "week_special": "Veckans special",
       "day_special": "Dagens special",
-      "fettisdagen": "🥯 Fettisdagen"
+      "fettisdagen": "🥯 Fettisdagen",
+       "options": "val"
     },
+     "select": "Välj",
+    "from_price": "från",
     "availability": {
       "label": "Tillgänglig:",
       "all_days": "Alla dagar",
@@ -417,6 +420,7 @@
       "open_menu": "Öppna meny",
       "close_menu": "Stäng meny"
     },
+     "tagline":"House of Sur",
     "logo_alt": "Lilla Sur Logotyp"
   },
   "footer": {
@@ -444,7 +448,8 @@
         "krav": "KRAV-märkt",
         "handmade": "Handgjort med kärlek"
       }
-    }
+    },
+     "tagline":"House of Sur"
   }
 ,
   "cart_drawer": {
@@ -520,5 +525,11 @@
     "close_btn": "Stäng",
     "close_aria": "Stäng",
     "image_alt": "Kremla bild"
+  },
+  "variant_selector": {
+    "from": "Från",
+    "add_to_cart": "Lägg i varukorgen",
+    "select_variant": "Välj ett alternativ"
   }
+
 }

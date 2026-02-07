@@ -107,7 +107,7 @@ export default function OrderPage() {
           customerInfo.phone.trim()
         );
       case "confirm":
-       
+
         return true;
       default:
         return false;
@@ -132,7 +132,7 @@ export default function OrderPage() {
   const handleSubmitOrder = async () => {
     if (!canProceed()) return;
     setIsSubmitting(true);
-     setPrice(totalAmount)
+    setPrice(totalAmount)
     setError("");
 
     try {
@@ -142,6 +142,9 @@ export default function OrderPage() {
         productName: item.product.nameSv,
         quantity: item.quantity,
         price: item.product.price,
+        variantId: item.variantId,
+        variantName: item.variantName
+
       }));
 
       const newOrderId = await createOrder({
@@ -169,7 +172,7 @@ export default function OrderPage() {
   // Order Complete View
   if (orderComplete) {
     return (
-      <section className="min-h-screen pt-40 pb-20 bg-black">
+      <section className="min-h-screen pt-44 pb-20 bg-black">
         <div className="container mx-auto px-6">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -208,10 +211,10 @@ export default function OrderPage() {
 
             <div className="bg-crust-900 border border-crust-200 rounded-lg p-4 mb-10">
               <p className="text-sm text-crust-200 font-body"  >
-                {t.rich('confirm.payment_info',{
-                  strong: (chunks)=><strong>{chunks}</strong>
+                {t.rich('confirm.payment_info', {
+                  strong: (chunks) => <strong>{chunks}</strong>
                 })}
-                </p>
+              </p>
             </div>
 
             <Link href="/" className="btn-primary">
@@ -318,6 +321,12 @@ export default function OrderPage() {
                           <h3 className="font-display text-lg text-white/80">
                             {item.product.nameSv}
                           </h3>
+                          {/* ✅ Show variant name */}
+                          {item.variantName && (
+                            <p className="text-sm text-amber-400 mb-1">
+                              {item.variantName}
+                            </p>
+                          )}
                           <p className="text-sm text-crust-200">
                             {formatPrice(item.product.price)} {t('cart.price_unit')}
                           </p>
@@ -388,7 +397,7 @@ export default function OrderPage() {
                             {t('pickup.conflict.title')}
                           </h3>
                           <p className="text-sm text-red-300/80 mb-3 font-body max-sm:text-xs">
-                            {t('pickup.conflict.description', { day: locale=="sv"?dayLabels[getDayOfWeek(pickupDate)]:dayLabelsEn[getDayOfWeek(pickupDate)] })}
+                            {t('pickup.conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })}
                           </p>
                           <ul className="space-y-1">
                             {unavailableItems.map((item) => (

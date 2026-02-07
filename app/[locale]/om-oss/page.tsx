@@ -73,7 +73,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-20 bg-black">
+      <section className="pt-36 pb-20 bg-black">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <span className="text-sm font-body tracking-[0.3em] uppercase text-white/80 mb-4 block text-center mt-10">

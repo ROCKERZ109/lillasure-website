@@ -27,9 +27,36 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-sm:gap-12 sm:gap-24 md:gap-40">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-0">
+            <Link href="/" className=" relative inline-block mb-0">
               <img src="/images/logo-white.png" className="sm:size-48 max-sm:size-32" alt="Lilla Sur Logo" />
+              {/* Curved Text Area */}
+              {/* Position absolute karke logo ke upar overlay kiya hai, thoda neeche shift karke */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] pointer-events-none z-20 animate-spin-slow">
+                <svg viewBox="0 0 300 300" className="w-full h-full">
+                  {/* Path Breakdown for Circle Bottom:
+        M 50,150  -> Start point (Left side, middle height)
+        A 100,100 -> Radius X, Radius Y (Jitna bada number, utna flat curve)
+        0 0,0     -> Rotation and Flags (Standard curve settings)
+        250,150   -> End point (Right side, middle height)
+        
+        Isse ek "U" shape ya "Bowl" shape banti hai jo circle ke neeche fit hoti hai.
+      */}
+                  <path
+                    id="circle-path"
+                    d="M 65,150 A 80,125 0 0,0 225,15"
+                    fill="transparent"
+                  />
+
+                  <text className="font-century tracking-[12px]  text-[17px] max-sm:text-[14px]" fill="white">
+                    {/* startOffset="50%" text ko exact center-bottom mein rakhega */}
+                    <textPath href="#circle-path"   textAnchor="start" >
+                      {t('tagline')}
+                    </textPath>
+                  </text>
+                </svg>
+              </div>
             </Link>
+
             <p className="text-sm text-flour-300 leading-relaxed mb-6">
               {t('brand_description')}
             </p>
@@ -77,7 +104,7 @@ export default function Footer() {
               {t('hours.title')}
             </h3>
             <ul className="space-y-2">
-             {locale=="sv"?storeHours.map((hours) => (
+              {locale == "sv" ? storeHours.map((hours) => (
                 <li
                   key={hours.day}
                   className="flex justify-between text-sm"
@@ -87,7 +114,7 @@ export default function Footer() {
                     {hours.closed ? t('hours.closed') : `${hours.open} - ${hours.close}`}
                   </span>
                 </li>
-              )):storeHoursEn.map((hours) => (
+              )) : storeHoursEn.map((hours) => (
                 <li
                   key={hours.day}
                   className="flex justify-between text-sm"
@@ -143,7 +170,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-        {/* <div className="border-t border-flour-800">
+      {/* <div className="border-t border-flour-800">
         <div className="container mx-auto px-6 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-flour-500">
@@ -156,9 +183,9 @@ export default function Footer() {
               <span className="mx-2">•</span>
               <span>{t('bottom.tags.handmade')}</span>
             </div> */}
-          {/* </div>
+      {/* </div>
         </div>
-      </div> */} 
+      </div> */}
     </footer>
   );
 }

@@ -38,7 +38,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-32 pb-16 bg-black">
+      <section className="pt-36 pb-16 bg-black">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <span className="text-sm font-body tracking-[0.3em] uppercase text-white/80 mb-4 block mt-10">

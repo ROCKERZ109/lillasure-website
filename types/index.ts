@@ -19,6 +19,11 @@ export interface Product {
   // NEW: For Fettisdagen special products
   isFettisdagen?: boolean;
   minOrder?: number; // Minimum order quantity
+  // ✅ NEW: Variants
+  hasVariants?: boolean;
+  variantLabel?: string;      // "Flavor", "Size", etc.
+  variantLabelSv?: string;    // "Smak", "Storlek", etc.
+  variants?: ProductVariant[];
 }
 
 export type ProductCategory = 
@@ -40,6 +45,8 @@ export type DayOfWeek =
 export interface CartItem {
   product: Product;
   quantity: number;
+   variantId?: string;      
+  variantName?: string;    
 }
 
 // Order types
@@ -64,7 +71,18 @@ export interface OrderItem {
   productName: string;
   quantity: number;
   price: number;
+  variantId?: string;      // ✅ NEW
+  variantName?: string;  
 }
+
+export type ProductVariant = {
+  id: string;
+  name: string;
+  nameSv: string;
+  priceDiff?: number;
+  available: boolean;
+};
+
 
 export interface CustomerInfo {
   name: string;

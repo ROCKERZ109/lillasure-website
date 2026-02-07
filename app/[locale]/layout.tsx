@@ -10,6 +10,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import FettisdagenPopup from "@/components/FettisdagenPopup";
+import localFont from 'next/font/local'
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -17,8 +18,12 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   display: "swap",
 });
-
+const century = localFont({
+  src: './fonts/Century-PS Regular.ttf', // Path to your font file
+  variable: '--font-century'
+})
 const lato = Lato({
+  
   subsets: ["latin"],
   weight: ["300", "400", "700"],
   variable: "--font-lato",
@@ -72,7 +77,7 @@ export default async function LocaleLayout({
   // FETCH MESSAGES - This is what was likely missing!
   const messages = await getMessages();
   return (
-    <html lang={locale}  translate="no" className={`${cormorant.variable} ${lato.variable}`}>
+    <html lang={locale}  translate="no" className={`${cormorant.variable} ${lato.variable} ${century.variable}`}>
 
       <body className="min-h-screen flex flex-col ">
         <NextIntlClientProvider locale={locale} messages={messages}>

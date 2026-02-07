@@ -45,17 +45,41 @@ export default function Header() {
       >
         <div className="container mx-auto px-6">
           <nav className="flex items-center justify-between">
-            {/* Logo */}
-            <Link
-              href="/"
-              className="relative z-10 group"
-            >
-              <div className="grid grid-cols-2 grid-rows-1 ">
+            {/* Logo 
+            
+             ><div className="grid grid-cols-2 grid-rows-1 ">
                 <img
                   src="/images/logo-white.png"
                   alt={t('logo_alt')}
                   className="h-24 w-36 -ml-5 max-sm:h-16 max-sm:w-20 max-sm:-ml-2 object-cover"
-                />
+            */}
+            <Link href="/" className=" relative inline-block mb-0">
+              <img src="/images/logo-white.png" className="sm:size-24 max-sm:size-16" alt="Lilla Sur Logo" />
+              {/* Curved Text Area */}
+              {/* Position absolute karke logo ke upar overlay kiya hai, thoda neeche shift karke */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] pointer-events-none z-20 animate-spin-slow">
+                <svg viewBox="0 0 300 300" className="w-full h-full">
+                  {/* Path Breakdown for Circle Bottom:
+        M 50,150  -> Start point (Left side, middle height)
+        A 100,100 -> Radius X, Radius Y (Jitna bada number, utna flat curve)
+        0 0,0     -> Rotation and Flags (Standard curve settings)
+        250,150   -> End point (Right side, middle height)
+        
+        Isse ek "U" shape ya "Bowl" shape banti hai jo circle ke neeche fit hoti hai.
+      */}
+                  <path
+                    id="circle-path"
+                    d="M 65,150 A 80,125 0 0,0 225,15"
+                    fill="transparent"
+                  />
+
+                  <text className="font-century tracking-[12px]  text-[18px] max-sm:text-[15px]" fill="white">
+                    {/* startOffset="50%" text ko exact center-bottom mein rakhega */}
+                    <textPath href="#circle-path" textAnchor="start" >
+                      {t('tagline')}
+                    </textPath>
+                  </text>
+                </svg>
               </div>
             </Link>
 
@@ -70,14 +94,14 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
-                {/* <LocaleSwitcher></LocaleSwitcher> */}
+              {/* <LocaleSwitcher></LocaleSwitcher> */}
             </div>
-           
+
 
             {/* Cart & Mobile Menu */}
             <div className="flex items-center gap-4">
               {/* Cart Button */}
-               <LocaleSwitcher></LocaleSwitcher>
+              <LocaleSwitcher></LocaleSwitcher>
               <button
                 onClick={openCart}
                 className="relative p-2 text-amber-100 hover:text-white/80 transition-colors"
@@ -129,13 +153,13 @@ export default function Header() {
             </div>
           </div>
         </div>
-        
+
         <FettisdagenBanner />
-         
+
       </header>
-     
+
       {/* Cart Drawer */}
-      
+
       <CartDrawer />
     </>
   );
