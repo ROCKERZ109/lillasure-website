@@ -136,15 +136,23 @@ export default function OrderPage() {
     setError("");
 
     try {
-      const orderItems: OrderItem[] = state.items.map((item) => ({
+      const orderItems: OrderItem[] = state.items.map((item) => (
+        
+        item.variantId == null?
+        {
 
         productId: item.product.id,
         productName: item.product.nameSv,
         quantity: item.quantity,
-        price: item.product.price,
-        variantId: item.variantId,
-        variantName: item.variantName
+        price: item.product.price
 
+      }:{
+          productId: item.product.id,
+        productName: item.product.nameSv,
+        quantity: item.quantity,
+        price: item.product.price,
+        variantId: item.variantId ,
+        variantName: item.variantName
       }));
 
       const newOrderId = await createOrder({
