@@ -28,7 +28,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className=" relative inline-block mb-0">
-              <img src="/images/img-adobe-logo.png" className="sm:size-48 max-sm:size-32" alt="Lilla Sur Logo" />
+              <img src="/images/hosur.png" className="sm:size-48 max-sm:size-32" alt="Lilla Sur Logo" />
               {/* Curved Text Area */}
               {/* Position absolute karke logo ke upar overlay kiya hai, thoda neeche shift karke */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] pointer-events-none z-20 animate-spin-slow">
