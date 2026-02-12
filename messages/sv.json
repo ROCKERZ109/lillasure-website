@@ -530,6 +530,27 @@
     "from": "Från",
     "add_to_cart": "Lägg i varukorgen",
     "select_variant": "Välj ett alternativ"
+  },
+  "valentine": {
+    "badge": "Begränsad Upplaga",
+    "title": "Love Bites",
+    "subtitle": "Kärleksbett",
+    "description": {
+      "line1": "Begränsad upplaga.",
+      "line2": "Små partier.",
+      "line3": "Stort hjärta."
+    },
+    "details": {
+      "shell": "Mörkt chokladskal.",
+      "cream": "Silkeslen chokladkräm.",
+      "core": "Kärna av rinnande kola."
+    },
+    "availability": "Endast i butik",
+    "disclaimer": "Inga förbeställningar. Först till kvarn gäller.",
+    "footer_label": "Alla Hjärtans Dag",
+    "date_roman": "XIV · II · MMXXVI",
+    "price": "121 kr"
   }
+
 
 }

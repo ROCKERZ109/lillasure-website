@@ -54,7 +54,7 @@ export default function Header() {
                   className="h-24 w-36 -ml-5 max-sm:h-16 max-sm:w-20 max-sm:-ml-2 object-cover"
             */}
             <Link href="/" className=" relative inline-block mb-0">
-              <img src="/images/logo-white.png" className="sm:size-24 max-sm:size-16" alt="Lilla Sur Logo" />
+              <img src="/images/img-adobe-logo.png" className="sm:size-24 max-sm:size-16" alt="Lilla Sur Logo" />
               {/* Curved Text Area */}
               {/* Position absolute karke logo ke upar overlay kiya hai, thoda neeche shift karke */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] pointer-events-none z-20 animate-spin-slow">
@@ -75,9 +75,9 @@ export default function Header() {
 
                   <text className="font-century tracking-[12px]  text-[18px] max-sm:text-[15px]" fill="white">
                     {/* startOffset="50%" text ko exact center-bottom mein rakhega */}
-                    <textPath href="#circle-path" textAnchor="start" >
+                    {/* <textPath href="#circle-path" textAnchor="start" >
                       {t('tagline')}
-                    </textPath>
+                    </textPath> */}
                   </text>
                 </svg>
               </div>

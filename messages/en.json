@@ -523,5 +523,26 @@
     "from": "From",
     "add_to_cart": "Add to cart",
     "select_variant": "Select an option"
+  },
+  "valentine": {
+    "badge": "Limited Edition",
+    "title": "Love Bites",
+    "subtitle": "Love Bites",
+    "description": {
+      "line1": "Limited edition.",
+      "line2": "Small batch.",
+      "line3": "Big heart."
+    },
+    "details": {
+      "shell": "Dark chocolate shell.",
+      "cream": "Silky chocolate cream.",
+      "core": "Molten caramel core."
+    },
+    "availability": "Available in store only",
+    "disclaimer": "No pre-orders. When they're gone, they're gone.",
+    "footer_label": "All Hearts Day",
+    "date_roman": "XIV · II · MMXXVI",
+    "price": "121 kr"
   }
 }
+  

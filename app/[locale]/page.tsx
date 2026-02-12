@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/types";
 import Shimmer from "@/components/Shimmer";
 import { useTranslations } from "next-intl";
+import ValentineBanner from "@/components/ValentinesBanner";
 
 export default function HomePage() {
   const t = useTranslations('home');
@@ -91,6 +92,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ValentineBanner />
+
       <section className="py-10 bg-black transition-transform duration-500 hover:scale-95">
         <div className="mx-auto px-6">
           {/* Container */}
@@ -107,7 +110,7 @@ export default function HomePage() {
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="max-w-xl mx-auto text-center px-6">
                   <span className="text-amber-400 text-sm uppercase tracking-widest mb-3 block">
-                   {t('new_product.badge')}{''}
+                    {t('new_product.badge')}{''}
                   </span>
                   <h2 className="font-display text-2xl sm:text-4xl font-bold text-white mb-4">
                     {t('new_product.title')}{''}
@@ -118,11 +121,11 @@ export default function HomePage() {
                   <p className="text-amber-500 font-body leading-relaxed mb-4 text-2xl">
                     {t('new_product.line2')}{''}
                   </p>
-                   <p className="text-neutral-200 font-body leading-relaxed mb-8 text-base xl:text-lg">
-                     {t('new_product.line3')}{' '}
+                  <p className="text-neutral-200 font-body leading-relaxed mb-8 text-base xl:text-lg">
+                    {t('new_product.line3')}{' '}
                     <span className="text-amber-300 font-body ">Saffron Kremla</span> and{' '}
                     <span className="text-amber-300 font-body ">Jalapeño Cheddar Bread</span>, comes{' '}
-                      <br />
+                    <br />
                     <em className="font-display text-white max-sm:text-2xl text-3xl">Vive La Kremla!!</em>
                     <br />
                     <span className="text-neutral-200 text-sm">Made only on Sundays!</span>
@@ -140,20 +143,20 @@ export default function HomePage() {
               <div className="w-1/2 h-full flex items-center justify-center bg-neutral-900">
                 <div className="max-w-lg text-center px-8">
                   <span className="text-amber-400  font-bodytext-sm uppercase tracking-widest mb-4 block">
-                     {t('new_product.badge')}{''}
+                    {t('new_product.badge')}{''}
                   </span>
                   <h2 className="font-display text-4xl xl:text-5xl font-semibold text-white mb-6">
-                   {t('new_product.title')}{''} 
+                    {t('new_product.title')}{''}
                   </h2>
                   <p className="text-neutral-400 font-body leading-relaxed mb-4 text-base xl:text-lg">
-                      {t('new_product.line1')}{''}
+                    {t('new_product.line1')}{''}
                     {/* <span className="text-amber-400 font-semibold">basic human right</span>. */}
                   </p>
                   <p className="text-amber-500 font-body leading-relaxed mb-4 text-4xl">
                     {t('new_product.line2')}{''}
                   </p>
                   <p className="text-neutral-400  font-bodyleading-relaxed mb-8 text-base xl:text-lg">
-                     {t('new_product.line3')}{' '}
+                    {t('new_product.line3')}{' '}
                     <span className="text-amber-300 font-body">Saffron Kremla</span> and{' '}
                     <span className="text-amber-300 font-body">Jalapeño Cheddar Bread</span>, comes{' '}
                     <em className="font-display text-white text-3xl">Vive La Kremla!!</em>
