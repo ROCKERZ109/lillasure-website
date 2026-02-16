@@ -550,6 +550,53 @@
     "footer_label": "Alla Hjärtans Dag",
     "date_roman": "XIV · II · MMXXVI",
     "price": "121 kr"
+  },
+    "notFound": {
+        "title": "Sidan hittades inte",
+        "description": "Den här sidan verkar ha försvunnit...",
+        "subtitle": "Precis som våra kakor brukar göra!",
+        "homeBtn": "Tillbaka hem",
+        "productsBtn": "Se produkter"
+    
+},
+"change_password": {
+    "title": "Ändra lösenord",
+    "subtitle": "Uppdatera ditt lösenord",
+    "back_alt": "Gå tillbaka"
+  },
+  "order_history": {
+    "title": "Orderhistorik",
+    "total_orders": "{count, plural, =0 {Inga beställningar} =1 {1 beställning totalt} other {# beställningar totalt}}",
+    "filters": {
+      "all": "Alla",
+      "pending": "Väntar",
+      "confirmed": "Bekräftad",
+      "completed": "Slutförd",
+      "cancelled": "Avbruten"
+    },
+    "states": {
+      "loading": "Laddar dina beställningar...",
+      "error": "Kunde inte ladda beställningar",
+      "try_again": "Försök igen",
+      "empty_title": "Inga beställningar än",
+      "empty_subtitle": "Din orderhistorik kommer att visas här",
+      "browse_btn": "Se produkter",
+      "no_filtered_orders": "Inga {status} beställningar"
+    },
+    "details": {
+      "items": "Beställda varor",
+      "total": "Totalt",
+      "pickup_title": "Hämtningsinformation",
+      "pickup_at": "{date} kl {time}",
+      "notes": "Noteringar",
+      "cancel_btn": "Avbryt beställning"
+    },
+    "modal": {
+      "title": "Avbryt beställning?",
+      "description": "Är du säker? Detta kan inte ångras.",
+      "keep_btn": "Behåll beställning",
+      "confirm_btn": "Avbryt"
+    }
   }
 
 

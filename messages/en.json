@@ -543,6 +543,52 @@
     "footer_label": "All Hearts Day",
     "date_roman": "XIV · II · MMXXVI",
     "price": "121 kr"
+  },
+      "notFound": {
+        "title": "Page not found",
+        "description": "Looks like this page got eaten!",
+        "subtitle": "Just like our cookies tend to disappear!",
+        "homeBtn": "Back to Home",
+        "productsBtn": "Browse Products"
+    },
+    "change_password": {
+    "title": "Change Password",
+    "subtitle": "Update your account password",
+    "back_alt": "Go back"
+  },
+  "order_history": {
+    "title": "Order History",
+    "total_orders": "{count, plural, =0 {No orders} =1 {1 total order} other {# total orders}}",
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "states": {
+      "loading": "Loading your orders...",
+      "error": "Failed to load orders",
+      "try_again": "Try Again",
+      "empty_title": "No orders yet",
+      "empty_subtitle": "Your order history will appear here",
+      "browse_btn": "Browse Products",
+      "no_filtered_orders": "No {status} orders"
+    },
+    "details": {
+      "items": "Order Items",
+      "total": "Total",
+      "pickup_title": "Pickup Details",
+      "pickup_at": "{date} at {time}",
+      "notes": "Notes",
+      "cancel_btn": "Cancel Order"
+    },
+    "modal": {
+      "title": "Cancel Order?",
+      "description": "Are you sure? This action cannot be undone.",
+      "keep_btn": "Keep Order",
+      "confirm_btn": "Cancel"
+    }
   }
 }
   

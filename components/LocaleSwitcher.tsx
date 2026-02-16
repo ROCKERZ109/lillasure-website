@@ -3,7 +3,7 @@
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-import { Globe } from "lucide-react";
+
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
@@ -12,7 +12,7 @@ export default function LocaleSwitcher() {
 
   const toggleLanguage = () => {
     const nextLocale = locale === "sv" ? "en" : "sv";
-    
+
     // This replaces the current URL with the new locale
     // while keeping the user on the same page (e.g., /produkter -> /en/produkter)
     router.replace(pathname, { locale: nextLocale });
@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
       )}
       aria-label="Switch language"
     >
-      <Globe className="max-sm:w-3 max-sm:h-3 w-4 h-4" />
+      {locale === "sv" ? (<span >🇬🇧</span>) : (<span >🇸🇪</span>)}
       <span className="max-sm:text-xs text-sm font-body font-medium uppercase tracking-wide">
         {locale === "sv" ? "EN" : "SV"}
       </span>

@@ -151,3 +151,16 @@ export async function getOrdersByDateRange(
     throw new Error("Failed to fetch orders");
   }
 }
+// ✅ Cancel order
+export async function cancelOrder(orderId: string): Promise<void> {
+    try {
+        const orderRef = doc(db, 'test-orders', orderId);
+        await updateDoc(orderRef, {
+            status: 'cancelled',
+            cancelledAt: new Date().toISOString()
+        });
+    } catch (error) {
+        console.error('Error cancelling order:', error);
+        throw error;
+    }
+}

@@ -52,6 +52,7 @@ export interface CartItem {
 // Order types
 export interface Order {
   id?: string;
+  
   items: OrderItem[];
   customer: CustomerInfo;
   pickupDate: string;
@@ -88,8 +89,15 @@ export interface CustomerInfo {
   name: string;
   email: string;
   phone: string;
+  id?: string;
 }
 
+export interface UserData {
+    email: string;
+    name: string;
+    phone: string;
+    uid: string;
+}
 export type OrderStatus = 
   | "pending" 
   | "confirmed" 

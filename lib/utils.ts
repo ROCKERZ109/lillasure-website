@@ -45,9 +45,7 @@ function canOrderForTomorrow(): boolean {
   let currentHour = now.getHours();
   
   const todayClosing = closingHours[currentDay];
-  console.log("date:locale",now,now.toLocaleString())
-  console.log("Today Closing", todayClosing)
-  console.log("currentday",now.toLocaleDateString())
+
   
   // If bakery is closed today, allow ordering
   if (todayClosing === 0) return true;

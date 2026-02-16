@@ -33,6 +33,8 @@ import type { CustomerInfo, OrderItem } from "@/types";
 import { dayLabels, dayLabelsEn, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA } from "@/types";
 import { useTranslations, useLocale } from "next-intl";
 import { strong } from "framer-motion/client";
+import CreateAccount from "@/components/CreateAccount";
+import { userContext } from "@/components/UserContext";
 
 type Step = "cart" | "pickup" | "details" | "confirm";
 
@@ -46,13 +48,17 @@ export default function OrderPage() {
     totalAmount,
   } = useCart();
   const locale = useLocale()
+
   const [currentStep, setCurrentStep] = useState<Step>("cart");
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("");
+  const { user } = userContext();
+  const isLoggedIn = user.name && user.email && user.phone;
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
-    name: "",
-    email: "",
-    phone: "",
+    name: user.name || "",
+    email: user.email || "",
+    phone: user.phone || "",
+
   });
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,18 +72,32 @@ export default function OrderPage() {
 
   const availableDates = getAvailablePickupDates(60);
   const availableTimes = pickupDate ? getAvailablePickupTimes(pickupDate) : [];
-
+  useEffect(() => {
+    if (user.name && user.email) {
+      setCustomerInfo({
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+      });
+    }
+  }, [user]);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep, orderComplete]);
 
   // Defined inside component to use translations
-  const steps: { id: Step; label: string; number: number }[] = [
-    { id: "cart", label: t('steps.cart'), number: 1 },
-    { id: "pickup", label: t('steps.pickup'), number: 2 },
-    { id: "details", label: t('steps.details'), number: 3 },
-    { id: "confirm", label: t('steps.confirm'), number: 4 },
-  ];
+  const steps: { id: Step; label: string; number: number }[] = isLoggedIn
+    ? [
+      { id: "cart", label: t('steps.cart'), number: 1 },
+      { id: "pickup", label: t('steps.pickup'), number: 2 },
+      { id: "confirm", label: t('steps.confirm'), number: 3 },  // ✅ Skip details, renumber
+    ]
+    : [
+      { id: "cart", label: t('steps.cart'), number: 1 },
+      { id: "pickup", label: t('steps.pickup'), number: 2 },
+      { id: "details", label: t('steps.details'), number: 3 },
+      { id: "confirm", label: t('steps.confirm'), number: 4 },
+    ];
 
   const unavailableItems = state.items.filter((item) => {
     if (!pickupDate) return false;
@@ -101,18 +121,19 @@ export default function OrderPage() {
         if (isFettisdagenSelected) return false;
         return pickupDate && pickupTime && !hasAvailabilityConflict;
       case "details":
+        // ✅ If logged in, this step is skipped, but just in case
         return (
           customerInfo.name.trim() &&
           customerInfo.email.includes("@") &&
           customerInfo.phone.trim()
         );
       case "confirm":
-
         return true;
       default:
         return false;
     }
   };
+
 
   const handleNext = () => {
     if (!canProceed()) return;
@@ -137,23 +158,23 @@ export default function OrderPage() {
 
     try {
       const orderItems: OrderItem[] = state.items.map((item) => (
-        
-        item.variantId == null?
-        {
 
-        productId: item.product.id,
-        productName: item.product.nameSv,
-        quantity: item.quantity,
-        price: item.product.price
+        item.variantId == null ?
+          {
 
-      }:{
-          productId: item.product.id,
-        productName: item.product.nameSv,
-        quantity: item.quantity,
-        price: item.product.price,
-        variantId: item.variantId ,
-        variantName: item.variantName
-      }));
+            productId: item.product.id,
+            productName: item.product.nameSv,
+            quantity: item.quantity,
+            price: item.product.price
+
+          } : {
+            productId: item.product.id,
+            productName: item.product.nameSv,
+            quantity: item.quantity,
+            price: item.product.price,
+            variantId: item.variantId,
+            variantName: item.variantName
+          }));
 
       const newOrderId = await createOrder({
         items: orderItems,
@@ -180,7 +201,8 @@ export default function OrderPage() {
   // Order Complete View
   if (orderComplete) {
     return (
-      <section className="min-h-screen pt-44 pb-20 bg-black">
+
+      <section className="min-h-screen pt-44 pb-20 bg-black ">
         <div className="container mx-auto px-6">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -236,6 +258,9 @@ export default function OrderPage() {
 
   return (
     <section className="min-h-screen py-36 pb-20 bg-black">
+      {/* ✅ Only show CreateAccount if NOT logged in */}
+      {!isLoggedIn && <CreateAccount />}
+
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -246,9 +271,18 @@ export default function OrderPage() {
             <p className="text-crust-200">
               {t('header.subtitle')}
             </p>
+
+            {/* ✅ Show logged in user info */}
+            {isLoggedIn && (
+              <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full">
+                <span className="text-amber-500 text-sm font-body">
+                  Ordering as <strong>{user.name}</strong>
+                </span>
+              </div>
+            )}
           </div>
 
-          {/* Progress Steps */}
+          {/* Progress Steps - uses dynamic steps array */}
           <div className="flex items-center justify-between mb-12">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
@@ -285,7 +319,6 @@ export default function OrderPage() {
               </div>
             ))}
           </div>
-
           {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-sm flex items-start gap-3">
@@ -341,7 +374,7 @@ export default function OrderPage() {
                         </div>
                         <div className="grid grid-cols-2  gap-x-5 max-sm:gap-x-0 max-sm:grid-cols-2">
                           <div className="flex flex-col items-center max-sm:-mt-2  max-sm:h-24  "> <button
-                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                            onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.variantId)}
                             className="w-8 h-8 max-sm:w-8 flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors "
                           >
                             <Plus className="w-4 h-4 text-white/70" />
@@ -349,14 +382,14 @@ export default function OrderPage() {
                             <span className="w-8 text-center text-white max-sm:mt-2 max-sm:h-6  flex items-center justify-center">{item.quantity}</span>
 
                             <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              onClick={() => updateQuantity(item.product.id, item.quantity - 1, item.variantId)}
                               className="w-8 h-8 max-sm:w-8   flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors max-sm:mt-2"
                             >
                               <Minus className="w-4 h-4 text-white/70 " />
                             </button></div>
 
                           <button
-                            onClick={() => removeItem(item.product.id)}
+                            onClick={() => removeItem(item.product.id, item.variantId)}
                             className="p-2 text-gray-400 hover:text-red-500 transition-colors max-sm:ml-1 sm:mt-8 max-sm:mt-6"
                           >
                             <Trash2 className="w-4 h-4 max-sm:h-4 -mt-6" />
@@ -479,7 +512,7 @@ export default function OrderPage() {
             )}
 
             {/* Step 3: Details */}
-            {currentStep === "details" && (
+            {currentStep === "details" && !isLoggedIn && (
               <div>
                 <h2 className="font-display text-2xl text-white/80 mb-6">
                   {t('details.title')}
@@ -589,11 +622,18 @@ export default function OrderPage() {
                     </p>
                   </div>
 
-                  {/* Customer Details */}
+                  {/* ✅ Customer Details - Show user info with edit option */}
                   <div className="bg-gray-700 rounded-lg p-4">
-                    <h3 className="font-display text-lg text-white/80 mb-3">
-                      {t('confirm.sections.contact')}
-                    </h3>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-display text-lg text-white/80">
+                        {t('confirm.sections.contact')}
+                      </h3>
+                      {isLoggedIn && (
+                        <span className="text-xs text-amber-500 bg-amber-500/10 px-2 py-1 rounded-full">
+                          From your account
+                        </span>
+                      )}
+                    </div>
                     <dl className="space-y-1 text-sm">
                       <div className="flex gap-2">
                         <dt className="text-gray-400">{t('confirm.labels.name')}</dt>
@@ -616,6 +656,21 @@ export default function OrderPage() {
                     </dl>
                   </div>
 
+                  {/* ✅ Notes field for logged in users */}
+                  {isLoggedIn && (
+                    <div className="bg-gray-700 rounded-lg p-4">
+                      <label className="text-sm font-body text-amber-100 mb-2 block">
+                        {t('details.labels.notes')}
+                      </label>
+                      <textarea
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        placeholder={t('details.placeholders.notes')}
+                        rows={2}
+                        className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 resize-none"
+                      />
+                    </div>
+                  )}
                   <div className="bg-crust-900 border border-crust-200 rounded-lg p-4">
                     <p className="text-sm text-crust-200 font-body">
                       {t.rich('confirm.payment_info', {
