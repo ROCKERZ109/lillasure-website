@@ -235,7 +235,7 @@ export default function OrderPage() {
   }
 
   return (
-    <section className="min-h-screen py-36 pb-20 bg-black">
+    <section className="min-h-screen py-24 pb-20 bg-black">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           {/* Header */}

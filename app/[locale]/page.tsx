@@ -35,7 +35,7 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative py-[3rem] md:py-[9rem] flex items-center justify-center overflow-hidden grain-overlay bg-black">
         {/* Background Gradient */}
-        <div className="absolute inset-0 max-sm:mt-32">
+        <div className="absolute inset-0 max-sm:mt-20">
           <video
             autoPlay
             muted
