@@ -49,10 +49,10 @@
       "description": "Lilla Sur är ett hantverksbageri i Kålltorp som drivs av passionen för riktigt bröd – det bröd som våra förfäder åt."
     },
    "story": {
-  "subtitle": "Att skapa ett arv",
-  "title": "Lilla Surs historia",
-  "p1": "Ett hantverksbageri i hjärtat av Kålltorp. Riktigt bröd. Riktiga människor. Riktig smak. Lilla Sur grundades 2014 av brödentusiasterna Andreas och Tommy och har sedan dess varit en symbol för kvalitet, gemenskap och service. Ett decennium senare tar Beata och Sid Lilla Sur till nya höjder. Samma kvalitet. Samma gemenskap. Mer kärlek. Mer äventyr.",
-  "p2": "Beata har älskat surdegsbröd så länge hon kan minnas. Doften av nybakat tar henne direkt tillbaka till barndomen i Polen. Beata har bott och arbetat i Asien, Europa och USA, och har samlat på sig erfarenheter och smaker från världens alla hörn. Längs vägen mötte hon Sid. Sid har lekt med degar redan innan han lärde sig gå. Ingenjör till yrket och konstnär i själen – Sid byggde bilar på Volvo innan han bestämde sig för att satsa på det han verkligen brinner för. Upp och baka.",
+  "subtitle": "Att skapa ett arv Lilla Surs historia",
+  "title": "",
+  "p1": "Ett hantverksbageri i hjärtat av Kålltorp. Riktigt bröd. Riktiga människor. Riktig smak. <br></br>  Lilla Sur grundades 2014 av brödentusiasterna Andreas och Tommy och har sedan dess varit en symbol för kvalitet, gemenskap och service. <br></br> Ett decennium senare tar Beata och Sid Lilla Sur till nya höjder. Samma kvalitet. Samma gemenskap. Mer kärlek. Mer äventyr.",
+  "p2": "Beata har älskat surdegsbröd så länge hon kan minnas. Doften av nybakat tar henne direkt tillbaka till barndomen i Polen. Beata har bott och arbetat i Asien, Europa och USA, och har samlat på sig erfarenheter och smaker från världens alla hörn. Längs vägen mötte hon Sid.  <br></br> Sid har lekt med degar redan innan han lärde sig gå. Ingenjör till yrket och konstnär i själen – Sid byggde bilar på Volvo innan han bestämde sig för att satsa på det han verkligen brinner för. Upp och baka.",
   "p3": "Tillsammans med ett team av talangfulla bagare lovar Beata och Sid att skämma bort göteborgarna med bröd och bullar av högsta smak och kvalitet. Bakat på Lilla Sur."
 },
     "values": {
@@ -305,6 +305,7 @@
     },
     "pickup": {
       "title": "Välj avhämtning",
+      "tomorrow": "Vi tar emot beställningar för nästa dag fram till kl.",
       "date_label": "Välj datum",
       "time_label": "Välj tid",
       "conflict": {
@@ -513,7 +514,8 @@
     "legend": {
       "selected": "Vald dag",
       "today": "Idag",
-      "closed": "Stängt"
+      "closed": "Stängt",
+      "orderingClosed": "Beställningar stängda"
     }
   }
 ,

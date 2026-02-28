@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { canOrderForTomorrow, cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 
 interface DatePickerProps {
@@ -17,7 +17,7 @@ export default function DatePicker({
   availableDates,
 }: DatePickerProps) {
   const t = useTranslations('date_picker');
-  
+
   const [currentMonth, setCurrentMonth] = useState(() => {
     const today = new Date();
     return new Date(today.getFullYear(), today.getMonth(), 1);
@@ -46,18 +46,22 @@ export default function DatePicker({
   ];
 
   const dayNames = [
-    t('weekdays.mon'), t('weekdays.tue'), t('weekdays.wed'), 
-    t('weekdays.thu'), t('weekdays.fri'), t('weekdays.sat'), 
+    t('weekdays.mon'), t('weekdays.tue'), t('weekdays.wed'),
+    t('weekdays.thu'), t('weekdays.fri'), t('weekdays.sat'),
     t('weekdays.sun')
   ];
 
   const goToPrevMonth = () => {
+  
+    if (new Date().getMonth()  == currentMonth.getMonth() ||new Date().getFullYear() != currentMonth.getFullYear()) {
+      
+      return
+    }
+      console.log("PREVIOUffS MONTH")
     setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1));
   };
 
-  const goToNextMonth = () => {
-    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
-  };
+
 
   const formatDateString = (day: number): string => {
     const year = currentMonth.getFullYear();
@@ -69,6 +73,13 @@ export default function DatePicker({
   const isDateAvailable = (day: number): boolean => {
     const dateStr = formatDateString(day);
     return availableDates.includes(dateStr);
+  };
+
+  const goToNextMonth = () => {
+    if (currentMonth.getMonth() - 2 == new Date().getMonth()) {
+      return
+    }
+    setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1));
   };
 
   const isDateSelected = (day: number): boolean => {
@@ -84,6 +95,15 @@ export default function DatePicker({
       currentMonth.getFullYear() === today.getFullYear()
     );
   };
+  const isTomorrow = (day: number): boolean => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    return (
+      day === tomorrow.getDate() &&
+      currentMonth.getMonth() === tomorrow.getMonth() &&
+      currentMonth.getFullYear() === tomorrow.getFullYear()
+    );
+  };
 
   const handleDateClick = (day: number) => {
     if (isDateAvailable(day)) {
@@ -93,7 +113,7 @@ export default function DatePicker({
 
   // Generate calendar days
   const calendarDays = [];
-  
+
   // Empty cells for days before the first day of month
   for (let i = 0; i < startDay; i++) {
     calendarDays.push(<div key={`empty-${i}`} className="h-10" />);
@@ -105,7 +125,7 @@ export default function DatePicker({
     const selected = isDateSelected(day);
     const today = isToday(day);
     const currentDay = new Date().toISOString().split("T")[0];
-
+    const tomorrow = isTomorrow(day)
     calendarDays.push(
       <button
         key={day}
@@ -118,8 +138,10 @@ export default function DatePicker({
           "flex items-center justify-center mx-auto",
           // Available & not selected
           available && !selected && "hover:bg-gray-700 text-white cursor-pointer",
+          //canOrderForTomorrow
+          !canOrderForTomorrow() && tomorrow && "text-amber-400 cursor-not-allowed",
           // Not available
-          !available && "text-red-400 cursor-not-allowed",
+          !available && !tomorrow && "text-red-400 cursor-not-allowed",
           // Past dates
           formatDateString(day) < currentDay && "text-gray-500 cursor-not-allowed",
           // Today not available
@@ -147,11 +169,11 @@ export default function DatePicker({
         >
           <ChevronLeft className="w-5 h-5 text-crust-600" />
         </button>
-        
+
         <h3 className="font-display text-lg text-white/80">
           {monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}
         </h3>
-        
+
         <button
           type="button"
           onClick={goToNextMonth}
@@ -180,19 +202,32 @@ export default function DatePicker({
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-flour-200">
-        <div className="flex items-center gap-2 text-xs text-crust-200">
-          <div className="w-3 h-3 rounded-full bg-crust-900" />
-          <span>{t('legend.selected')}</span>
+      <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-6 mt-4 pt-4 border-t border-flour-200">
+        {/* Selected */}
+        <div className="flex items-center gap-2">
+          <div className="w-2.5 h-2.5 rounded-full bg-crust-900" />
+          <span className="text-xs text-crust-200">{t('legend.selected')}</span>
         </div>
-        <div className="flex items-center gap-2 text-xs text-crust-200">
-          <div className="w-3 h-3 rounded-full ring-2 ring-wheat-400" />
-          <span>{t('legend.today')}</span>
+
+        {/* Today */}
+        <div className="flex items-center gap-2">
+          <div className="w-2.5 h-2.5 rounded-full ring-2 ring-wheat-400" />
+          <span className="text-xs text-crust-200">{t('legend.today')}</span>
         </div>
-        <div className="flex items-center gap-2 text-xs text-crust-200">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <span>{t('legend.closed')}</span>
+
+        {/* Closed */}
+        <div className="flex items-center gap-2">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+          <span className="text-xs text-crust-200">{t('legend.closed')}</span>
         </div>
+
+        {/* Ordering Closed */}
+        {!canOrderForTomorrow() && (
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+            <span className="text-xs text-crust-200">{t('legend.orderingClosed')}</span>
+          </div>
+        )}
       </div>
     </div>
   );

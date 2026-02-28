@@ -64,7 +64,7 @@ export default function OrderPage() {
   // Check if selected date is Fettisdagen
   const isFettisdagenSelected = pickupDate === FETTISDAGEN_DATE;
 
-  const availableDates = getAvailablePickupDates(60);
+  const availableDates = getAvailablePickupDates(75);
   const availableTimes = pickupDate ? getAvailablePickupTimes(pickupDate) : [];
 
   useEffect(() => {
@@ -137,23 +137,23 @@ export default function OrderPage() {
 
     try {
       const orderItems: OrderItem[] = state.items.map((item) => (
-        
-        item.variantId == null?
-        {
 
-        productId: item.product.id,
-        productName: item.product.nameSv,
-        quantity: item.quantity,
-        price: item.product.price
+        item.variantId == null ?
+          {
 
-      }:{
-          productId: item.product.id,
-        productName: item.product.nameSv,
-        quantity: item.quantity,
-        price: item.product.price,
-        variantId: item.variantId ,
-        variantName: item.variantName
-      }));
+            productId: item.product.id,
+            productName: item.product.nameSv,
+            quantity: item.quantity,
+            price: item.product.price
+
+          } : {
+            productId: item.product.id,
+            productName: item.product.nameSv,
+            quantity: item.quantity,
+            price: item.product.price,
+            variantId: item.variantId,
+            variantName: item.variantName
+          }));
 
       const newOrderId = await createOrder({
         items: orderItems,
@@ -341,7 +341,7 @@ export default function OrderPage() {
                         </div>
                         <div className="grid grid-cols-2  gap-x-5 max-sm:gap-x-0 max-sm:grid-cols-2">
                           <div className="flex flex-col items-center max-sm:-mt-2  max-sm:h-24  "> <button
-                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                            onClick={() => updateQuantity(item.product.id, item.quantity + 1, item.variantId)}
                             className="w-8 h-8 max-sm:w-8 flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors "
                           >
                             <Plus className="w-4 h-4 text-white/70" />
@@ -349,7 +349,7 @@ export default function OrderPage() {
                             <span className="w-8 text-center text-white max-sm:mt-2 max-sm:h-6  flex items-center justify-center">{item.quantity}</span>
 
                             <button
-                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                              onClick={() => updateQuantity(item.product.id, item.quantity - 1, item.variantId)}
                               className="w-8 h-8 max-sm:w-8   flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-600 transition-colors max-sm:mt-2"
                             >
                               <Minus className="w-4 h-4 text-white/70 " />
@@ -373,10 +373,12 @@ export default function OrderPage() {
             {/* Step 2: Pickup */}
             {currentStep === "pickup" && (
               <div>
-                <h2 className="font-display text-2xl text-white/80 mb-6">
+                <h2 className="font-display text-xl text-white/80 mb-2">
                   {t('pickup.title')}
                 </h2>
-
+                <h3 className="font-display text-md text-crust-600 mb-3">
+                  {t('pickup.tomorrow')} { (new Date().getDay() == 6 || new Date().getDay() == 7 ) ? " 14.00": "16.00"}
+                </h3>
                 <div className="space-y-6">
                   {/* Date Selection */}
                   <div>

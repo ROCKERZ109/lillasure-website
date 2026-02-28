@@ -117,9 +117,22 @@ export default function AboutPage() {
                 </h2>
               </div>
               <div className="space-y-4 text-crust-200 leading-relaxed max-sm:text-center font-body">
-                <p>{t('story.p1')}</p>
-                <p>{t('story.p2')}</p>
-                <p>{t('story.p3')}</p>
+                <p>
+                  {t.rich('story.p1', {
+                    br: () => <br />
+                  })}
+                </p>
+                <p>
+                  {t.rich('story.p2', {
+                    br: () => <br />
+                  })}
+                </p>
+                <p>
+                  {t.rich('story.p3', {
+                    br: () => <br/>
+                  })}
+                </p>
+
               </div>
             </div>
           </div>

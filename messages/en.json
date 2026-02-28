@@ -48,10 +48,10 @@
       "description": "Lilla Sur is a craft bakery in Kålltorp driven by a passion for real bread – the kind of bread our ancestors ate."
     },
     "story": {
-      "subtitle": "Creating a legacy",
-      "title": "Lilla Sur's story",
-      "p1": "A craft bakery in the heart of Kålltorp. Real bread. Real people. Real taste. Lilla Sur was founded in 2014 by bread enthusiasts Andreas and Tommy and has since been a symbol of quality, community, and service. A decade later, Beata and Sid are taking Lilla Sur to new heights. Same quality. Same community. More love. More adventure.",
-      "p2": "Beata has loved sourdough bread for as long as she can remember. The smell of freshly baked sourdough takes her right back to her childhood days in Poland. Beata has lived and worked in Asia, Europe, and the USA, gathering experiences and flavors from all corners of the world. Along the way, she met Sid. Sid has been playing with dough even before he learned to walk. An engineer by craft and an artist at heart, Sid built cars at Volvo before deciding to pursue what he is truly passionate about. Wake and bake.",
+      "subtitle": "Creating a legacy Lilla Sur's story",
+      "title": "",
+      "p1": "A craft bakery in the heart of Kålltorp. Real bread. Real people. Real taste. <br></br> Lilla Sur was founded in 2014 by bread enthusiasts Andreas and Tommy and has since been a symbol of quality, community, and service. <br></br> A decade later, Beata and Sid are taking Lilla Sur to new heights. Same quality. Same community. More love. More adventure.",
+      "p2": "Beata has loved sourdough bread for as long as she can remember. The smell of freshly baked sourdough takes her right back to her childhood days in Poland. Beata has lived and worked in Asia, Europe, and the USA, gathering experiences and flavors from all corners of the world. Along the way, she met Sid.  <br></br>Sid has been playing with dough even before he learned to walk. An engineer by craft and an artist at heart, Sid built cars at Volvo before deciding to pursue what he is truly passionate about. Wake and bake.",
       "p3": "Together with a team of talented bakers, Beata and Sid promise to pamper the people of Gothenburg with bread and buns of the highest taste and quality. Baked at Lilla Sur."
     },
     "values": {
@@ -298,6 +298,7 @@
     },
     "pickup": {
       "title": "Choose Pickup",
+      "tomorrow":"We accept orders for the next day until",
       "date_label": "Choose Date",
       "time_label": "Choose Time",
       "conflict": {
@@ -507,7 +508,8 @@
     "legend": {
       "selected": "Selected",
       "today": "Today",
-      "closed": "Closed"
+      "closed": "Closed",
+      "orderingClosed": "Ordering closed"
     }
   },
   "fettisdagen_popup": {

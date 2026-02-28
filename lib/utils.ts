@@ -39,15 +39,13 @@ const closingHours: Record<number, number> = {
 const ORDER_CUTOFF_HOURS = 2;
 
 // Check if ordering for tomorrow is still allowed
-function canOrderForTomorrow(): boolean {
+export function canOrderForTomorrow(): boolean {
   const now = new Date();
   const currentDay = now.getDay();
   let currentHour = now.getHours();
   
   const todayClosing = closingHours[currentDay];
-  console.log("date:locale",now,now.toLocaleString())
-  console.log("Today Closing", todayClosing)
-  console.log("currentday",now.toLocaleDateString())
+ 
   
   // If bakery is closed today, allow ordering
   if (todayClosing === 0) return true;
@@ -58,7 +56,7 @@ function canOrderForTomorrow(): boolean {
 }
 
 // Generate available pickup dates (excluding Sundays and Mondays, with cutoff logic)
-export function getAvailablePickupDates(daysAhead: number = 60): string[] {
+export function getAvailablePickupDates(daysAhead: number = 90): string[] {
   const dates: string[] = [];
   const today = new Date();
   const canOrderTomorrow = canOrderForTomorrow();

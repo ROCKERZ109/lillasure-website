@@ -15,7 +15,8 @@ const firebaseConfig = {
  const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
 // const functions = getFunctions(app);
-// const db = getFirestore(app)
+
 // connectFirestoreEmulator(db, "127.0.0.1", 8080);
+// connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 // console.log(db)
 export { app, db };
