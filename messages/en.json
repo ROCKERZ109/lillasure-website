@@ -5,6 +5,25 @@
       "description": "Place your order online and pick up your freshly baked bread in the store. We bake to order so that your bread is always as fresh as possible.",
       "title": "Order for pickup"
     },
+    "easter": {
+      "badge": "Special Hours",
+      "title": "Easter Opening Hours",
+      "description": "Join us this Easter for freshly baked goods! Here are our special holiday hours.",
+      "days": {
+        "thursday": "Maundy Thursday",
+        "friday": "Good Friday",
+        "saturday": "Holy Saturday",
+        "sunday": "Easter Sunday",
+        "monday": "Easter Monday"
+      },
+      "times": {
+       "thursday": "08:00 - 18:00",
+        "friday": "08:00 - 18:00",
+        "saturday": "08:00 - 16:00",
+        "sunday": "08:00 - 16:00",
+        "monday": "Stängt"
+      }
+    },
    "new_product": {
   "cta": "Order now",
   "title": "God rested. We bake.",
@@ -547,4 +566,3 @@
     "price": "121 kr"
   }
 }
-  

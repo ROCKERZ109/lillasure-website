@@ -5,6 +5,25 @@
       "description": "Lägg din beställning online och hämta ditt nybakade bröd i butiken. Vi bakar på beställning så att ditt bröd alltid är så färskt som möjligt.",
       "title": "Beställ till avhämtning"
     },
+    "easter": {
+      "badge": "Avvikande öppettider",
+      "title": "Öppettider i Påsk",
+      "description": "Välkommen in i påsk för nybakat bröd och fika! Här är våra öppettider under storhelgen.",
+      "days": {
+        "thursday": "Skärtorsdag",
+        "friday": "Långfredag",
+        "saturday": "Påskafton",
+        "sunday": "Påskdagen",
+        "monday": "Annandag påsk"
+      },
+      "times": {
+        "thursday": "08:00 - 18:00",
+        "friday": "08:00 - 18:00",
+        "saturday": "08:00 - 16:00",
+        "sunday": "08:00 - 16:00",
+        "monday": "Stängt"
+      }
+    },
     "new_product": {
   "cta": "Beställ nu",
   "title": "Gud vilade. Vi bakar.",
@@ -274,7 +293,7 @@
       "payment_note": "<strong>Obs!</strong> Betalning sker vid avhämtning i butiken.",
       "back_home": "Tillbaka till startsidan"
     },
-   
+
 
   "banner": {
     "approaching": "Fettisdagen närmar sig!",
@@ -282,7 +301,7 @@
     "countdown_one": "Fettisdagen om {days} dag!",
     "cta": "Förbeställ din Kremla nu →",
     "close": "Stäng banner"
-  
+
 }
   }
 ,
@@ -480,7 +499,7 @@
    "LocaleSwitcher": {
     "label": "Ändra språk",
     "locale": "{locale, välj, sv {Svenska} en {Engelska}"
-  
+
   }
 ,
   "date_picker": {
