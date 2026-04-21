@@ -94,60 +94,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <ValentineBanner />
-
-      {/* --- EASTER SECTION START --- */}
-      <section className="py-12 bg-black">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="relative rounded-3xl overflow-hidden border border-amber-500/20 bg-neutral-900/40 backdrop-blur-md p-8 md:p-12 text-center group transition-transform duration-500 hover:scale-[1.01]">
-
-            {/* Secsy Background Glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-40 bg-amber-500/10 blur-[100px] rounded-full pointer-events-none transition-opacity duration-500 group-hover:bg-amber-500/20" />
-
-            <div className="relative z-10 flex flex-col items-center">
-              <div className="flex items-center gap-2 mb-4">
-                <Egg className="w-5 h-5 text-amber-400" />
-                <span className="text-amber-400 font-body text-sm uppercase tracking-widest block">
-                  {t('easter.badge')}
-                </span>
-                <Egg className="w-5 h-5 text-amber-400" />
-              </div>
-
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">
-                {t('easter.title')}
-              </h2>
-              <p className="text-neutral-300 font-body leading-relaxed mb-10 max-w-lg mx-auto text-sm sm:text-base">
-                {t('easter.description')}
-              </p>
-
-              {/* Schedule Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-4xl text-left">
-                {easterDays.map((day, index) => {
-                  const time = t(`easter.times.${day}`);
-                  const isClosed = time.toLowerCase().includes('stängt') || time.toLowerCase().includes('closed');
-
-                  return (
-                    <div
-                      key={day}
-                      className={`flex flex-col sm:flex-row sm:justify-between items-start sm:items-center bg-black/50 p-5 rounded-2xl border border-white/5 transition-colors duration-300 hover:border-amber-500/30 hover:bg-black/70 ${index === 4 ? 'md:col-span-2 lg:col-span-1' : ''}`}
-                    >
-                      <span className="text-neutral-200 font-display text-lg mb-1 sm:mb-0">
-                        {t(`easter.days.${day}`)}
-                      </span>
-                      <span className={`font-body font-medium px-3 py-1 rounded-full text-sm ${isClosed ? 'bg-red-500/10 text-red-400' : 'bg-amber-500/10 text-amber-300'}`}>
-                        {time}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-      {/* --- EASTER SECTION END --- */}
+2
 
       <section className="py-10 bg-black transition-transform duration-500 hover:scale-95">
         <div className="mx-auto px-6">
@@ -177,12 +124,12 @@ export default function HomePage() {
                   </p>
                   <p className="text-neutral-200 font-body leading-relaxed mb-8 text-base xl:text-lg">
                     {t('new_product.line3')}{' '}
-                    <span className="text-amber-300 font-body ">Saffron Kremla</span> and{' '}
-                    <span className="text-amber-300 font-body ">Jalapeño Cheddar Bread</span>, comes{' '}
+                    <span className="text-amber-300 font-body ">Saffron Kremla</span> {t('new_product.and')}{' '}
+                    <span className="text-amber-300 font-body ">Jalapeño Cheddar Bread</span>, {t('new_product.comes')}{' '}
                     <br />
                     <em className="font-display text-white max-sm:text-2xl text-3xl">Vive La Kremla!!</em>
                     <br />
-                    <span className="text-neutral-200 text-sm">Made only on Sundays!</span>
+                    <span className="text-neutral-200 text-sm">{t('new_product.tagline')}</span>
                   </p>
                 </div>
               </div>
@@ -207,11 +154,11 @@ export default function HomePage() {
                   </p>
                   <p className="text-neutral-400  font-bodyleading-relaxed mb-8 text-base xl:text-lg">
                     {t('new_product.line3')}{' '}
-                    <span className="text-amber-300 font-body">Saffron Kremla</span> and{' '}
-                    <span className="text-amber-300 font-body">Jalapeño Cheddar Bread</span>, comes{' '}
+                    <span className="text-amber-300 font-body">Saffron Kremla</span> {t('new_product.and')}{' '}
+                    <span className="text-amber-300 font-body">Jalapeño Cheddar Bread</span>, {t('new_product.comes')}{' '}
                     <em className="font-display text-white text-3xl">Vive La Kremla!!</em>
                     <br />
-                    <span className="text-neutral-500 text-sm font-body">Made only on Sundays!</span>
+                    <span className="text-neutral-500 text-sm font-body">{t('new_product.tagline')}</span>
                   </p>
                 </div>
               </div>
