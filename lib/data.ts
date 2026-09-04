@@ -3,7 +3,7 @@ import type { Product, StoreHours } from "@/types";
 
 export const products: Product[] = [
   // Breads
- 
+
   {
     id: "ragbrod",
     name: "Dark Rye Bread",
@@ -45,7 +45,7 @@ export const products: Product[] = [
     weight: "600g",
   },
 
-  
+
   // Pastries
   {
     id: "kanelbulle",
@@ -85,25 +85,25 @@ export const products: Product[] = [
     available: true,
     allergens: ["gluten", "dairy", "eggs", "almonds"],
   }
- 
+
 ];
 
 export const storeHours: StoreHours[] = [
   { day: "Måndag", open: "", close: "", closed: true },
-  { day: "Tisdag", open: "08:00", close: "18:00" },
-  { day: "Onsdag", open: "08:00", close: "18:00" },
-  { day: "Torsdag", open: "08:00", close: "18:00" },
-  { day: "Fredag", open: "08:00", close: "18:00" },
+  { day: "Tisdag", open: "07:00", close: "18:00" },
+  { day: "Onsdag", open: "07:00", close: "18:00" },
+  { day: "Torsdag", open: "07:00", close: "18:00" },
+  { day: "Fredag", open: "07:00", close: "18:00" },
   { day: "Lördag", open: "08:00", close: "16:00" },
   { day: "Söndag", open: "08:00", close: "16:00" },
 ];
 
 export const storeHoursEn: StoreHours[] = [
   { day: "Monday", open: "", close: "", closed: true },
-  { day: "Tuesday", open: "08:00", close: "18:00" },
-  { day: "Wednesday", open: "08:00", close: "18:00" },
-  { day: "Thursday", open: "08:00", close: "18:00" },
-  { day: "Friday", open: "08:00", close: "18:00" },
+  { day: "Tuesday", open: "07:00", close: "18:00" },
+  { day: "Wednesday", open: "07:00", close: "18:00" },
+  { day: "Thursday", open: "07:00", close: "18:00" },
+  { day: "Friday", open: "07:00", close: "18:00" },
   { day: "Saturday", open: "08:00", close: "16:00" },
   { day: "Sunday", open: "08:00", close: "16:00" },
 ];

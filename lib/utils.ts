@@ -43,10 +43,10 @@ export function canOrderForTomorrow(): boolean {
   const now = new Date();
   const currentDay = now.getDay();
   let currentHour = now.getHours();
-  
+
   const todayClosing = closingHours[currentDay];
- 
-  
+
+
   // If bakery is closed today, allow ordering
   if (todayClosing === 0) return true;
 
@@ -61,13 +61,13 @@ export function getAvailablePickupDates(daysAhead: number = 90): string[] {
   const today = new Date();
   const canOrderTomorrow = canOrderForTomorrow();
 
-  
+
   for (let i = 1; i <= daysAhead; i++) {
    let date = new Date(today);
 date.setDate(today.getDate() + i);
 
 // 1. Get the Day of Week (0-6) reliably
-const dayOfWeek = date.getDay(); 
+const dayOfWeek = date.getDay();
     // Skip  Monday (1) - bakery is closed
     if (dayOfWeek !== 1) {
       // Skip tomorrow if past cutoff time
@@ -77,7 +77,7 @@ const dayOfWeek = date.getDay();
       dates.push(date.toISOString().split("T")[0]);
     }
   }
-  
+
   return dates;
 }
 
@@ -89,7 +89,7 @@ export function getAvailablePickupTimes(dateString: string): string[] {
   // const now = new Date();
   if ((date.getMonth()== 1) && (date.getDate()== 17)) return ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
   const satSun =  ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00"];
-  const weekDays = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
+  const weekDays = ["07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
   // Different hours for weekdays vs weekends
   if (dayOfWeek === 6 || dayOfWeek === 0) {
     //  if(now.toLocaleDateString() == date.toLocaleDateString()){
@@ -99,8 +99,8 @@ export function getAvailablePickupTimes(dateString: string): string[] {
     //     console.log(today)
     //       return today;
     // }
-    
-    
+
+
     // Saturday/Sunday: 08:00-16:00
 
     return satSun;
@@ -122,14 +122,14 @@ export function getOrderCutoffInfo(): { cutoffTime: string; canOrderTomorrow: bo
   const now = new Date();
   const currentDay = now.getDay();
   const todayClosing = closingHours[currentDay];
-  
+
   if (todayClosing === 0) {
     return { cutoffTime: "Stängt idag", canOrderTomorrow: true };
   }
-  
+
   const cutoffHour = todayClosing - ORDER_CUTOFF_HOURS;
   const cutoffTime = `${cutoffHour.toString().padStart(2, "0")}:00`;
-  
+
   return {
     cutoffTime,
     canOrderTomorrow: now.getHours() < cutoffHour,
