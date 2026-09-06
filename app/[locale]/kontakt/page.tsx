@@ -126,11 +126,11 @@ export default function ContactPage() {
                   )) : storeHoursEn.map((hours) => (
                     <li
                       key={hours.day}
-                      className="flex justify-between text-sm"
+                       className="flex justify-between py-2 border-b border-flour-200 last:border-0"
                     >
-                      <span className="text-flour-400">{hours.day}</span>
+                      <span className="text-crust-200">{hours.day}</span>
                       <span className={hours.closed ? "text-white"   : "text-white/80 font-medium"}>
-                        {hours.closed ? t('info.closed') : `${hours.open} - ${hours.close}`}
+                        {hours.closed ? t('info.closed') : `${hours.open} – ${hours.close}`}
                       </span>
                     </li>
                   ))}
