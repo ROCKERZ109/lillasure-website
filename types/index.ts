@@ -26,27 +26,27 @@ export interface Product {
   variants?: ProductVariant[];
 }
 
-export type ProductCategory = 
-  | "bread" 
-  | "pastry" 
-  | "cookie" 
-  | "other" 
+export type ProductCategory =
+  | "bread"
+  | "pastry"
+  | "cookie"
+  | "other"
   | "seasonal";
 
-export type DayOfWeek = 
+export type DayOfWeek =
   | "monday"
-  | "tuesday" 
-  | "wednesday" 
-  | "thursday" 
-  | "friday" 
-  | "saturday" 
+  | "tuesday"
+  | "wednesday"
+  | "thursday"
+  | "friday"
+  | "saturday"
   | "sunday";
 
 export interface CartItem {
   product: Product;
   quantity: number;
-   variantId?: string;      
-  variantName?: string;    
+  variantId?: string;
+  variantName?: string;
 }
 
 // Order types
@@ -61,7 +61,7 @@ export interface Order {
   createdAt: Date;
   notes?: string;
   locale: string;
-  
+
   // NEW: Flag for Fettisdagen orders
   isFettisdagenOrder?: boolean;
 }
@@ -72,7 +72,7 @@ export interface OrderItem {
   quantity: number;
   price: number;
   variantId?: string;      // ✅ NEW
-  variantName?: string;  
+  variantName?: string;
 }
 
 export type ProductVariant = {
@@ -90,11 +90,11 @@ export interface CustomerInfo {
   phone: string;
 }
 
-export type OrderStatus = 
-  | "pending" 
-  | "confirmed" 
-  | "ready" 
-  | "completed" 
+export type OrderStatus =
+  | "pending"
+  | "confirmed"
+  | "ready"
+  | "completed"
   | "cancelled";
 
 // Store hours
@@ -127,5 +127,10 @@ export const dayLabelsEn: Record<DayOfWeek, string> = {
 };
 
 // Fettisdagen date (update yearly)
-export const FETTISDAGEN_DATE = "2026-02-17"; 
+export const FETTISDAGEN_DATE = "2026-02-17";
 export const FETTISDAGEN_MIN_KREMLA = 20;
+
+export const KANELBULLENS_DAY_START = "2026-10-02";
+export const KANELBULLENS_DAY_END = "2026-10-05";
+export const KANELBULLENS_DAY_MIN_BUNS = 10;
+export const KANELBULLENS_DAY_CUTOFF = "18:00";

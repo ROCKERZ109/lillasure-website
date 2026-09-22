@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/types";
 import Shimmer from "@/components/Shimmer";
 import { useTranslations } from "next-intl";
-import ValentineBanner from "@/components/ValentinesBanner";
+import KanelbullensBanner from "@/components/KanelbullensBanner";
 
 export default function HomePage() {
   const t = useTranslations('home');
@@ -96,87 +96,7 @@ export default function HomePage() {
       </section>
 2
 
-      <section className="py-10 bg-black transition-transform duration-500 hover:scale-95">
-        <div className="mx-auto px-6">
-          {/* Container */}
-          <div className="relative h-[27rem] sm:h-[32rem] xl:h-[29rem] rounded-3xl overflow-hidden">
-            {/* Mobile/Tablet: Centered overlay layout */}
-            <div className="xl:hidden absolute inset-0">
-              <img
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                src="/images/ghibli.png"
-                alt="Vive La Kremla"
-              />
-              <div className="absolute inset-0 bg-gray-900/70" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="max-w-xl mx-auto text-center px-6">
-                  <span className="text-amber-400 text-sm uppercase tracking-widest mb-3 block">
-                    {t('new_product.badge')}{''}
-                  </span>
-                  <h2 className="font-display text-2xl sm:text-4xl font-bold text-white mb-4">
-                    {t('new_product.title')}{''}
-                  </h2>
-                  <p className="text-neutral-300 font-body leading-relaxed mb-6 text-sm sm:text-base">
-                    {t('new_product.line1')}{''}
-                  </p>
-                  <p className="text-amber-500 font-body leading-relaxed mb-4 text-2xl">
-                    {t('new_product.line2')}{''}
-                  </p>
-                  <p className="text-neutral-200 font-body leading-relaxed mb-8 text-base xl:text-lg">
-                    {t('new_product.line3')}{' '}
-                    <span className="text-amber-300 font-body ">Saffron Kremla</span> {t('new_product.and')}{' '}
-                    <span className="text-amber-300 font-body ">Jalapeño Cheddar Bread</span>, {t('new_product.comes')}{' '}
-                    <br />
-                    <em className="font-display text-white max-sm:text-2xl text-3xl">Vive La Kremla!!</em>
-                    <br />
-                    <span className="text-neutral-200 text-sm">{t('new_product.tagline')}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop: Side by side layout (Text LEFT, Image RIGHT) */}
-            <div className="hidden xl:flex h-full ">
-              {/* Left: Content */}
-              <div className="w-1/2 h-full flex items-center justify-center bg-neutral-900">
-                <div className="max-w-lg text-center px-8">
-                  <span className="text-amber-400  font-bodytext-sm uppercase tracking-widest mb-4 block">
-                    {t('new_product.badge')}{''}
-                  </span>
-                  <h2 className="font-display text-4xl xl:text-5xl font-semibold text-white mb-6">
-                    {t('new_product.title')}{''}
-                  </h2>
-                  <p className="text-neutral-400 font-body leading-relaxed mb-4 text-base xl:text-lg">
-                    {t('new_product.line1')}{''}
-                  </p>
-                  <p className="text-amber-500 font-body leading-relaxed mb-4 text-4xl">
-                    {t('new_product.line2')}{''}
-                  </p>
-                  <p className="text-neutral-400  font-bodyleading-relaxed mb-8 text-base xl:text-lg">
-                    {t('new_product.line3')}{' '}
-                    <span className="text-amber-300 font-body">Saffron Kremla</span> {t('new_product.and')}{' '}
-                    <span className="text-amber-300 font-body">Jalapeño Cheddar Bread</span>, {t('new_product.comes')}{' '}
-                    <em className="font-display text-white text-3xl">Vive La Kremla!!</em>
-                    <br />
-                    <span className="text-neutral-500 text-sm font-body">{t('new_product.tagline')}</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Right: Image */}
-              <div className="w-1/2 h-full relative">
-                <img
-                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                  src="/images/ghibli.png"
-                  alt="Vive La Kremla"
-                />
-                <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-neutral-900 to-transparent" />
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      <KanelbullensBanner />
 
       {/* Featured Products */}
       <section className="py-10 bg-black">

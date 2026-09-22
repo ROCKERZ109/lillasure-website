@@ -30,7 +30,7 @@ import {
 } from "@/lib/utils";
 import { createOrder } from "@/lib/orders";
 import type { CustomerInfo, OrderItem } from "@/types";
-import { dayLabels, dayLabelsEn, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA } from "@/types";
+import { dayLabels, dayLabelsEn, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA, KANELBULLENS_DAY_END, KANELBULLENS_DAY_MIN_BUNS, KANELBULLENS_DAY_START } from "@/types";
 import { useTranslations, useLocale } from "next-intl";
 import { strong } from "framer-motion/client";
 
@@ -79,9 +79,58 @@ export default function OrderPage() {
     { id: "confirm", label: t('steps.confirm'), number: 4 },
   ];
 
+  const isKanelbullensDayCampaign = pickupDate >= KANELBULLENS_DAY_START && pickupDate <= KANELBULLENS_DAY_END;
+  const normalizeProductName = (value: string) => value
+      .trim()
+      .toLocaleLowerCase("sv-SE")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\/|_-]+/g, " ")
+      .replace(/\s+/g, " ");
+
+  const getProductNames = (product: typeof state.items[number]["product"]) => [
+    normalizeProductName(product.nameSv),
+    normalizeProductName(product.name),
+  ];
+
+  const isKanelbulle = (product: typeof state.items[number]["product"]) =>
+    getProductNames(product).some((name) => ["kanelbulle", "cinnamon bun"].includes(name));
+
+  const isCampaignProduct = (product: typeof state.items[number]["product"]) => {
+    const productNames = getProductNames(product);
+    const allowedNames = new Set([
+      "sesamfralla",
+      "sesam fralla",
+      "sesamefralla",
+      "sesame roll",
+      "lilla sur original",
+      "lillasuroriginal",
+      "kremla",
+      "grotta",
+      "hallon mandel grotta",
+      "hallonmandelgrotta",
+      "raspberry almond grotta",
+      "raspberryalmondgrotta",
+      "cookie",
+      "choklad chip cookie",
+      "chokladchipcookie",
+      "chocolate chip cookie",
+      "chocolatechipcookie",
+    ]);
+
+    return isKanelbulle(product) || productNames.some((name) => allowedNames.has(name));
+  };
+
   const unavailableItems = state.items.filter((item) => {
     if (!pickupDate) return false;
     const selectedDay = getDayOfWeek(pickupDate);
+
+    if (isKanelbullensDayCampaign) {
+      const isMondayCampaign = pickupDate === KANELBULLENS_DAY_END;
+      const isAllowed = isMondayCampaign ? isKanelbulle(item.product) : isCampaignProduct(item.product);
+
+      return !isAllowed;
+    }
 
     // If availableDays is empty/undefined, it's available every day
     if (!item.product.availableDays || item.product.availableDays.length === 0) {
@@ -91,6 +140,12 @@ export default function OrderPage() {
   });
 
   const hasAvailabilityConflict = unavailableItems.length > 0;
+  const campaignBunCount = state.items.reduce(
+      (total, item) => total + (isKanelbulle(item.product) ? item.quantity : 0),
+    0
+  );
+  const hasCampaignMinimumConflict = isKanelbullensDayCampaign && campaignBunCount < KANELBULLENS_DAY_MIN_BUNS;
+  const hasCampaignProductConflict = isKanelbullensDayCampaign && unavailableItems.length > 0;
   const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
 
   const canProceed = () => {
@@ -99,7 +154,7 @@ export default function OrderPage() {
         return state.items.length > 0;
       case "pickup":
         if (isFettisdagenSelected) return false;
-        return pickupDate && pickupTime && !hasAvailabilityConflict;
+        return pickupDate && pickupTime && !hasAvailabilityConflict && !hasCampaignMinimumConflict;
       case "details":
         return (
           customerInfo.name.trim() &&
@@ -131,6 +186,10 @@ export default function OrderPage() {
 
   const handleSubmitOrder = async () => {
     if (!canProceed()) return;
+    if (hasCampaignProductConflict || hasCampaignMinimumConflict) {
+      setError(t('errors.campaign_invalid'));
+      return;
+    }
     setIsSubmitting(true);
     setPrice(totalAmount)
     setError("");
@@ -246,6 +305,7 @@ export default function OrderPage() {
             <p className="text-crust-200">
               {t('header.subtitle')}
             </p>
+            <p className="mt-3 text-sm text-amber-300">{t('pickup.kanelbullens_day.notice')}</p>
           </div>
 
           {/* Progress Steps */}
@@ -404,10 +464,12 @@ export default function OrderPage() {
                         </div>
                         <div className="flex-1">
                           <h3 className="text-red-200 font-semibold mb-1 font-body max-sm:text-sm" >
-                            {t('pickup.conflict.title')}
+                            {isKanelbullensDayCampaign ? t('pickup.campaign_conflict.title') : t('pickup.conflict.title')}
                           </h3>
                           <p className="text-sm text-red-300/80 mb-3 font-body max-sm:text-xs">
-                            {t('pickup.conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })}
+                            {isKanelbullensDayCampaign
+                              ? t('pickup.campaign_conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })
+                              : t('pickup.conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })}
                           </p>
                           <ul className="space-y-1">
                             {unavailableItems.map((item) => (
@@ -418,10 +480,16 @@ export default function OrderPage() {
                             ))}
                           </ul>
                           <p className="text-xs text-red-400/60 mt-4 italic font-body max-sm:text-xs">
-                            {t('pickup.conflict.tip')}
+                            {isKanelbullensDayCampaign ? t('pickup.campaign_conflict.tip') : t('pickup.conflict.tip')}
                           </p>
                         </div>
                       </div>
+                    </div>
+                  )}
+
+                  {pickupDate && isKanelbullensDayCampaign && hasCampaignMinimumConflict && (
+                    <div className="rounded-xl border border-amber-500/50 bg-amber-950/30 p-4 text-sm text-amber-200">
+                      {t('pickup.kanelbullens_day.minimum_error', { count: KANELBULLENS_DAY_MIN_BUNS })}
                     </div>
                   )}
 

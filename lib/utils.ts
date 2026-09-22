@@ -1,4 +1,4 @@
-import { DayOfWeek } from "@/types";
+import { DayOfWeek, KANELBULLENS_DAY_END, KANELBULLENS_DAY_START } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -69,9 +69,12 @@ date.setDate(today.getDate() + i);
 // 1. Get the Day of Week (0-6) reliably
 const dayOfWeek = date.getDay();
     // Skip  Monday (1) - bakery is closed
-    if (dayOfWeek !== 1) {
+    const dateString = date.toISOString().split("T")[0];
+    const isKanelbullensDayMonday = dateString === KANELBULLENS_DAY_END;
+    if (dayOfWeek !== 1 || isKanelbullensDayMonday) {
       // Skip tomorrow if past cutoff time
-      if (i === 1 && !canOrderTomorrow) {
+      const campaignCutoffPassed = isCampaignDate(dateString) && new Date().getHours() >= 18;
+      if (i === 1 && (!canOrderTomorrow || campaignCutoffPassed)) {
         continue;
       }
       dates.push(date.toISOString().split("T")[0]);
@@ -79,6 +82,10 @@ const dayOfWeek = date.getDay();
   }
 
   return dates;
+}
+
+function isCampaignDate(dateString: string): boolean {
+  return dateString >= KANELBULLENS_DAY_START && dateString <= KANELBULLENS_DAY_END;
 }
 
 // Generate available pickup times
@@ -89,8 +96,13 @@ export function getAvailablePickupTimes(dateString: string): string[] {
   // const now = new Date();
   if ((date.getMonth()== 1) && (date.getDate()== 17)) return ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
   const satSun =  ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00"];
+  const campaignMonday = ["08:00", "09:00", "10:00", "11:00", "12:00"];
   const weekDays = ["07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
   // Different hours for weekdays vs weekends
+  if (isCampaignDate(dateString)) {
+    if (dateString === KANELBULLENS_DAY_END) return campaignMonday;
+    return satSun;
+  }
   if (dayOfWeek === 6 || dayOfWeek === 0) {
     //  if(now.toLocaleDateString() == date.toLocaleDateString()){
     //     let today = [];

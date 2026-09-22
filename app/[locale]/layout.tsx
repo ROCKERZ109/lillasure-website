@@ -23,7 +23,7 @@ const century = localFont({
   variable: '--font-century'
 })
 const lato = Lato({
-  
+
   subsets: ["latin"],
   weight: ["300", "400", "700"],
   variable: "--font-lato",
@@ -85,7 +85,7 @@ export default async function LocaleLayout({
             <Header />
 
             <FettisdagenPopup />
-            <main className="flex-1 ">{children}</main>
+            <main className="flex-1 pt-14 md:pt-16">{children}</main>
 
             <Footer />
           </CartProvider>

@@ -6,7 +6,7 @@ import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "./CartContext";
 import CartDrawer from "./CartDrawer";
 import { cn } from "@/lib/utils";
-import FettisdagenBanner from "./FettisdagenBanner";
+import KanelbullensBanner from "./KanelbullensBanner";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
 
@@ -45,8 +45,8 @@ export default function Header() {
       >
         <div className="container mx-auto px-6">
           <nav className="flex items-center justify-between">
-            {/* Logo 
-            
+            {/* Logo
+
              ><div className="grid grid-cols-2 grid-rows-1 ">
                 <img
                   src="/images/logo-white.png"
@@ -64,7 +64,7 @@ export default function Header() {
         A 100,100 -> Radius X, Radius Y (Jitna bada number, utna flat curve)
         0 0,0     -> Rotation and Flags (Standard curve settings)
         250,150   -> End point (Right side, middle height)
-        
+
         Isse ek "U" shape ya "Bowl" shape banti hai jo circle ke neeche fit hoti hai.
       */}
                   <path
@@ -154,7 +154,7 @@ export default function Header() {
           </div>
         </div>
 
-        <FettisdagenBanner />
+        <KanelbullensBanner compact />
 
       </header>
 

@@ -173,7 +173,7 @@
       "items": {
         "corporate": {
           "question": "Kan jag beställa till företagsevent?",
-          "answer": "Absolut! Vi tar emot större beställningar för företag, fester och evenemang. Kontakta oss via email minst en vecka i förväg så hjälper vi dig."
+          "answer": "Absolut! Under Kanelbullens dag kostar kanelbullar 32 kr/st även vid större beställningar. Kontakta oss minst en vecka i förväg för företagsevent och större upplägg."
         },
         "gluten": {
           "question": "Har ni glutenfria alternativ?",
@@ -185,7 +185,7 @@
         },
         "reserve": {
           "question": "Kan jag reservera bröd?",
-          "answer": "Ja! Använd vår online-beställning. Vi rekommenderar att beställa minst en dag i förväg, särskilt för helger."
+          "answer": "Ja! Använd vår online-beställning senast kl. 18:00 dagen före avhämtning, särskilt för helger."
         },
         "closed_days": {
           "question": "Varför är butiken stängd söndag och måndag?",
@@ -334,10 +334,19 @@
         "description": "Följande produkter bakas inte på {day}ar:",
         "tip": "Tips: Ändra datum eller gå tillbaka till varukorgen för att ta bort dessa produkter."
       },
+      "campaign_conflict": {
+        "title": "Produkter utanför Kanelbullens dag-sortimentet",
+        "description": "Följande produkter kan inte beställas för {day} under kampanjen:",
+        "tip": "Ta bort produkterna från varukorgen för att fortsätta. 2–4 oktober gäller kampanjsortimentet. Den 5 oktober kan du endast beställa kanelbullar."
+      },
       "fettisdagen": {
         "title": "Fettisdagen - Endast Kremla!",
         "description": "På Fettisdagen ({date}) kan du endast beställa Kremla/kremlor, med en minsta beställning på {count} stycken.",
         "btn": "Beställ Kremla här"
+      },
+      "kanelbullens_day": {
+        "minimum_error": "För Kanelbullens dag måste beställningen innehålla minst {count} kanelbullar. Du kan samtidigt beställa andra produkter.",
+        "notice": "Förbeställ senast kl. 18:00 dagen före avhämtning."
       }
     },
     "details": {
@@ -391,7 +400,8 @@
       "total_label": "Totalt"
     },
     "errors": {
-      "submit_failed": "Det gick inte att skicka beställningen. Kontrollera att du har internetanslutning och försök igen."
+      "submit_failed": "Det gick inte att skicka beställningen. Kontrollera att du har internetanslutning och försök igen.",
+      "campaign_invalid": "Kontrollera kampanjdatumet: 2–4 oktober gäller endast kampanjsortimentet och 5 oktober endast kanelbullar, minst 10 st."
     }
   }
 ,
@@ -553,6 +563,19 @@
     "from": "Från",
     "add_to_cart": "Lägg i varukorgen",
     "select_variant": "Välj ett alternativ"
+  },
+  "kanelbullens_day": {
+    "badge": "Kanelbullens dag 2026",
+    "title": "Förbeställ kanelbullar till Kanelbullens dag",
+    "subtitle": "Fira med nybakade kanelbullar från Lilla Sur. Hämtning fredag 2 oktober till måndag 5 oktober.",
+    "dates": "2–5 oktober 2026",
+    "cutoff": "Beställ senast kl. 18:00 dagen före",
+    "cutoff_details": "Fredag 2/10: torsdag 1/10 kl. 18:00 · Lördag 3/10: fredag 2/10 kl. 18:00 · Söndag 4/10: lördag 3/10 kl. 18:00 · Måndag 5/10: söndag 4/10 kl. 18:00.",
+    "minimum": "Minst 10 kanelbullar",
+    "pricing": "32 kr/st oavsett antal. Företags- och bulkbeställningar följer samma pris och bokas senast en vecka i förväg.",
+    "cta": "Förbeställ kanelbullar",
+    "image_alt": "Nybakad kanelbulle",
+    "close": "Stäng kampanjbanner"
   },
   "valentine": {
     "badge": "Begränsad Upplaga",
