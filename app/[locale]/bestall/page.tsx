@@ -30,11 +30,9 @@ import {
 } from "@/lib/utils";
 import { createOrder } from "@/lib/orders";
 import type { CustomerInfo, OrderItem } from "@/types";
-import { dayLabels, dayLabelsEn, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA } from "@/types";
+import { dayLabels, dayLabelsEn, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA, KANELBULLENS_DAY_END, KANELBULLENS_DAY_MIN_BUNS, KANELBULLENS_DAY_START } from "@/types";
 import { useTranslations, useLocale } from "next-intl";
 import { strong } from "framer-motion/client";
-import CreateAccount from "@/components/CreateAccount";
-import { userContext } from "@/components/UserContext";
 
 type Step = "cart" | "pickup" | "details" | "confirm";
 
@@ -48,17 +46,13 @@ export default function OrderPage() {
     totalAmount,
   } = useCart();
   const locale = useLocale()
-
   const [currentStep, setCurrentStep] = useState<Step>("cart");
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("");
-  const { user } = userContext();
-  const isLoggedIn = user.name && user.email && user.phone;
   const [customerInfo, setCustomerInfo] = useState<CustomerInfo>({
-    name: user.name || "",
-    email: user.email || "",
-    phone: user.phone || "",
-
+    name: "",
+    email: "",
+    phone: "",
   });
   const [notes, setNotes] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,38 +64,73 @@ export default function OrderPage() {
   // Check if selected date is Fettisdagen
   const isFettisdagenSelected = pickupDate === FETTISDAGEN_DATE;
 
-  const availableDates = getAvailablePickupDates(60);
+  const availableDates = getAvailablePickupDates(75);
   const availableTimes = pickupDate ? getAvailablePickupTimes(pickupDate) : [];
-  useEffect(() => {
-    if (user.name && user.email) {
-      setCustomerInfo({
-        name: user.name,
-        email: user.email,
-        phone: user.phone,
-      });
-    }
-  }, [user]);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep, orderComplete]);
 
   // Defined inside component to use translations
-  const steps: { id: Step; label: string; number: number }[] = isLoggedIn
-    ? [
-      { id: "cart", label: t('steps.cart'), number: 1 },
-      { id: "pickup", label: t('steps.pickup'), number: 2 },
-      { id: "confirm", label: t('steps.confirm'), number: 3 },  // ✅ Skip details, renumber
-    ]
-    : [
-      { id: "cart", label: t('steps.cart'), number: 1 },
-      { id: "pickup", label: t('steps.pickup'), number: 2 },
-      { id: "details", label: t('steps.details'), number: 3 },
-      { id: "confirm", label: t('steps.confirm'), number: 4 },
-    ];
+  const steps: { id: Step; label: string; number: number }[] = [
+    { id: "cart", label: t('steps.cart'), number: 1 },
+    { id: "pickup", label: t('steps.pickup'), number: 2 },
+    { id: "details", label: t('steps.details'), number: 3 },
+    { id: "confirm", label: t('steps.confirm'), number: 4 },
+  ];
+
+  const isKanelbullensDayCampaign = pickupDate >= KANELBULLENS_DAY_START && pickupDate <= KANELBULLENS_DAY_END;
+  const normalizeProductName = (value: string) => value
+      .trim()
+      .toLocaleLowerCase("sv-SE")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[\/|_-]+/g, " ")
+      .replace(/\s+/g, " ");
+
+  const getProductNames = (product: typeof state.items[number]["product"]) => [
+    normalizeProductName(product.nameSv),
+    normalizeProductName(product.name),
+  ];
+
+  const isKanelbulle = (product: typeof state.items[number]["product"]) =>
+    getProductNames(product).some((name) => ["kanelbulle", "cinnamon bun"].includes(name));
+
+  const isCampaignProduct = (product: typeof state.items[number]["product"]) => {
+    const productNames = getProductNames(product);
+    const allowedNames = new Set([
+      "sesamfralla",
+      "sesam fralla",
+      "sesamefralla",
+      "sesame roll",
+      "lilla sur original",
+      "lillasuroriginal",
+      "kremla",
+      "grotta",
+      "hallon mandel grotta",
+      "hallonmandelgrotta",
+      "raspberry almond grotta",
+      "raspberryalmondgrotta",
+      "cookie",
+      "choklad chip cookie",
+      "chokladchipcookie",
+      "chocolate chip cookie",
+      "chocolatechipcookie",
+    ]);
+
+    return isKanelbulle(product) || productNames.some((name) => allowedNames.has(name));
+  };
 
   const unavailableItems = state.items.filter((item) => {
     if (!pickupDate) return false;
     const selectedDay = getDayOfWeek(pickupDate);
+
+    if (isKanelbullensDayCampaign) {
+      const isMondayCampaign = pickupDate === KANELBULLENS_DAY_END;
+      const isAllowed = isMondayCampaign ? isKanelbulle(item.product) : isCampaignProduct(item.product);
+
+      return !isAllowed;
+    }
 
     // If availableDays is empty/undefined, it's available every day
     if (!item.product.availableDays || item.product.availableDays.length === 0) {
@@ -111,6 +140,12 @@ export default function OrderPage() {
   });
 
   const hasAvailabilityConflict = unavailableItems.length > 0;
+  const campaignBunCount = state.items.reduce(
+      (total, item) => total + (isKanelbulle(item.product) ? item.quantity : 0),
+    0
+  );
+  const hasCampaignMinimumConflict = isKanelbullensDayCampaign && campaignBunCount < KANELBULLENS_DAY_MIN_BUNS;
+  const hasCampaignProductConflict = isKanelbullensDayCampaign && unavailableItems.length > 0;
   const currentStepIndex = steps.findIndex((s) => s.id === currentStep);
 
   const canProceed = () => {
@@ -119,21 +154,20 @@ export default function OrderPage() {
         return state.items.length > 0;
       case "pickup":
         if (isFettisdagenSelected) return false;
-        return pickupDate && pickupTime && !hasAvailabilityConflict;
+        return pickupDate && pickupTime && !hasAvailabilityConflict && !hasCampaignMinimumConflict;
       case "details":
-        // ✅ If logged in, this step is skipped, but just in case
         return (
           customerInfo.name.trim() &&
           customerInfo.email.includes("@") &&
           customerInfo.phone.trim()
         );
       case "confirm":
+
         return true;
       default:
         return false;
     }
   };
-
 
   const handleNext = () => {
     if (!canProceed()) return;
@@ -152,6 +186,10 @@ export default function OrderPage() {
 
   const handleSubmitOrder = async () => {
     if (!canProceed()) return;
+    if (hasCampaignProductConflict || hasCampaignMinimumConflict) {
+      setError(t('errors.campaign_invalid'));
+      return;
+    }
     setIsSubmitting(true);
     setPrice(totalAmount)
     setError("");
@@ -201,8 +239,7 @@ export default function OrderPage() {
   // Order Complete View
   if (orderComplete) {
     return (
-
-      <section className="min-h-screen pt-44 pb-20 bg-black ">
+      <section className="min-h-screen pt-44 pb-20 bg-black">
         <div className="container mx-auto px-6">
           <div className="max-w-lg mx-auto text-center">
             <div className="w-20 h-20 mx-auto mb-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -257,10 +294,7 @@ export default function OrderPage() {
   }
 
   return (
-    <section className="min-h-screen py-36 pb-20 bg-black">
-      {/* ✅ Only show CreateAccount if NOT logged in */}
-      {!isLoggedIn && <CreateAccount />}
-
+    <section className="min-h-screen py-24 pb-20 bg-black">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -271,18 +305,10 @@ export default function OrderPage() {
             <p className="text-crust-200">
               {t('header.subtitle')}
             </p>
-
-            {/* ✅ Show logged in user info */}
-            {isLoggedIn && (
-              <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full">
-                <span className="text-amber-500 text-sm font-body">
-                  Ordering as <strong>{user.name}</strong>
-                </span>
-              </div>
-            )}
+            <p className="mt-3 text-sm text-amber-300">{t('pickup.kanelbullens_day.notice')}</p>
           </div>
 
-          {/* Progress Steps - uses dynamic steps array */}
+          {/* Progress Steps */}
           <div className="flex items-center justify-between mb-12">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
@@ -319,6 +345,7 @@ export default function OrderPage() {
               </div>
             ))}
           </div>
+
           {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-sm flex items-start gap-3">
@@ -389,7 +416,7 @@ export default function OrderPage() {
                             </button></div>
 
                           <button
-                            onClick={() => removeItem(item.product.id, item.variantId)}
+                            onClick={() => removeItem(item.product.id)}
                             className="p-2 text-gray-400 hover:text-red-500 transition-colors max-sm:ml-1 sm:mt-8 max-sm:mt-6"
                           >
                             <Trash2 className="w-4 h-4 max-sm:h-4 -mt-6" />
@@ -406,10 +433,12 @@ export default function OrderPage() {
             {/* Step 2: Pickup */}
             {currentStep === "pickup" && (
               <div>
-                <h2 className="font-display text-2xl text-white/80 mb-6">
+                <h2 className="font-display text-xl text-white/80 mb-2">
                   {t('pickup.title')}
                 </h2>
-
+                <h3 className="font-display text-md text-crust-600 mb-3">
+                  {t('pickup.tomorrow')} { (new Date().getDay() == 6 || new Date().getDay() == 7 ) ? " 14.00": "16.00"}
+                </h3>
                 <div className="space-y-6">
                   {/* Date Selection */}
                   <div>
@@ -435,10 +464,12 @@ export default function OrderPage() {
                         </div>
                         <div className="flex-1">
                           <h3 className="text-red-200 font-semibold mb-1 font-body max-sm:text-sm" >
-                            {t('pickup.conflict.title')}
+                            {isKanelbullensDayCampaign ? t('pickup.campaign_conflict.title') : t('pickup.conflict.title')}
                           </h3>
                           <p className="text-sm text-red-300/80 mb-3 font-body max-sm:text-xs">
-                            {t('pickup.conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })}
+                            {isKanelbullensDayCampaign
+                              ? t('pickup.campaign_conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })
+                              : t('pickup.conflict.description', { day: locale == "sv" ? dayLabels[getDayOfWeek(pickupDate)] : dayLabelsEn[getDayOfWeek(pickupDate)] })}
                           </p>
                           <ul className="space-y-1">
                             {unavailableItems.map((item) => (
@@ -449,10 +480,16 @@ export default function OrderPage() {
                             ))}
                           </ul>
                           <p className="text-xs text-red-400/60 mt-4 italic font-body max-sm:text-xs">
-                            {t('pickup.conflict.tip')}
+                            {isKanelbullensDayCampaign ? t('pickup.campaign_conflict.tip') : t('pickup.conflict.tip')}
                           </p>
                         </div>
                       </div>
+                    </div>
+                  )}
+
+                  {pickupDate && isKanelbullensDayCampaign && hasCampaignMinimumConflict && (
+                    <div className="rounded-xl border border-amber-500/50 bg-amber-950/30 p-4 text-sm text-amber-200">
+                      {t('pickup.kanelbullens_day.minimum_error', { count: KANELBULLENS_DAY_MIN_BUNS })}
                     </div>
                   )}
 
@@ -512,7 +549,7 @@ export default function OrderPage() {
             )}
 
             {/* Step 3: Details */}
-            {currentStep === "details" && !isLoggedIn && (
+            {currentStep === "details" && (
               <div>
                 <h2 className="font-display text-2xl text-white/80 mb-6">
                   {t('details.title')}
@@ -622,18 +659,11 @@ export default function OrderPage() {
                     </p>
                   </div>
 
-                  {/* ✅ Customer Details - Show user info with edit option */}
+                  {/* Customer Details */}
                   <div className="bg-gray-700 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-display text-lg text-white/80">
-                        {t('confirm.sections.contact')}
-                      </h3>
-                      {isLoggedIn && (
-                        <span className="text-xs text-amber-500 bg-amber-500/10 px-2 py-1 rounded-full">
-                          From your account
-                        </span>
-                      )}
-                    </div>
+                    <h3 className="font-display text-lg text-white/80 mb-3">
+                      {t('confirm.sections.contact')}
+                    </h3>
                     <dl className="space-y-1 text-sm">
                       <div className="flex gap-2">
                         <dt className="text-gray-400">{t('confirm.labels.name')}</dt>
@@ -656,21 +686,6 @@ export default function OrderPage() {
                     </dl>
                   </div>
 
-                  {/* ✅ Notes field for logged in users */}
-                  {isLoggedIn && (
-                    <div className="bg-gray-700 rounded-lg p-4">
-                      <label className="text-sm font-body text-amber-100 mb-2 block">
-                        {t('details.labels.notes')}
-                      </label>
-                      <textarea
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                        placeholder={t('details.placeholders.notes')}
-                        rows={2}
-                        className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-amber-500 resize-none"
-                      />
-                    </div>
-                  )}
                   <div className="bg-crust-900 border border-crust-200 rounded-lg p-4">
                     <p className="text-sm text-crust-200 font-body">
                       {t.rich('confirm.payment_info', {

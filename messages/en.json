@@ -150,7 +150,7 @@
       "items": {
         "corporate": {
           "question": "Can I order for corporate events?",
-          "answer": "Absolutely! We accept larger orders for companies, parties, and events. Contact us via email at least one week in advance and we will help you."
+          "answer": "Absolutely! During Kanelbullens dag, cinnamon buns are 32 SEK each, including larger orders. Contact us at least one week in advance for corporate events and larger arrangements."
         },
         "gluten": {
           "question": "Do you have gluten-free options?",
@@ -162,7 +162,7 @@
         },
         "reserve": {
           "question": "Can I reserve bread?",
-          "answer": "Yes! Use our online ordering. We recommend ordering at least one day in advance, especially for weekends."
+          "answer": "Yes! Use our online ordering by 18:00 the day before pickup, especially for weekends."
         },
         "closed_days": {
           "question": "Why is the shop closed Sunday and Monday?",
@@ -305,10 +305,19 @@
         "description": "The following products are not baked on {day}s:",
         "tip": "Tip: Change date or go back to the cart to remove these products."
       },
+      "campaign_conflict": {
+        "title": "Products outside the Kanelbullens dag range",
+        "description": "The following products cannot be ordered for {day} during the campaign:",
+        "tip": "Remove these products from your cart to continue. The campaign range applies 2–4 October. On 5 October, only cinnamon buns can be ordered."
+      },
       "fettisdagen": {
         "title": "Fettisdagen - Kremla Only!",
         "description": "On Fettisdagen ({date}) you can only order Kremla/Kremlas, with a minimum order of {count} pieces.",
         "btn": "Order Kremla here"
+      },
+      "kanelbullens_day": {
+        "minimum_error": "For Kanelbullens dag, the order must contain at least {count} cinnamon buns. You can still add other products.",
+        "notice": "Pre-order by 18:00 the day before pickup."
       }
     },
     "details": {
@@ -362,7 +371,8 @@
       "total_label": "Total"
     },
     "errors": {
-      "submit_failed": "Could not submit the order. Please check your internet connection and try again."
+      "submit_failed": "Could not submit the order. Please check your internet connection and try again.",
+      "campaign_invalid": "Check the campaign date: 2–4 October allows only the campaign range, and 5 October allows only cinnamon buns, with a minimum of 10."
     }
   },
   "product_card": {
@@ -523,6 +533,19 @@
     "from": "From",
     "add_to_cart": "Add to cart",
     "select_variant": "Select an option"
+  },
+  "kanelbullens_day": {
+    "badge": "Kanelbullens dag 2026",
+    "title": "Pre-order cinnamon buns for Kanelbullens dag",
+    "subtitle": "Celebrate with freshly baked cinnamon buns from Lilla Sur. Pickup Friday 2 October through Monday 5 October.",
+    "dates": "2–5 October 2026",
+    "cutoff": "Order by 18:00 the day before",
+    "cutoff_details": "Friday 2 Oct: Thursday 1 Oct at 18:00 · Saturday 3 Oct: Friday 2 Oct at 18:00 · Sunday 4 Oct: Saturday 3 Oct at 18:00 · Monday 5 Oct: Sunday 4 Oct at 18:00.",
+    "minimum": "Minimum 10 cinnamon buns",
+    "pricing": "32 SEK each at every quantity. Corporate and bulk orders use the same price and should be booked at least one week in advance.",
+    "cta": "Pre-order cinnamon buns",
+    "image_alt": "Freshly baked cinnamon bun",
+    "close": "Close campaign banner"
   },
   "valentine": {
     "badge": "Limited Edition",

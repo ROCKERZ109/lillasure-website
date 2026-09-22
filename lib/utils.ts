@@ -1,4 +1,4 @@
-import { DayOfWeek } from "@/types";
+import { DayOfWeek, KANELBULLENS_DAY_END, KANELBULLENS_DAY_START } from "@/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -39,14 +39,14 @@ const closingHours: Record<number, number> = {
 const ORDER_CUTOFF_HOURS = 2;
 
 // Check if ordering for tomorrow is still allowed
-function canOrderForTomorrow(): boolean {
+export function canOrderForTomorrow(): boolean {
   const now = new Date();
   const currentDay = now.getDay();
   let currentHour = now.getHours();
-  
+
   const todayClosing = closingHours[currentDay];
 
-  
+
   // If bakery is closed today, allow ordering
   if (todayClosing === 0) return true;
 
@@ -56,29 +56,36 @@ function canOrderForTomorrow(): boolean {
 }
 
 // Generate available pickup dates (excluding Sundays and Mondays, with cutoff logic)
-export function getAvailablePickupDates(daysAhead: number = 60): string[] {
+export function getAvailablePickupDates(daysAhead: number = 90): string[] {
   const dates: string[] = [];
   const today = new Date();
   const canOrderTomorrow = canOrderForTomorrow();
 
-  
+
   for (let i = 1; i <= daysAhead; i++) {
    let date = new Date(today);
 date.setDate(today.getDate() + i);
 
 // 1. Get the Day of Week (0-6) reliably
-const dayOfWeek = date.getDay(); 
+const dayOfWeek = date.getDay();
     // Skip  Monday (1) - bakery is closed
-    if (dayOfWeek !== 1) {
+    const dateString = date.toISOString().split("T")[0];
+    const isKanelbullensDayMonday = dateString === KANELBULLENS_DAY_END;
+    if (dayOfWeek !== 1 || isKanelbullensDayMonday) {
       // Skip tomorrow if past cutoff time
-      if (i === 1 && !canOrderTomorrow) {
+      const campaignCutoffPassed = isCampaignDate(dateString) && new Date().getHours() >= 18;
+      if (i === 1 && (!canOrderTomorrow || campaignCutoffPassed)) {
         continue;
       }
       dates.push(date.toISOString().split("T")[0]);
     }
   }
-  
+
   return dates;
+}
+
+function isCampaignDate(dateString: string): boolean {
+  return dateString >= KANELBULLENS_DAY_START && dateString <= KANELBULLENS_DAY_END;
 }
 
 // Generate available pickup times
@@ -89,8 +96,13 @@ export function getAvailablePickupTimes(dateString: string): string[] {
   // const now = new Date();
   if ((date.getMonth()== 1) && (date.getDate()== 17)) return ["07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
   const satSun =  ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00","16:00"];
-  const weekDays = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
+  const campaignMonday = ["08:00", "09:00", "10:00", "11:00", "12:00"];
+  const weekDays = ["07:00","08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00","18:00"];
   // Different hours for weekdays vs weekends
+  if (isCampaignDate(dateString)) {
+    if (dateString === KANELBULLENS_DAY_END) return campaignMonday;
+    return satSun;
+  }
   if (dayOfWeek === 6 || dayOfWeek === 0) {
     //  if(now.toLocaleDateString() == date.toLocaleDateString()){
     //     let today = [];
@@ -99,8 +111,8 @@ export function getAvailablePickupTimes(dateString: string): string[] {
     //     console.log(today)
     //       return today;
     // }
-    
-    
+
+
     // Saturday/Sunday: 08:00-16:00
 
     return satSun;
@@ -122,14 +134,14 @@ export function getOrderCutoffInfo(): { cutoffTime: string; canOrderTomorrow: bo
   const now = new Date();
   const currentDay = now.getDay();
   const todayClosing = closingHours[currentDay];
-  
+
   if (todayClosing === 0) {
     return { cutoffTime: "Stängt idag", canOrderTomorrow: true };
   }
-  
+
   const cutoffHour = todayClosing - ORDER_CUTOFF_HOURS;
   const cutoffTime = `${cutoffHour.toString().padStart(2, "0")}:00`;
-  
+
   return {
     cutoffTime,
     canOrderTomorrow: now.getHours() < cutoffHour,

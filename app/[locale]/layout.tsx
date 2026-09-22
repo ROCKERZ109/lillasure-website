@@ -11,7 +11,6 @@ import { notFound } from "next/navigation";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import FettisdagenPopup from "@/components/FettisdagenPopup";
 import localFont from 'next/font/local'
-import { UserProvider } from "@/components/UserContext";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -78,21 +77,18 @@ export default async function LocaleLayout({
   // FETCH MESSAGES - This is what was likely missing!
   const messages = await getMessages();
   return (
-    <html lang={locale} translate="no" className={`${cormorant.variable} ${lato.variable} ${century.variable}`}>
+    <html lang={locale}  translate="no" className={`${cormorant.variable} ${lato.variable} ${century.variable}`}>
 
       <body className="min-h-screen flex flex-col ">
-
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <UserProvider>
-            <CartProvider>
-              <Header />
+          <CartProvider>
+            <Header />
 
-              {/* <FettisdagenPopup /> */}
-              <main className="flex-1 ">{children}</main>
+            <FettisdagenPopup />
+            <main className="flex-1 pt-14 md:pt-16">{children}</main>
 
-              <Footer />
-            </CartProvider>
-          </UserProvider>
+            <Footer />
+          </CartProvider>
         </NextIntlClientProvider>
       </body>
     </html>
