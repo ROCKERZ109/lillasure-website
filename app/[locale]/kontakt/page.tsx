@@ -38,7 +38,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-36 pb-16 bg-black">
+      <section className="pt-24 pb-16 bg-black">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <span className="text-sm font-body tracking-[0.3em] uppercase text-white/80 mb-4 block mt-10">
@@ -126,11 +126,11 @@ export default function ContactPage() {
                   )) : storeHoursEn.map((hours) => (
                     <li
                       key={hours.day}
-                      className="flex justify-between text-sm"
+                       className="flex justify-between py-2 border-b border-flour-200 last:border-0"
                     >
-                      <span className="text-flour-400">{hours.day}</span>
+                      <span className="text-crust-200">{hours.day}</span>
                       <span className={hours.closed ? "text-white"   : "text-white/80 font-medium"}>
-                        {hours.closed ? t('info.closed') : `${hours.open} - ${hours.close}`}
+                        {hours.closed ? t('info.closed') : `${hours.open} – ${hours.close}`}
                       </span>
                     </li>
                   ))}

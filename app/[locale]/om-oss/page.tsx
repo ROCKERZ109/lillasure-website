@@ -73,7 +73,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-36 pb-20 bg-black">
+      <section className="pt-24 pb-20 bg-black">
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <span className="text-sm font-body tracking-[0.3em] uppercase text-white/80 mb-4 block text-center mt-10">
@@ -117,9 +117,22 @@ export default function AboutPage() {
                 </h2>
               </div>
               <div className="space-y-4 text-crust-200 leading-relaxed max-sm:text-center font-body">
-                <p>{t('story.p1')}</p>
-                <p>{t('story.p2')}</p>
-                <p>{t('story.p3')}</p>
+                <p>
+                  {t.rich('story.p1', {
+                    br: () => <br />
+                  })}
+                </p>
+                <p>
+                  {t.rich('story.p2', {
+                    br: () => <br />
+                  })}
+                </p>
+                <p>
+                  {t.rich('story.p3', {
+                    br: () => <br/>
+                  })}
+                </p>
+
               </div>
             </div>
           </div>

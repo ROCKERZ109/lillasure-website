@@ -126,9 +126,9 @@ export default function ProductCard({ product, featured, showAvailableDays }: Pr
 
           <p
             className={cn(
-              "text-crust-200 leading-relaxed mb-4 font-body",
+              "text-crust-200 leading-relaxed mb-4 font-body overflow-auto",
               featured ? "text-base" : "text-sm",
-              !featured && "line-clamp-2"
+              !featured 
             )}
           >
             {locale === "sv" ? product.descriptionSv : product.description}
