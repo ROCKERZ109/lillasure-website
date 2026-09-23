@@ -339,7 +339,7 @@
       },
       "kanelbullens_day": {
         "minimum_error": "For Kanelbullens dag, the order must contain at least {count} cinnamon buns. You can still add other products.",
-        "notice": "Pre-order by 18:00 the day before pickup."
+        "notice": "Kanelbullens dag, 2–5 October: minimum 10 cinnamon buns and pre-order by 18:00 the day before pickup."
       }
     },
     "details": {

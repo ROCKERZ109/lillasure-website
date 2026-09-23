@@ -346,7 +346,7 @@
       },
       "kanelbullens_day": {
         "minimum_error": "För Kanelbullens dag måste beställningen innehålla minst {count} kanelbullar. Du kan samtidigt beställa andra produkter.",
-        "notice": "Förbeställ senast kl. 18:00 dagen före avhämtning."
+        "notice": "Kanelbullens dag 2–5 oktober: minst 10 kanelbullar och förbeställning senast kl. 18:00 dagen före avhämtning."
       }
     },
     "details": {
