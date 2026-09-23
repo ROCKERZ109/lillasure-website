@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useEffect, useRef, useState } from "react";
+import { SetStateAction, Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import {
@@ -38,7 +38,7 @@ import { strong } from "framer-motion/client";
 
 type Step = "cart" | "pickup" | "details" | "confirm";
 
-export default function OrderPage() {
+function OrderPageContent() {
   const t = useTranslations('order');
   const {
     state,
@@ -791,5 +791,13 @@ export default function OrderPage() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function OrderPage() {
+  return (
+    <Suspense fallback={null}>
+      <OrderPageContent />
+    </Suspense>
   );
 }

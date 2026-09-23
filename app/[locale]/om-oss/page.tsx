@@ -81,7 +81,7 @@ export default function AboutPage() {
             </span>
             <h1 className="font-display text-5xl md:text-6xl font-semibold text-white mb-8 text-center leading-tight">
               {t('hero.title_line1')}
-              <br />
+              <span className="block" />
               {t('hero.title_line2')}
             </h1>
             <p className="text-xl text-crust-200 leading-relaxed text-center max-w-2xl mx-auto font-body">
@@ -119,17 +119,17 @@ export default function AboutPage() {
               <div className="space-y-4 text-crust-200 leading-relaxed max-sm:text-center font-body">
                 <p>
                   {t.rich('story.p1', {
-                    br: () => <br />
+                    br: () => <span className="block" />
                   })}
                 </p>
                 <p>
                   {t.rich('story.p2', {
-                    br: () => <br />
+                    br: () => <span className="block" />
                   })}
                 </p>
                 <p>
                   {t.rich('story.p3', {
-                    br: () => <br/>
+                    br: () => <span className="block" />
                   })}
                 </p>
 

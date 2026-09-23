@@ -76,9 +76,9 @@ export default function ContactPage() {
                 </div>
                 <address className="not-italic text-crust-200 leading-relaxed mb-4">
                   {bakeryInfo.address.street}
-                  <br />
+                  <span className="block" />
                   {bakeryInfo.address.postalCode} {bakeryInfo.address.city}
-                  <br />
+                  <span className="block" />
                   {bakeryInfo.address.country}
                 </address>
                 <a

@@ -38,7 +38,7 @@ export default function Footer() {
         A 100,100 -> Radius X, Radius Y (Jitna bada number, utna flat curve)
         0 0,0     -> Rotation and Flags (Standard curve settings)
         250,150   -> End point (Right side, middle height)
-        
+
         Isse ek "U" shape ya "Bowl" shape banti hai jo circle ke neeche fit hoti hai.
       */}
                   <path
@@ -136,9 +136,9 @@ export default function Footer() {
             </h3>
             <address className="not-italic text-sm text-flour-300 leading-relaxed mb-4">
               {bakeryInfo.address.street}
-              <br />
+              <span className="block" />
               {bakeryInfo.address.postalCode} {bakeryInfo.address.city}
-              <br />
+              <span className="block" />
               {bakeryInfo.address.country}
             </address>
             <a

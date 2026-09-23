@@ -59,7 +59,7 @@ export default function HomePage() {
             {/* Main Heading */}
             <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold text-white leading-[0.9] tracking-tight mb-6 animate-slide-up">
               {t('hero.title_prefix')}
-              <br />
+              <span className="block" />
               <span className="text-white/80">{t('hero.title_suffix')}</span>
             </h1>
 
