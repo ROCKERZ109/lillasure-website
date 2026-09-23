@@ -94,7 +94,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-2
 
       <KanelbullensBanner />
 
@@ -177,6 +176,9 @@ export default function HomePage() {
                   <p className="text-neutral-300 leading-relaxed mb-10 text-sm sm:text-base">
                     {t('about.description')}
                   </p>
+                  <p className="mb-6 text-sm font-semibold text-amber-300 sm:text-base">
+                    {t('about.kanelbullens_cutoff')}
+                  </p>
                   <Link href="/produkter" className="btn-primary text-sm h-11 sm:h-14 sm:text-lg">
                     {t('about.cta')}
                   </Link>
@@ -207,6 +209,9 @@ export default function HomePage() {
                   </h2>
                   <p className="text-neutral-400 leading-relaxed mb-10 text-base xl:text-lg">
                     {t('about.description')}
+                  </p>
+                  <p className="mb-6 text-base font-semibold text-amber-300">
+                    {t('about.kanelbullens_cutoff')}
                   </p>
                   <Link href="/produkter" className="btn-primary text-lg h-14">
                     {t('about.cta')}

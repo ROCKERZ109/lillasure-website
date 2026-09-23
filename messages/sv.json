@@ -3,7 +3,8 @@
     "about": {
       "cta": "Beställ nu",
       "description": "Lägg din beställning online och hämta ditt nybakade bröd i butiken. Vi bakar på beställning så att ditt bröd alltid är så färskt som möjligt.",
-      "title": "Beställ till avhämtning"
+    "title": "Beställ till avhämtning",
+    "kanelbullens_cutoff": "För Kanelbullens dag: förbeställ senast kl. 18:00 dagen före avhämtning."
     },
     "easter": {
       "badge": "Avvikande öppettider",
