@@ -17,7 +17,7 @@ export default function KanelbullensBanner({ compact = false }: { compact?: bool
     return (
       <div className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-100">
         <div className="container relative z-10 mx-auto px-10 py-2.5">
-          <Link href="/produkter" className="flex items-center justify-center gap-3 text-center">
+          <Link href="/bestall?kanelbulle=1" className="flex items-center justify-center gap-3 text-center">
             <img src="/images/cinnamon.jpg" className="hidden h-10 w-10 rounded-full object-cover sm:block" alt="" />
             <span>
               <span className="block font-display text-xl font-bold text-amber-900 sm:inline sm:text-3xl">{t("title")}</span>
@@ -62,7 +62,7 @@ export default function KanelbullensBanner({ compact = false }: { compact?: bool
                 <p className="text-white/70">{t("minimum")}</p>
               </div>
 
-              <Link href="/produkter" className="btn-primary group mt-8 inline-flex items-center">
+              <Link href="/bestall?kanelbulle=1" className="btn-primary group mt-8 inline-flex items-center">
                 {t("cta")}
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
