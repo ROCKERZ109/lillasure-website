@@ -36,7 +36,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-[3rem] md:py-[9rem] flex items-center justify-center overflow-hidden grain-overlay bg-black">
+      <section className="relative -mt-4 py-[3rem] md:-mt-6 md:py-[9rem] flex items-center justify-center overflow-hidden grain-overlay bg-black">
         {/* Background Gradient */}
         <div className="absolute inset-0 max-sm:mt-20">
           <video
