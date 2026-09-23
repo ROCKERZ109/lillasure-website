@@ -77,7 +77,8 @@ function OrderPageContent() {
   }, [currentStep, orderComplete]);
 
   useEffect(() => {
-    if (searchParams.get("kanelbulle") !== "1" || campaignProductRequested.current) return;
+    const requestedQuantity = Number(searchParams.get("kanelbulle"));
+    if (!Number.isFinite(requestedQuantity) || requestedQuantity < 1 || campaignProductRequested.current) return;
 
     campaignProductRequested.current = true;
     const alreadyInCart = state.items.some((item) => {
@@ -95,7 +96,12 @@ function OrderPageContent() {
         return swedishName === "kanelbulle" || englishName === "cinnamon bun";
       });
 
-      if (kanelbulle) addItem(kanelbulle);
+      if (kanelbulle) {
+        addItem(kanelbulle);
+        if (requestedQuantity > 1) {
+          updateQuantity(kanelbulle.id, requestedQuantity);
+        }
+      }
     }).catch((loadError) => {
       console.error("Could not load Kanelbulle from the campaign banner:", loadError);
     });
