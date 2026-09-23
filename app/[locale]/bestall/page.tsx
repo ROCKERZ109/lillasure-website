@@ -1,6 +1,7 @@
 "use client";
 
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import {
   ArrowLeft,
@@ -29,6 +30,7 @@ import {
   getDayOfWeek,
 } from "@/lib/utils";
 import { createOrder } from "@/lib/orders";
+import { getProducts } from "@/lib/product";
 import type { CustomerInfo, OrderItem } from "@/types";
 import { dayLabels, dayLabelsEn, FETTISDAGEN_DATE, FETTISDAGEN_MIN_KREMLA, KANELBULLENS_DAY_END, KANELBULLENS_DAY_MIN_BUNS, KANELBULLENS_DAY_START } from "@/types";
 import { useTranslations, useLocale } from "next-intl";
@@ -40,12 +42,15 @@ export default function OrderPage() {
   const t = useTranslations('order');
   const {
     state,
+    addItem,
     removeItem,
     updateQuantity,
     clearCart,
     totalAmount,
   } = useCart();
   const locale = useLocale()
+  const searchParams = useSearchParams();
+  const campaignProductRequested = useRef(false);
   const [currentStep, setCurrentStep] = useState<Step>("cart");
   const [pickupDate, setPickupDate] = useState("");
   const [pickupTime, setPickupTime] = useState("");
@@ -70,6 +75,31 @@ export default function OrderPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep, orderComplete]);
+
+  useEffect(() => {
+    if (searchParams.get("kanelbulle") !== "1" || campaignProductRequested.current) return;
+
+    campaignProductRequested.current = true;
+    const alreadyInCart = state.items.some((item) => {
+      const swedishName = item.product.nameSv.trim().toLocaleLowerCase("sv-SE");
+      const englishName = item.product.name.trim().toLocaleLowerCase("en-US");
+      return swedishName === "kanelbulle" || englishName === "cinnamon bun";
+    });
+
+    if (alreadyInCart) return;
+
+    getProducts().then((products) => {
+      const kanelbulle = products.find((product) => {
+        const swedishName = product.nameSv.trim().toLocaleLowerCase("sv-SE");
+        const englishName = product.name.trim().toLocaleLowerCase("en-US");
+        return swedishName === "kanelbulle" || englishName === "cinnamon bun";
+      });
+
+      if (kanelbulle) addItem(kanelbulle);
+    }).catch((loadError) => {
+      console.error("Could not load Kanelbulle from the campaign banner:", loadError);
+    });
+  }, [addItem, searchParams, state.items]);
 
   // Defined inside component to use translations
   const steps: { id: Step; label: string; number: number }[] = [
