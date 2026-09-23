@@ -16,14 +16,14 @@ export default function KanelbullensBanner({ compact = false }: { compact?: bool
   if (compact) {
     return (
       <div className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-r from-amber-100 via-yellow-50 to-amber-100">
-        <div className="container relative z-10 mx-auto px-10 py-2.5">
-          <Link href="/bestall?kanelbulle=1" className="flex items-center justify-center gap-3 text-center">
-            <img src="/images/cinnamon.jpg" className="hidden h-10 w-10 rounded-full object-cover sm:block" alt="" />
-            <span>
-              <span className="block font-display text-xl font-bold text-amber-900 sm:inline sm:text-3xl">{t("title")}</span>
-              <span className="block text-sm font-semibold text-amber-700 sm:ml-2 sm:inline sm:text-lg">{t("cta")}</span>
+        <div className="container relative z-10 mx-auto px-9 py-2 sm:px-10 sm:py-2.5">
+          <Link href="/bestall?kanelbulle=1" className="flex min-w-0 items-center justify-center gap-2 text-center sm:gap-3">
+            <img src="/images/cinnamon.jpg" className="h-8 w-8 flex-shrink-0 rounded-full object-cover sm:h-10 sm:w-10" alt="" />
+            <span className="min-w-0 whitespace-nowrap">
+              <span className="font-display text-base font-bold text-amber-900 sm:text-3xl">{t("compact_title")}</span>
+              <span className="ml-1.5 text-xs font-semibold text-amber-700 sm:ml-2 sm:text-lg">{t("compact_cta")}</span>
             </span>
-            <img src="/images/cinnamon.jpg" className="hidden h-10 w-10 rounded-full object-cover sm:block" alt="" />
+            <img src="/images/cinnamon.jpg" className="h-8 w-8 flex-shrink-0 rounded-full object-cover sm:h-10 sm:w-10" alt="" />
           </Link>
         </div>
         <button

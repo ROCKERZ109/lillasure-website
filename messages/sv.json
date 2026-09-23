@@ -574,6 +574,8 @@
     "minimum": "Minst 10 kanelbullar",
     "pricing": "32 kr/st oavsett antal. Företags- och bulkbeställningar följer samma pris och bokas senast en vecka i förväg.",
     "cta": "Förbeställ kanelbullar",
+    "compact_title": "Kanelbullens dag",
+    "compact_cta": "Beställ 10+",
     "image_alt": "Nybakad kanelbulle",
     "close": "Stäng kampanjbanner"
   },
