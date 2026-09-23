@@ -94,7 +94,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-2
 
       <KanelbullensBanner />
 
@@ -171,11 +170,11 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gray-900/70" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="max-w-xl mx-auto text-center px-6">
-                  <h2 className="font-display text-3xl sm:text-4xl font-semibold text-white mb-6">
-                    {t('about.title')}
+                  <h2 className="mx-auto max-w-xs whitespace-pre-line font-display text-3xl leading-tight font-semibold text-white mb-4 sm:max-w-md sm:text-4xl">
+                    {t('about.kremla_title')}
                   </h2>
-                  <p className="text-neutral-300 leading-relaxed mb-10 text-sm sm:text-base">
-                    {t('about.description')}
+                  <p className="text-amber-300 font-display text-2xl sm:text-3xl italic mb-8">
+                    {t('about.kremla_tagline')}
                   </p>
                   <Link href="/produkter" className="btn-primary text-sm h-11 sm:h-14 sm:text-lg">
                     {t('about.cta')}
@@ -202,11 +201,11 @@ export default function HomePage() {
               {/* Right: Content */}
               <div className="w-1/2 h-full flex items-center justify-center bg-neutral-900">
                 <div className="max-w-lg text-center px-8">
-                  <h2 className="font-display text-4xl xl:text-5xl font-semibold text-white mb-6">
-                    {t('about.title')}
+                  <h2 className="mx-auto max-w-md whitespace-pre-line font-display text-4xl leading-tight font-semibold text-white mb-4 xl:text-5xl">
+                    {t('about.kremla_title')}
                   </h2>
-                  <p className="text-neutral-400 leading-relaxed mb-10 text-base xl:text-lg">
-                    {t('about.description')}
+                  <p className="text-amber-300 font-display text-3xl italic mb-8">
+                    {t('about.kremla_tagline')}
                   </p>
                   <Link href="/produkter" className="btn-primary text-lg h-14">
                     {t('about.cta')}

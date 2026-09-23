@@ -3,7 +3,10 @@
     "about": {
       "cta": "Beställ nu",
       "description": "Lägg din beställning online och hämta ditt nybakade bröd i butiken. Vi bakar på beställning så att ditt bröd alltid är så färskt som möjligt.",
-      "title": "Beställ till avhämtning"
+    "title": "Beställ till avhämtning",
+    "kanelbullens_cutoff": "För Kanelbullens dag: förbeställ senast kl. 18:00 dagen före avhämtning.",
+    "kremla_title": "Kanelbulle + Semla\n=\nlite magi",
+    "kremla_tagline": "Kremla"
     },
     "easter": {
       "badge": "Avvikande öppettider",
@@ -346,7 +349,7 @@
       },
       "kanelbullens_day": {
         "minimum_error": "För Kanelbullens dag måste beställningen innehålla minst {count} kanelbullar. Du kan samtidigt beställa andra produkter.",
-        "notice": "Förbeställ senast kl. 18:00 dagen före avhämtning."
+        "notice": "Kanelbullens dag 2–5 oktober: minst 10 kanelbullar och förbeställning senast kl. 18:00 dagen före avhämtning."
       }
     },
     "details": {

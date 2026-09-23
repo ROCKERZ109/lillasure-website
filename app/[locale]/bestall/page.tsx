@@ -473,7 +473,9 @@ function OrderPageContent() {
                   {t('pickup.title')}
                 </h2>
                 <h3 className="font-display text-md text-crust-600 mb-3">
-                  {t('pickup.tomorrow')} { (new Date().getDay() == 6 || new Date().getDay() == 7 ) ? " 14.00": "16.00"}
+                  {isKanelbullensDayCampaign
+                    ? t('pickup.kanelbullens_day.notice')
+                    : `${t('pickup.tomorrow')} ${(new Date().getDay() == 6 || new Date().getDay() == 7) ? "14.00" : "16.00"}`}
                 </h3>
                 <div className="space-y-6">
                   {/* Date Selection */}

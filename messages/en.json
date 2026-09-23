@@ -3,7 +3,10 @@
     "about": {
       "cta": "Order now",
       "description": "Place your order online and pick up your freshly baked bread in the store. We bake to order so that your bread is always as fresh as possible.",
-      "title": "Order for pickup"
+    "title": "Order for pickup",
+    "kanelbullens_cutoff": "For Kanelbullens dag: pre-order by 18:00 the day before pickup.",
+    "kremla_title": "Kanelbulle + Semla\n=\na little bit of magic",
+    "kremla_tagline": "Kremla"
     },
     "easter": {
       "badge": "Special Hours",
@@ -339,7 +342,7 @@
       },
       "kanelbullens_day": {
         "minimum_error": "For Kanelbullens dag, the order must contain at least {count} cinnamon buns. You can still add other products.",
-        "notice": "Pre-order by 18:00 the day before pickup."
+        "notice": "Kanelbullens dag, 2–5 October: minimum 10 cinnamon buns and pre-order by 18:00 the day before pickup."
       }
     },
     "details": {
