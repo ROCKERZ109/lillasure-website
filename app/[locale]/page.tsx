@@ -170,11 +170,11 @@ export default function HomePage() {
               <div className="absolute inset-0 bg-gray-900/70" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="max-w-xl mx-auto text-center px-6">
-                  <h2 className="font-display text-3xl sm:text-4xl font-semibold text-white mb-6">
-                    {t('about.title')}
+                  <h2 className="whitespace-pre-line font-display text-3xl sm:text-4xl font-semibold text-white mb-4">
+                    {t('about.kremla_title')}
                   </h2>
-                  <p className="text-neutral-300 leading-relaxed mb-10 text-sm sm:text-base">
-                    {t('about.description')}
+                  <p className="text-amber-300 font-display text-2xl sm:text-3xl italic mb-8">
+                    {t('about.kremla_tagline')}
                   </p>
                   <p className="mb-6 text-sm font-semibold text-amber-300 sm:text-base">
                     {t('about.kanelbullens_cutoff')}
@@ -204,11 +204,11 @@ export default function HomePage() {
               {/* Right: Content */}
               <div className="w-1/2 h-full flex items-center justify-center bg-neutral-900">
                 <div className="max-w-lg text-center px-8">
-                  <h2 className="font-display text-4xl xl:text-5xl font-semibold text-white mb-6">
-                    {t('about.title')}
+                  <h2 className="whitespace-pre-line font-display text-4xl xl:text-5xl font-semibold text-white mb-4">
+                    {t('about.kremla_title')}
                   </h2>
-                  <p className="text-neutral-400 leading-relaxed mb-10 text-base xl:text-lg">
-                    {t('about.description')}
+                  <p className="text-amber-300 font-display text-3xl italic mb-8">
+                    {t('about.kremla_tagline')}
                   </p>
                   <p className="mb-6 text-base font-semibold text-amber-300">
                     {t('about.kanelbullens_cutoff')}
